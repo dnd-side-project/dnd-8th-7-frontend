@@ -51,8 +51,9 @@
   },
   "lint-staged": {
     "**/*.(js|jsx|ts|tsx)": [
-      "eslint --cache --fix",
-      "yarn run prettier --write"
+      "eslint --fix",
+      "yarn run prettier --write",
+      "bash -c tsc --noEmit"
     ]
   }
 }
