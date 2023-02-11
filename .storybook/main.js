@@ -17,6 +17,19 @@ module.exports = {
   ],
   framework: '@storybook/react',
   webpackFinal: async (config) => {
+    const fileLoaderRule = config.module.rules.find(
+      (rule) => rule.test && rule.test.test('.svg'),
+    )
+    fileLoaderRule.exclude = /\.svg$/
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      enforce: 'pre',
+      loader: require.resolve('@svgr/webpack'),
+    })
+
+    config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules']
+
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, '../src'),
