@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react'
 
 export const colorOptions = ['white', 'gray', 'black'] as const
 export const sizeOptions = ['sm', 'md'] as const
+
 interface Props extends React.ComponentPropsWithoutRef<'button'> {
   size?: (typeof sizeOptions)[number]
   color?: (typeof colorOptions)[number]
@@ -26,6 +27,7 @@ const Button = ({
   disabled = false,
   children,
   size = 'md',
+  className,
   ...rest
 }: PropsWithChildren<Props>) => {
   const { onClick } = rest
@@ -41,6 +43,7 @@ const Button = ({
         'justify-center',
         COLOR_CONFIG[color],
         SIZE_CONFIG[size],
+        className,
         {
           'disabled:text-gray-200 disabled:bg-gray-100': color === 'black',
         },
