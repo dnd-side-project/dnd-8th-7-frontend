@@ -4,15 +4,15 @@ import { ArrowLeftIcon, ExitIcon, MoreVerticalIcon } from '@/components/Icons'
 import { PropsWithChildren } from 'react'
 
 export const buttonOptions = ['none', 'exit', 'more', 'back'] as const
-type HeaderButton = (typeof buttonOptions)[number]
+type ButtonType = (typeof buttonOptions)[number]
 
 interface Props {
   title: string
-  leftButton?: HeaderButton
-  rightButton?: HeaderButton
+  leftButton?: ButtonType
+  rightButton?: ButtonType
 }
 
-const HeaderButton = ({ type }: { type: HeaderButton }) => {
+const HeaderButton = ({ type }: { type: ButtonType }) => {
   if (type === 'exit') return <ExitButton />
   if (type === 'more') return <MoreButton />
   if (type === 'back') return <BackButton />
