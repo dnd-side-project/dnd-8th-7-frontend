@@ -6,5 +6,6 @@ module.exports = {
       'always',
       ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore'],
     ],
+    'subject-case': [0, 'never'],
   },
 }
