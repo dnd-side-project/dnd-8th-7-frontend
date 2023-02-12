@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Header, { buttonOptions } from '.'
+import Header, { buttonOptions } from '@/components/Header'
 
 export default {
   title: 'components/Header',
