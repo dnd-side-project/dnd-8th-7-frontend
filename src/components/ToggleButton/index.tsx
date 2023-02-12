@@ -9,10 +9,8 @@ export type OnClick = ({
   value: string
 }) => void
 
-interface Props {
-  name: string
-  value: string
-  defaultChecked?: boolean
+interface Props
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onClick'> {
   onClick?: OnClick
 }
 
