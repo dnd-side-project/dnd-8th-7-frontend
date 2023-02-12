@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { useRouter } from 'next/router'
 import { ArrowLeftIcon, ExitIcon, MoreVerticalIcon } from '@/components/Icons'
 import { PropsWithChildren } from 'react'
 
@@ -10,19 +9,16 @@ interface Props {
   title: string
   leftButton?: ButtonType
   rightButton?: ButtonType
-}
-
-const HeaderButton = ({ type }: { type: ButtonType }) => {
-  if (type === 'exit') return <ExitButton />
-  if (type === 'more') return <MoreButton />
-  if (type === 'back') return <BackButton />
-  else return null
+  onLeftButtonClick?: () => void
+  onRightButtonClick?: () => void
 }
 
 const Header = ({
   title,
-  leftButton = 'back',
+  leftButton = 'none',
   rightButton = 'none',
+  onLeftButtonClick,
+  onRightButtonClick,
 }: Props) => {
   return (
     <header
@@ -35,58 +31,33 @@ const Header = ({
         'w-full',
         'h-[56px]',
         'px-5',
+        'bg-white',
       )}
     >
-      <div className="min-w-[24px]">
-        <HeaderButton type={leftButton} />
-      </div>
+      <HeaderButton type={leftButton} onClick={onLeftButtonClick} />
       <p className="text-black text-2xl font-bold min-w-[calc(100%_-_40px)] text-center">
         {title}
       </p>
-      <div className="min-w-[24px]">
-        <HeaderButton type={rightButton} />
-      </div>
+      <HeaderButton type={rightButton} onClick={onRightButtonClick} />
     </header>
   )
 }
 
-const ButtonWrapper = ({
+const ButtonIcon = ({ type }: { type: ButtonType }) => {
+  if (type === 'exit') return <ExitIcon />
+  if (type === 'more') return <MoreVerticalIcon />
+  if (type === 'back') return <ArrowLeftIcon />
+  else return null
+}
+
+const HeaderButton = ({
+  type,
   onClick,
-  children,
-}: PropsWithChildren<{ onClick?: () => void }>) => {
+}: PropsWithChildren<{ type: ButtonType; onClick?: () => void }>) => {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex items-center justify-center"
-    >
-      {children}
+    <button type="button" className="min-w-[24px]" onClick={onClick}>
+      <ButtonIcon type={type} />
     </button>
-  )
-}
-
-const BackButton = () => {
-  const { back } = useRouter()
-  return (
-    <ButtonWrapper onClick={back}>
-      <ArrowLeftIcon />
-    </ButtonWrapper>
-  )
-}
-
-const MoreButton = () => {
-  return (
-    <ButtonWrapper onClick={() => {}}>
-      <MoreVerticalIcon />
-    </ButtonWrapper>
-  )
-}
-
-const ExitButton = () => {
-  return (
-    <ButtonWrapper onClick={() => {}}>
-      <ExitIcon />
-    </ButtonWrapper>
   )
 }
 
