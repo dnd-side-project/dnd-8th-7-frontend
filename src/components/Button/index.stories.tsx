@@ -1,5 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Button, { sizeOptions, colorOptions } from '@/components/Button'
+import Button, {
+  sizeOptions,
+  colorOptions,
+  fontWeightOptions,
+} from '@/components/Button'
 
 export default {
   title: 'components/Button',
@@ -13,6 +17,10 @@ export default {
       options: colorOptions,
       control: { type: 'radio' },
     },
+    fontWeight: {
+      options: fontWeightOptions,
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof Button>
 
@@ -24,4 +32,5 @@ Basic.args = {
   disabled: false,
   size: 'sm',
   color: 'black',
+  fontWeight: 'medium',
 }

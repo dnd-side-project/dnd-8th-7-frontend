@@ -3,11 +3,18 @@ import { PropsWithChildren } from 'react'
 
 export const colorOptions = ['white', 'gray', 'black'] as const
 export const sizeOptions = ['sm', 'md'] as const
+export const fontWeightOptions = ['medium', 'bold'] as const
 
 interface Props extends React.ComponentPropsWithoutRef<'button'> {
   size?: (typeof sizeOptions)[number]
   color?: (typeof colorOptions)[number]
+  fontWeight?: (typeof fontWeightOptions)[number]
   disabled?: boolean
+}
+
+const FONT_WEIGHT_CONFIG = {
+  medium: 'font-medium',
+  bold: 'font-bold',
 }
 
 const COLOR_CONFIG = {
@@ -27,6 +34,7 @@ const Button = ({
   disabled = false,
   children,
   size = 'md',
+  fontWeight = 'medium',
   className,
   ...rest
 }: PropsWithChildren<Props>) => {
@@ -41,6 +49,7 @@ const Button = ({
         'flex',
         'items-center',
         'justify-center',
+        FONT_WEIGHT_CONFIG[fontWeight],
         COLOR_CONFIG[color],
         SIZE_CONFIG[size],
         className,
