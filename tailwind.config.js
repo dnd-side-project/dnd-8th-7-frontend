@@ -3,12 +3,31 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      white: '#FFFFFF',
       black: '#333333',
       red: '#FF7154',
       orange: '#FFB673',
       skyblue: '#7CCAE2',
       blue: '#5B9DFF',
       purple: '#7E85FF',
+      gray: {
+        50: '#F9F9F9',
+        100: '#F2F3F5',
+        200: '#E3E4E6',
+        300: '#D5D5DB',
+        400: '#B7BABF',
+        500: '#979A9E',
+      },
+      textGray: {
+        50: '#999999',
+        100: '#767676',
+        200: '#505050',
+      },
+    },
+    borderRadius: {
+      sm: '8px',
+      md: '12px',
+      lg: '14px',
     },
     extend: {
       fontSize: {
