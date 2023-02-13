@@ -17,6 +17,8 @@ module.exports = {
     },
   ],
   framework: '@storybook/react',
+  staticDirs: ['../public'],
+
   webpackFinal: async (config) => {
     const fileLoaderRule = config.module.rules.find(
       (rule) => rule.test && rule.test.test('.svg'),
