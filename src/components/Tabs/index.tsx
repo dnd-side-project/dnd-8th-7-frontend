@@ -7,6 +7,7 @@ import React, {
   useContext,
   useState,
 } from 'react'
+import { noop } from '@/utils'
 
 interface TabProps {
   id: number
@@ -19,7 +20,7 @@ const TabsContext = createContext<{
   setActiveTabId: Dispatch<SetStateAction<number>>
 }>({
   activeTabId: 0,
-  setActiveTabId: () => {},
+  setActiveTabId: noop,
 })
 
 export const Tabs = ({
@@ -45,7 +46,7 @@ const TabList = ({ children }: { children: React.ReactNode }) => {
   return <ul className="flex">{children}</ul>
 }
 
-const Tab = ({ id, text, onClick = () => {} }: TabProps) => {
+const Tab = ({ id, text, onClick = noop }: TabProps) => {
   const { activeTabId, setActiveTabId } = useTabs()
   const handleTabClick = () => {
     setActiveTabId(id)
