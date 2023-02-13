@@ -49,6 +49,7 @@ const Button = ({
         'flex',
         'items-center',
         'justify-center',
+        'text-lg',
         FONT_WEIGHT_CONFIG[fontWeight],
         COLOR_CONFIG[color],
         SIZE_CONFIG[size],
