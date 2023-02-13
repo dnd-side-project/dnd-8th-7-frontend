@@ -18,8 +18,8 @@ const FONT_WEIGHT_CONFIG = {
 }
 
 const COLOR_CONFIG = {
-  white: 'bg-white text-gray-300',
-  gray: 'bg-gray-100 text-gray-300',
+  white: 'bg-white text-textGray-100',
+  gray: 'bg-gray-100 text-textGray-100',
   black: 'bg-black text-white',
 }
 
@@ -55,7 +55,7 @@ const Button = ({
         SIZE_CONFIG[size],
         className,
         {
-          'disabled:text-gray-200 disabled:bg-gray-100': color === 'black',
+          'disabled:text-textGray-50 disabled:bg-gray-100': color === 'black',
         },
       )}
     >

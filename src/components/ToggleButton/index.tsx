@@ -48,7 +48,7 @@ const ToggleButton = ({
           'px-3',
           'py-1',
           'bg-gray-100',
-          'text-gray-300',
+          'text-textGray-100',
           'peer-checked:bg-red',
           'peer-checked:text-white',
         )}
