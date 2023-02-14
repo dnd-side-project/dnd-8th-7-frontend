@@ -19,7 +19,7 @@ const NoData = ({ text = '등록된 블록이 없어요', outlined = false }: Pr
         { 'border border-dashed border-textGray-50': outlined },
       )}
     >
-      <img src="/assets/images/no_data.svg" alt="" /> {/* TODO: 이미지 확인 */}
+      <img src="/assets/images/no_data.png" width={88} height={72} alt="" />
       <p
         className={clsx(
           'text-base',
