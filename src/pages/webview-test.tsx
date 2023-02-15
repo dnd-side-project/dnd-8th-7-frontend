@@ -1,5 +1,5 @@
 import webBridge from '@/utils/react-native-webview-bridge'
-import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNBottomSheet'
+import useRNSelectBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNSelectBottomSheet'
 import { useEffect, useState } from 'react'
 
 /**
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
  */
 export default function WebViewTestPage() {
   const [text, setText] = useState(['초기'])
-  const [open, close] = useRNListBottomSheet('REST')
+  const [open, close] = useRNSelectBottomSheet('REST')
 
   const handleOpenBottomSheet = () => {
     open(
@@ -27,6 +27,7 @@ export default function WebViewTestPage() {
       {
         onItemClick: (key: string) => {
           setText((arr) => [...arr, '아이템 클릭' + key])
+          // close()
         },
         onClose: () => {
           setText((arr) => [...arr, '모달 닫힘'])

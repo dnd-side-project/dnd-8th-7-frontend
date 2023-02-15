@@ -13,9 +13,17 @@ export type DefaultElement = {
   //   showSwitch?: boolean
   //   onSwitchChange?: (value: boolean) => void
 }
-export type ListBottomSheetContents = {
+
+type BottomSheetDefaultContents = {
   title?: string
+}
+export type ListBottomSheetContents = BottomSheetDefaultContents & {
   items: Array<DefaultElement>
+}
+export type SelectBottomSheetContents = BottomSheetDefaultContents & {
+  items: Array<DefaultElement>
+  multiple?: boolean
+  defaultSelect?: string[]
 }
 
 export type RNWebViewData = {
