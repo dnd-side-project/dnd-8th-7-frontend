@@ -18,10 +18,6 @@ export type ListBottomSheetContents = {
   items: Array<DefaultElement>
 }
 
-export type RNWebViewData = {
-  key: string
-}
-
 export enum RN_EVENT_TYPE {
   ITEM_CLICKED = 'ITEM_CLICKED',
   CLICKED = 'CLICKED',
