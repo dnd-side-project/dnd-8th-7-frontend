@@ -1,5 +1,5 @@
 import webBridge from '@/utils/react-native-webview-bridge'
-import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNBottomSheet'
+import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import { useEffect, useState } from 'react'
 
 /**
