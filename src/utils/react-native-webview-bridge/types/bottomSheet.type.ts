@@ -22,13 +22,13 @@ export type RNWebViewData = {
   key: string
 }
 
-export enum ERNEventType {
+export enum RN_EVENT_TYPE {
   ITEM_CLICKED = 'ITEM_CLICKED',
   CLICKED = 'CLICKED',
   CLOSED = 'CLOSED',
   OPENED = 'OPENED',
 }
-export type RNEventType = keyof typeof ERNEventType
+export type RNEventType = keyof typeof RN_EVENT_TYPE
 
 /**
  * @description RN에 정의되어 있는 콜백 함수입니다.
