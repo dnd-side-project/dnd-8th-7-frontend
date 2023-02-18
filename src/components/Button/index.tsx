@@ -1,31 +1,44 @@
 import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
-
-export const colorOptions = ['white', 'gray', 'black'] as const
-export const sizeOptions = ['sm', 'md'] as const
-export const fontWeightOptions = ['medium', 'bold'] as const
+import type {
+  Size,
+  Color,
+  FontWeight,
+  Rounded,
+  ColorConfig,
+  RoundedConfig,
+  FontWeightConfig,
+  SizeConfig,
+} from './types'
 
 interface Props extends React.ComponentPropsWithoutRef<'button'> {
-  size?: (typeof sizeOptions)[number]
-  color?: (typeof colorOptions)[number]
-  fontWeight?: (typeof fontWeightOptions)[number]
+  size?: Size
+  color?: Color
+  fontWeight?: FontWeight
+  rounded?: Rounded
   disabled?: boolean
 }
 
-const FONT_WEIGHT_CONFIG = {
-  medium: 'font-medium',
-  bold: 'font-bold',
+const SIZE_CONFIG: SizeConfig = {
+  sm: 'px-3 py-1 w-fit',
+  md: 'px-8 py-[13px] w-full',
 }
 
-const COLOR_CONFIG = {
+const COLOR_CONFIG: ColorConfig = {
   white: 'bg-white text-textGray-100',
   gray: 'bg-gray-100 text-textGray-100',
   black: 'bg-black text-white',
 }
 
-const SIZE_CONFIG = {
-  sm: 'px-3 py-1 w-fit rounded-sm',
-  md: 'px-8 py-[13px] w-full rounded-lg',
+const ROUNDED_CONFIG: RoundedConfig = {
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+}
+
+const FONT_WEIGHT_CONFIG: FontWeightConfig = {
+  medium: 'font-medium',
+  bold: 'font-bold',
 }
 
 const Button = ({
@@ -34,6 +47,7 @@ const Button = ({
   disabled = false,
   children,
   size = 'md',
+  rounded = 'md',
   fontWeight = 'medium',
   className,
   ...rest
@@ -49,7 +63,8 @@ const Button = ({
         'flex',
         'items-center',
         'justify-center',
-        'text-lg',
+        'text-base',
+        ROUNDED_CONFIG[rounded],
         FONT_WEIGHT_CONFIG[fontWeight],
         COLOR_CONFIG[color],
         SIZE_CONFIG[size],

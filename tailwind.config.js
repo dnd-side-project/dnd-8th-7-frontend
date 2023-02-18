@@ -28,6 +28,7 @@ module.exports = {
       sm: '8px',
       md: '12px',
       lg: '14px',
+      full: '50%',
     },
     extend: {
       fontSize: {

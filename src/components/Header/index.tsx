@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import { ArrowLeftIcon, ExitIcon, MoreVerticalIcon } from '@/components/Icons'
 import { PropsWithChildren } from 'react'
+import { ArrowLeftIcon, ExitIcon, MoreVerticalIcon } from '@/components/Icons'
+import { noop } from '@/utils'
 
 export const buttonOptions = ['none', 'exit', 'more', 'back'] as const
 type ButtonType = (typeof buttonOptions)[number]
@@ -17,14 +18,17 @@ const Header = ({
   title,
   leftButton = 'none',
   rightButton = 'none',
-  onLeftButtonClick,
-  onRightButtonClick,
+  onLeftButtonClick = noop,
+  onRightButtonClick = noop,
 }: Props) => {
   return (
     <header
       className={clsx(
         'fixed',
         'flex',
+        'top-0',
+        'left-0',
+        'right-0',
         'items-center',
         'justify-center',
         'z-10',
