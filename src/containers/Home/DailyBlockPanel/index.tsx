@@ -4,7 +4,7 @@ import { AddIcon } from '@/components/Icons'
 import NoData from '@/components/NoData'
 
 // TODO : 서버 데이터 연결
-const DATE = '1월 25일 수요일'
+const DATE = '2022-01-25'
 const TOTAL_BLOCK = 0
 const TOTAL_TASK = 0
 

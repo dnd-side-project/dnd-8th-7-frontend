@@ -10,7 +10,7 @@ const Template: ComponentStory<typeof Date> = (args) => <Date {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {
-  date: '1월 25일 수요일',
+  date: '2022-01-25',
   totalBlock: 4,
   totalTask: 14,
 }
