@@ -3,6 +3,7 @@ export enum EBottomSheetType {
   SELECT = 'SELECT',
   MULTI_SELECT = 'MULTI_SELECT',
   REACTION = 'REACTION',
+  EMOJI = 'EMOJI',
 }
 export type BottomSheetType = keyof typeof EBottomSheetType
 export type Key = string
