@@ -17,7 +17,7 @@ export default class WebBridge {
     window.ReactNativeWebView.postMessage(JSON.stringify({ type, data }))
   }
 
-  webviewListner(event: any) {
+  webviewListener(event: any) {
     const { type, eventKey, data } = JSON.parse(
       event.data,
     ) as CallbackMessageData
@@ -55,9 +55,9 @@ export default class WebBridge {
   init() {
     if (window.ReactNativeWebView) {
       /** android */
-      document.addEventListener('message', this.webviewListner)
+      document.addEventListener('message', this.webviewListener)
       /** ios */
-      window.addEventListener('message', this.webviewListner)
+      window.addEventListener('message', this.webviewListener)
     }
   }
 
@@ -66,8 +66,8 @@ export default class WebBridge {
    */
   unmount() {
     /** android */
-    document.removeEventListener('message', this.webviewListner)
+    document.removeEventListener('message', this.webviewListener)
     /** ios */
-    window.removeEventListener('message', this.webviewListner)
+    window.removeEventListener('message', this.webviewListener)
   }
 }
