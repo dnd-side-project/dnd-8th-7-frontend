@@ -21,7 +21,7 @@ export type CallbackMessageType = keyof typeof ECallbackMessageType
 export type CallbackMessageData = {
   type: string
   eventKey?: string
-  data?: any
+  data?: CallbackDataType
 }
 export type CallbackDataType = {
   callbackKey: string
@@ -29,5 +29,5 @@ export type CallbackDataType = {
 }
 
 export type Callbacks = {
-  [key: string]: (parameters?: any) => any
+  [key: string]: (parameter?: any) => any
 }
