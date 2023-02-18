@@ -20,7 +20,7 @@ export default function useRNListBottomSheet(key: string): ReturnType {
       webBridge.subscribe(thisKey, callbacks)
     }
 
-    RNBottomSheet.open({
+    RNBottomSheet.open<ListBottomSheetContents>({
       eventKey: thisKey,
       contents: { type: EBottomSheetType.LIST, props: data },
     })

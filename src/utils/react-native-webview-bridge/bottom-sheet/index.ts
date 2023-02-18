@@ -1,14 +1,11 @@
-import {
-  BottomSheetType,
-  ListBottomSheetContents,
-} from '@/utils/react-native-webview-bridge/types/bottomSheet.type'
+import { BottomSheetType } from '@/utils/react-native-webview-bridge/types/bottomSheet.type'
 import { EMessageType, MessageData } from '../types/common.type'
 import webBridge from '@/utils/react-native-webview-bridge'
 
-function open(
+function open<T = unknown>(
   data: MessageData<{
     type: BottomSheetType
-    props: ListBottomSheetContents
+    props?: T
   }>,
 ) {
   if (window?.ReactNativeWebView) {
