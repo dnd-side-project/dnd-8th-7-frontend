@@ -3,16 +3,15 @@ import RNNewWebView from '@/utils/react-native-webview-bridge/new-webview'
 import webBridge from '@/utils/react-native-webview-bridge'
 import { NewWebViewData } from '../types/newWebView.type'
 
-type Functions = {
+type ReturnType = {
   open: (data: NewWebViewData, callbacks?: RNCallBacks) => void
   close: () => void
 }
-type ReturnType = [Functions['open'], Functions['close']]
 
-export default function rnWebViewBridge(key: string): ReturnType {
-  const thisKey = `NEW_WEBVIEW_${key}`
+function rnWebViewBridge(): ReturnType {
+  const thisKey = `NEW_WEBVIEW`
 
-  const open: Functions['open'] = (data, callbacks) => {
+  const open: ReturnType['open'] = (data, callbacks) => {
     if (callbacks) {
       webBridge.subscribe(thisKey, callbacks)
     }
@@ -23,9 +22,11 @@ export default function rnWebViewBridge(key: string): ReturnType {
     })
   }
 
-  const close: Functions['close'] = () => {
+  const close: ReturnType['close'] = () => {
     RNNewWebView.close({ eventKey: thisKey })
   }
 
-  return [open, close]
+  return { open, close }
 }
+
+export default rnWebViewBridge()
