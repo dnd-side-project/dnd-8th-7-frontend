@@ -18,7 +18,7 @@ export const BLOCK_COLOR_CONFIG = {
 }
 
 // mock data - 추후 제거 예정
-const BLOCK_DATA: Block = {
+const MOCK_BLOCK: Block = {
   color: 'FF7154',
   icon: '',
   blockTitle: '출근 준비',
@@ -44,20 +44,20 @@ const BLOCK_DATA: Block = {
   ],
 }
 
-export const BLOCK_LIST_DATA: Block[] = [
-  BLOCK_DATA,
+export const MOCK_BLOCK_LIST: Block[] = [
+  MOCK_BLOCK,
   {
-    ...BLOCK_DATA,
+    ...MOCK_BLOCK,
     color: 'FFB673',
     blockTitle: '회사',
   },
   {
-    ...BLOCK_DATA,
+    ...MOCK_BLOCK,
     color: '7E85FF',
     blockTitle: '디앤디',
   },
   {
-    ...BLOCK_DATA,
+    ...MOCK_BLOCK,
     color: '5B9DFF',
     blockTitle: '휴식',
   },
