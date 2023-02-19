@@ -37,40 +37,27 @@ const TodoBlock = ({
   locked = false,
 }: Block & { locked?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [open, close] = useRNListBottomSheet('blockMenu')
+  const [open] = useRNListBottomSheet('blockMenu')
 
-  const handleMoreClick = () => {
-    if (locked) return
-    if (isExpanded) {
-      setIsExpanded((expanded) => !expanded)
-      return
-    }
-    open(
-      {
-        title: blockTitle,
-        items: [
-          { key: 'edit', title: '수정하기' },
-          { key: 'delete', title: '삭제하기' },
-          {
-            key: 'saveBlock',
-            title: '블럭 저장하기',
-          },
-          { key: 'delay', title: '다른 날로 미루기' },
-        ],
-      },
-      {
-        onItemClick: (key: string) => {
-          handleItemClick(key)
-        },
-      },
-    )
+  const handleBlockClick = () => {
+    setIsExpanded((expanded) => !expanded)
   }
 
-  const handleItemClick = (key: string) => {
-    if (key === 'edit') {
-      close()
-      setIsExpanded((expanded) => !expanded)
-    } else close()
+  const handleMoreClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation()
+    if (locked) return
+    open({
+      title: blockTitle,
+      items: [
+        { key: 'edit', title: '수정하기' },
+        { key: 'delete', title: '삭제하기' },
+        {
+          key: 'saveBlock',
+          title: '블럭 저장하기',
+        },
+        { key: 'delay', title: '다른 날로 미루기' },
+      ],
+    })
   }
 
   useEffect(() => {
@@ -91,6 +78,7 @@ const TodoBlock = ({
         'text-white',
       )}
       style={{ backgroundColor: color as string }}
+      onClick={handleBlockClick}
     >
       <div className="flex items-center">
         <BlockIcon icon={icon} />
