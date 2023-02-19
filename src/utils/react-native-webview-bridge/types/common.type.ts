@@ -4,6 +4,8 @@
 export enum EMessageType {
   OPEN_BOTTOM_SHEET = 'OPEN_BOTTOM_SHEET',
   CLOSE_BOTTOM_SHEET = 'CLOSE_BOTTOM_SHEET',
+  OPEN_NEW_WEBVIEW = 'OPEN_NEW_WEBVIEW',
+  CLOSE_NEW_WEBVIEW = 'CLOSE_NEW_WEBVIEW',
 }
 export type MessageType = keyof typeof EMessageType
 export type MessageData<T = Record<string | number, unknown>> = {
