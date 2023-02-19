@@ -13,15 +13,14 @@ const Block = ({ colors }: Props) => {
 
   const showColors = () => {
     const coloredBlocks = []
+    if (!totalBlocks) return <div className="bg-gray-100 h-full" />
     for (let i = 0; i <= totalBlocks; i++) {
       coloredBlocks.push(
         <div
           key={i}
           className={clsx(
             BLOCK_COLOR_CONFIG[colors[i]],
-            totalBlocks <= MAX_COLORS
-              ? HEIGHT[totalBlocks]
-              : HEIGHT[MAX_COLORS],
+            HEIGHT[Math.min(totalBlocks, MAX_COLORS)],
           )}
         />,
       )
