@@ -77,6 +77,8 @@ export default forwardRef<HTMLInputElement, Props>(function BlockInput(
           'items-center',
           'w-[36px]',
           'h-[36px]',
+          'min-w-[36px]',
+          'min-h-[36px]',
           'bg-white',
           'rounded-md',
         )}
@@ -92,7 +94,7 @@ export default forwardRef<HTMLInputElement, Props>(function BlockInput(
         ref={ref}
         className={clsx(
           'ml-[15px]',
-          'flex-1',
+          'w-full',
           'text-lg',
           'bg-gray-50',
           'outline-none',
