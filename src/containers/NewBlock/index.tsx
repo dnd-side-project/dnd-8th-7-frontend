@@ -16,6 +16,7 @@ const DESCRIPTION = 'text-sm tracking-[-0.004em] text-textGray-100'
 export default function NewBlockContainer() {
   const [emoji, setEmoji] = useState<string>()
   const [color, setColor] = useState<string>()
+  const [isSecret, setIsSecret] = useState(false)
 
   const handleEmojiChange = (emoji: string) => {
     setEmoji(emoji)
@@ -23,6 +24,10 @@ export default function NewBlockContainer() {
 
   const handleColorChange = (color: string) => {
     setColor(color)
+  }
+
+  const handleSecretChange = (value: boolean) => {
+    setIsSecret(value)
   }
 
   const handleClose = () => {
@@ -61,7 +66,7 @@ export default function NewBlockContainer() {
             <div className={clsx(SUB_TITLE)}>쉿! 비밀로 하기</div>
             <div className={clsx(DESCRIPTION)}>친구들에게 보이지 않아요</div>
           </div>
-          <Switch />
+          <Switch onChange={handleSecretChange} />
         </div>
       </div>
     </div>
