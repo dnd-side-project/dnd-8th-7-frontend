@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
 import { BLOCK_COLOR_CONFIG } from '@/constants/block'
 import { Block } from '@/types/block'
-import AddTodoButton from './AddTodoButton'
-import Todo from './Todo'
+import AddTaskButton from './AddTaskButton'
+import Task from './Task'
 
 const LOCKED_TEXT = '쉿! 비밀이에요'
 
@@ -73,17 +73,17 @@ const TodoBlock = ({
         </div>
 
         <button type="button" className="w-6 h-6" onClick={handleMoreClick}>
-          <MoreVerticalIcon className="fill-white" />
+          <MoreVerticalIcon className="!fill-white" />
         </button>
       </div>
 
       {isExpanded && (
         <div className="pt-4 pl-3 pr-8">
-          <AddTodoButton />
+          <AddTaskButton />
           <div className="mt-6">
             {tasks?.map(({ isDone, task }, idx) => (
               <div key={idx} className="mb-3">
-                <Todo isDone={isDone} task={task} />
+                <Task isDone={isDone} task={task} />
               </div>
             ))}
           </div>

@@ -1,7 +1,7 @@
 import Button from '@/components/Button'
 import { AddIcon } from '@/components/Icons'
 
-const AddTodoButton = () => {
+const AddTaskButton = () => {
   return (
     <Button color="white" rounded="sm" className="!px-3 !py-1 !w-fit">
       추가하기
@@ -10,4 +10,4 @@ const AddTodoButton = () => {
   )
 }
 
-export default AddTodoButton
+export default AddTaskButton

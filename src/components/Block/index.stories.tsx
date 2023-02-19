@@ -1,17 +1,15 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import TodoBlock from '@/components/TodoBlock'
-import { Block } from '@/types/block'
+import Block from '@/components/Block'
+import type { Block as BlockType } from '@/types/block'
 
 export default {
-  title: 'components/TodoBlock',
-  components: TodoBlock,
-} as ComponentMeta<typeof TodoBlock>
+  title: 'components/Block',
+  components: Block,
+} as ComponentMeta<typeof Block>
 
-const Template: ComponentStory<typeof TodoBlock> = (args) => (
-  <TodoBlock {...args} />
-)
+const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />
 
-const MOCK_DATA: Block = {
+const MOCK_DATA: BlockType = {
   color: 'FF7154',
   icon: '',
   blockTitle: '출근 준비',

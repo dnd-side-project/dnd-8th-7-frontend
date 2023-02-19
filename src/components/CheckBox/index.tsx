@@ -52,7 +52,7 @@ const CheckBox = ({
         )}
       >
         <span className="w-full h-full flex items-center justify-center">
-          <img src="/assets/icons/todo_check.svg" alt="" draggable="false" />
+          <img src="/assets/icons/task_check.svg" alt="" draggable="false" />
         </span>
       </span>
 

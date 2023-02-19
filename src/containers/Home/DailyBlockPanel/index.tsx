@@ -1,7 +1,7 @@
 import Button from '@/components/Button'
 import Date from '@/components/Date'
 import { AddIcon } from '@/components/Icons'
-import TodoBlock from '@/components/TodoBlock'
+import Block from '@/components/Block'
 import { MOCK_BLOCK_LIST } from '@/constants/block'
 import WeeklyBlocks from './WeeklyBlocks'
 
@@ -23,7 +23,7 @@ const DailyBlockPanel = () => {
             idx,
           ) => (
             <div key={idx} className="mb-2">
-              <TodoBlock
+              <Block
                 color={color}
                 icon={icon}
                 blockTitle={blockTitle}
