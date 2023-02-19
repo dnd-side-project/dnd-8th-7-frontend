@@ -1,36 +1,55 @@
-import { PropsWithChildren } from 'react'
 import dayjs from 'dayjs'
+import clsx from 'clsx'
 import DailyBlock from '@/components/DailyBlock'
 import { BlockColorType, DAYS, MOCK_WEEKLY_BLOCKS } from '@/constants/block'
 
 const DayBlock = ({
-  day,
   colors,
   date,
-  children,
-}: PropsWithChildren<{
-  day: string
+  isToday,
+}: {
   colors: BlockColorType[]
   date: number
-}>) => {
+  isToday: boolean
+}) => {
   return (
-    <div className="flex flex-col items-center text-base px-[11px]">
-      <p className="text-textGray-50 mb-[11px]">{day}</p>
-      {children}
-      <DailyBlock colors={colors} />
-      <p className="text-textGray-100">{date}</p>
-    </div>
+    <>
+      <div
+        className={clsx(
+          'flex',
+          'flex-col',
+          'items-center',
+          'pt-1.5',
+          'pb-1',
+          'px-1.5',
+          'rounded-[11px]',
+          { border: isToday },
+        )}
+      >
+        <DailyBlock colors={colors} />
+        <p
+          className={clsx('mt-1', isToday ? 'text-black' : 'text-textGray-100')}
+        >
+          {date}
+        </p>
+      </div>
+    </>
   )
 }
 
 const WeeklyBlocks = () => {
+  const today = dayjs().day()
+
   return (
-    <div className="flex justify-center mb-7">
+    <div className="flex justify-between mb-7 min-w-80">
       {MOCK_WEEKLY_BLOCKS.map(({ date: dateTime, colors }, idx) => {
         const day = dayjs(dateTime).day()
         const date = dayjs(dateTime).date()
         return (
-          <DayBlock day={DAYS[day % 7]} key={idx} colors={colors} date={date} />
+          <div key={idx} className="flex flex-col items-center text-base">
+            <p className="text-textGray-50 mb-[5px]">{DAYS[day % 7]}</p>
+            <DayBlock colors={colors} date={date} isToday={today === day} />
+          </div>
         )
       })}
     </div>
