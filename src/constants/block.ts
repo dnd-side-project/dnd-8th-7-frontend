@@ -62,3 +62,44 @@ export const BLOCK_LIST_DATA: Block[] = [
     blockTitle: '휴식',
   },
 ]
+
+export const MOCK_COLORS: BlockColorType[] = [
+  'FF7154',
+  'FFB673',
+  '7CCAE2',
+  '5B9DFF',
+  '7E85FF',
+]
+
+export const DAYS = ['일', '월', '화', '수', '목', '금', '토']
+
+export const MOCK_WEEKLY_BLOCKS = [
+  {
+    date: '2022-01-23',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-24',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-25',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-26',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-27',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-28',
+    colors: MOCK_COLORS,
+  },
+  {
+    date: '2022-01-29',
+    colors: MOCK_COLORS,
+  },
+]
