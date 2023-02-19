@@ -78,9 +78,8 @@ const TodoBlock = ({
         'text-white',
       )}
       style={{ backgroundColor: color as string }}
-      onClick={handleBlockClick}
     >
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={handleBlockClick}>
         <BlockIcon icon={icon} />
 
         <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
