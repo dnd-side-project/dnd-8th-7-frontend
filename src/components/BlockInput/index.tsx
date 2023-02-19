@@ -13,18 +13,16 @@ import webBridge from '@/utils/react-native-webview-bridge'
 import { SmileFaceIcon } from '@/components/Icons'
 
 interface Props extends ComponentProps<'input'> {
-  count?: boolean
+  showLimitCount?: boolean
   defaultValue?: string
   onEmojiChange?: (emoji: string) => void
 }
 
 export default forwardRef<HTMLInputElement, Props>(function BlockInput(
-  { count = true, maxLength = 15, onEmojiChange, ...props },
+  { showLimitCount = true, onEmojiChange, ...props },
   ref,
 ) {
-  const [valueLength, setValueLength] = useState(
-    props?.defaultValue?.length || 0,
-  )
+  const [value, setValue] = useState(props?.defaultValue || '')
   const [emoji, setEmoji] = useState<string>()
   const [open, close] = useRNEmojiBottomSheet('newBlock')
 
@@ -39,9 +37,10 @@ export default forwardRef<HTMLInputElement, Props>(function BlockInput(
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (count) {
-      setValueLength((e.nativeEvent.target as HTMLInputElement).value.length)
-    }
+    const newValue = !!props?.maxLength
+      ? e.target.value.slice(0, props.maxLength)
+      : e.target.value
+    setValue(newValue)
     props?.onChange?.(e)
   }
 
@@ -49,6 +48,12 @@ export default forwardRef<HTMLInputElement, Props>(function BlockInput(
     webBridge.init()
     return () => {
       webBridge.unmount()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (showLimitCount && props.maxLength === undefined) {
+      throw new Error('maxLength 입력해주세요')
     }
   }, [])
 
@@ -93,13 +98,13 @@ export default forwardRef<HTMLInputElement, Props>(function BlockInput(
           'outline-none',
           'placeholder:text-textGray-50',
         )}
-        maxLength={maxLength}
         {...props}
+        value={value}
         onChange={handleChange}
       />
-      {count && (
+      {showLimitCount && (
         <div className={clsx('mx-[8px]', 'text-base', 'text-textGray-50')}>
-          {valueLength}/{maxLength}
+          {value.length}/{props.maxLength}
         </div>
       )}
     </div>
