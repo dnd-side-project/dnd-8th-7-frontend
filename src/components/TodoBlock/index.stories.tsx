@@ -47,4 +47,6 @@ Basic.args = {
   sumOfTask,
   sumOfDoneTask,
   tasks,
+  locked: false,
+  saved: false,
 }

@@ -1,10 +1,12 @@
 import clsx from 'clsx'
 import { useState } from 'react'
-import { MoreVerticalIcon } from '@/components/Icons'
+import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
 import { BLOCK_COLOR_CONFIG } from '@/constants/block'
 import { Block } from '@/types/block'
 import AddTodoButton from './AddTodoButton'
 import Todo from './Todo'
+
+const LOCKED_TEXT = '쉿! 비밀이에요'
 
 const BlockIcon = ({ icon }: { icon: string }) => {
   return (
@@ -31,9 +33,12 @@ const TodoBlock = ({
   sumOfTask,
   sumOfDoneTask,
   tasks,
-}: Block) => {
+  locked = false,
+  saved = false,
+}: Block & { locked?: boolean; saved?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const handleMoreClick = () => {
+    if (locked) return
     setIsExpanded((expanded) => !expanded)
   }
 
@@ -52,10 +57,18 @@ const TodoBlock = ({
       <div className="flex items-center">
         <BlockIcon icon={icon} />
 
-        <div className="flex justify-between text-base ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
-          <p className="font-bold">{blockTitle}</p>
-          <p>
-            {sumOfDoneTask}/{sumOfTask}
+        <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
+          {locked ? (
+            <div className="flex items-center">
+              <LockIcon className="fill-white" width={18} height={18} />
+              <p className="ml-2.5">{LOCKED_TEXT}</p>
+            </div>
+          ) : (
+            <p>{blockTitle}</p>
+          )}
+
+          <p className="font-medium">
+            {saved ? sumOfTask : sumOfDoneTask + '/' + sumOfTask}
           </p>
         </div>
 
