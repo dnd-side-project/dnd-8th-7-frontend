@@ -18,7 +18,7 @@ interface Props {
 
 const CHECK_BOX_STYLE = 'flex w-[22px] h-[22px] rounded-sm bg-white'
 
-const CheckBox = ({
+const TaskCheckBox = ({
   value,
   name,
   defaultChecked,
@@ -61,4 +61,4 @@ const CheckBox = ({
   )
 }
 
-export default CheckBox
+export default TaskCheckBox
