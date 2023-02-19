@@ -34,3 +34,17 @@ ul {
   width: 100%;
   margin: 0 auto;
 }
+
+textarea,
+input {
+  outline: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
