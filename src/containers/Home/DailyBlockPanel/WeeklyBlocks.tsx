@@ -41,7 +41,7 @@ const WeeklyBlocks = () => {
   const today = dayjs().day()
 
   return (
-    <div className="flex justify-between mb-7 min-w-80">
+    <div className="flex justify-between mx-auto mb-7 min-w-80 max-w-[400px]">
       {MOCK_WEEKLY_BLOCKS.map(({ date: dateTime, colors }, idx) => {
         const day = dayjs(dateTime).day()
         const date = dayjs(dateTime).date()
