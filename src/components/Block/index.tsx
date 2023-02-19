@@ -34,8 +34,7 @@ const TodoBlock = ({
   sumOfDoneTask,
   tasks,
   locked = false,
-  saved = false,
-}: Block & { locked?: boolean; saved?: boolean }) => {
+}: Block & { locked?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const handleMoreClick = () => {
     if (locked) return
@@ -68,7 +67,7 @@ const TodoBlock = ({
           )}
 
           <p className="font-medium">
-            {saved ? sumOfTask : sumOfDoneTask + '/' + sumOfTask}
+            {sumOfDoneTask}/{sumOfTask}
           </p>
         </div>
 
