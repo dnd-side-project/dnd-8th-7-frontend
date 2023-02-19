@@ -20,7 +20,7 @@ const Task = ({ isDone, task }: TaskType) => {
         className={clsx(
           'w-full',
           'bg-transparent',
-          'max-h-[18px]',
+          'max-h-[20px]',
           'ml-2.5',
           'resize-none',
           'text-white',

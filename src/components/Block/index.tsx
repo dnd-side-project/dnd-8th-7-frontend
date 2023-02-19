@@ -1,8 +1,10 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
 import { BLOCK_COLOR_CONFIG } from '@/constants/block'
 import { Block } from '@/types/block'
+import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
+import webBridge from '@/utils/react-native-webview-bridge'
 import AddTaskButton from './AddTaskButton'
 import Task from './Task'
 
@@ -36,10 +38,48 @@ const TodoBlock = ({
   locked = false,
 }: Block & { locked?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [open, close] = useRNListBottomSheet('blockMenu')
+
   const handleMoreClick = () => {
     if (locked) return
-    setIsExpanded((expanded) => !expanded)
+    if (isExpanded) {
+      setIsExpanded((expanded) => !expanded)
+      return
+    }
+    open(
+      {
+        title: blockTitle,
+        items: [
+          { key: 'edit', title: '수정하기' },
+          { key: 'delete', title: '삭제하기' },
+          {
+            key: 'saveBlock',
+            title: '블럭 저장하기',
+          },
+          { key: 'delay', title: '다른 날로 미루기' },
+        ],
+      },
+      {
+        onItemClick: (key: string) => {
+          handleItemClick(key)
+        },
+      },
+    )
   }
+
+  const handleItemClick = (key: string) => {
+    if (key === 'edit') {
+      close()
+      setIsExpanded((expanded) => !expanded)
+    } else close()
+  }
+
+  useEffect(() => {
+    webBridge.init()
+    return () => {
+      webBridge.unmount()
+    }
+  }, [])
 
   return (
     <div
