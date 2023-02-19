@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
-import { BLOCK_COLOR_CONFIG } from '@/constants/block'
 import { Block } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
@@ -90,8 +89,8 @@ const TodoBlock = ({
         'px-2',
         'py-[7px]',
         'text-white',
-        BLOCK_COLOR_CONFIG[color],
       )}
+      style={{ backgroundColor: color as string }}
     >
       <div className="flex items-center">
         <BlockIcon icon={icon} />

@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 import clsx from 'clsx'
 import DailyBlock from '@/components/DailyBlock'
-import { BlockColorType, DAYS, MOCK_WEEKLY_BLOCKS } from '@/constants/block'
+import { DAYS, MOCK_WEEKLY_BLOCKS } from '@/constants/block'
 
 const DayBlock = ({
   colors,
   date,
   isToday,
 }: {
-  colors: BlockColorType[]
+  colors: string[]
   date: number
   isToday: boolean
 }) => {

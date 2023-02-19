@@ -1,12 +1,10 @@
-import { BlockColorType } from '@/constants/block'
-
 export type Task = {
   task: string
   isDone: boolean
 }
 
 export type Block = {
-  color: BlockColorType
+  color: string | string[]
   icon: string
   blockTitle: string
   sumOfTask: number
