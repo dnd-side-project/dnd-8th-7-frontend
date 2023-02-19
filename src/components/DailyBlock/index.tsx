@@ -8,7 +8,7 @@ interface Props {
   colors: BlockColorType[]
 }
 
-const Block = ({ colors }: Props) => {
+const DailyBlock = ({ colors }: Props) => {
   const totalBlocks = colors.length
 
   const showColors = () => {
@@ -33,4 +33,4 @@ const Block = ({ colors }: Props) => {
   )
 }
 
-export default Block
+export default DailyBlock

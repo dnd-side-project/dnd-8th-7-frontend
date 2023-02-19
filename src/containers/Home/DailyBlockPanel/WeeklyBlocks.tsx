@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import dayjs from 'dayjs'
-import Block from '@/components/Block'
+import DailyBlock from '@/components/DailyBlock'
 import { BlockColorType, DAYS, MOCK_WEEKLY_BLOCKS } from '@/constants/block'
 
 const DayBlock = ({
@@ -17,7 +17,7 @@ const DayBlock = ({
     <div className="flex flex-col items-center text-base px-[11px]">
       <p className="text-textGray-50 mb-[11px]">{day}</p>
       {children}
-      <Block colors={colors} />
+      <DailyBlock colors={colors} />
       <p className="text-textGray-100">{date}</p>
     </div>
   )
