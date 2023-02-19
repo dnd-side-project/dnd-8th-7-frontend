@@ -10,7 +10,7 @@ import {
 import useRNEmojiBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNEmojiBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 
-import SmileFaceIcon from '@/components/Icons/SmileFace'
+import { SmileFaceIcon } from '@/components/Icons'
 
 interface Props extends ComponentProps<'input'> {
   count?: boolean
