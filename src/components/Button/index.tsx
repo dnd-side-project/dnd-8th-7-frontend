@@ -11,7 +11,7 @@ import type {
   SizeConfig,
 } from './types'
 
-interface Props extends React.ComponentPropsWithoutRef<'button'> {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   size?: Size
   color?: Color
   fontWeight?: FontWeight
@@ -51,7 +51,7 @@ const Button = ({
   fontWeight = 'medium',
   className,
   ...rest
-}: PropsWithChildren<Props>) => {
+}: PropsWithChildren<ButtonProps>) => {
   const { onClick } = rest
 
   return (
