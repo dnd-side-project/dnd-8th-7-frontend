@@ -11,6 +11,8 @@ module.exports = {
       skyblue: '#7CCAE2',
       blue: '#5B9DFF',
       purple: '#7E85FF',
+      success: '#3D8AFF',
+      error: '#FF4B4B',
       gray: {
         50: '#F9F9F9',
         100: '#F2F3F5',

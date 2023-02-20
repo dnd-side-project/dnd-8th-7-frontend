@@ -8,13 +8,35 @@ import {
 } from 'react'
 import clsx from 'clsx'
 
+const STATUS_MESSAGE = ['text-sm', 'h-6', 'pt-1']
+const ERROR_BOX = [
+  'shadow-error',
+  'shadow-[inset_1px_0px,inset_-1px_0px,inset_0px_1px,inset_0px_-1px]',
+]
+
+export const INPUT_STATUE = ['success', 'error', 'default'] as const
+export type InputStatus = (typeof INPUT_STATUE)[number]
+
 export interface InputProps extends ComponentProps<'input'> {
   showLimitCount?: boolean
   left?: ReactNode
+  status?: InputStatus
+  statusMessage?: string
+  noStatusMessage?: boolean
 }
 
 export default forwardRef<HTMLInputElement | null, InputProps>(
-  function BlockInput({ left, showLimitCount = false, ...props }, ref = null) {
+  function BlockInput(
+    {
+      left,
+      showLimitCount = false,
+      status = 'default',
+      noStatusMessage = false,
+      statusMessage = '',
+      ...props
+    },
+    ref = null,
+  ) {
     const [value, setValue] = useState(props?.defaultValue?.toString() || '')
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,43 +47,60 @@ export default forwardRef<HTMLInputElement | null, InputProps>(
       props?.onChange?.(e)
     }
 
+    const renderStatusMessage = () => {
+      switch (status) {
+        case 'success':
+          return <div className={clsx('text-success')}>{statusMessage}</div>
+        case 'error':
+          return <div className={clsx('text-error')}>{statusMessage}</div>
+        default:
+          return null
+      }
+    }
+
     useEffect(() => {
       if (showLimitCount && props.maxLength === undefined) {
         throw new Error('maxLength 입력해주세요')
       }
-    }, [])
+    }, [showLimitCount, props.maxLength])
 
     return (
-      <div
-        className={clsx(
-          'flex',
-          'items-center',
-          'rounded-lg',
-          'h-[52px]',
-          'bg-gray-50',
-          'p-[8px]',
-          'text-black',
-        )}
-      >
-        {left}
-        <input
-          ref={ref}
+      <div>
+        <div
           className={clsx(
-            'ml-[15px]',
-            'w-full',
-            'text-lg',
+            'flex',
+            'items-center',
+            'rounded-lg',
+            'h-[52px]',
             'bg-gray-50',
-            'outline-none',
-            'placeholder:text-textGray-50',
+            'p-[8px]',
+            'text-black',
+            status === 'error' && ERROR_BOX,
           )}
-          {...props}
-          value={value}
-          onChange={handleChange}
-        />
-        {showLimitCount && (
-          <div className={clsx('mx-[8px]', 'text-base', 'text-textGray-50')}>
-            {value.length}/{props.maxLength}
-          </div>
+        >
+          {left}
+          <input
+            ref={ref}
+            className={clsx(
+              'ml-[15px]',
+              'w-full',
+              'text-lg',
+              'bg-gray-50',
+              'outline-none',
+              'placeholder:text-textGray-50',
+            )}
+            {...props}
+            value={value}
+            onChange={handleChange}
+          />
+          {showLimitCount && (
+            <div className={clsx('mx-[8px]', 'text-base', 'text-textGray-50')}>
+              {value.length}/{props.maxLength}
+            </div>
+          )}
+        </div>
+        {!noStatusMessage && (
+          <div className={clsx(STATUS_MESSAGE)}>{renderStatusMessage()}</div>
         )}
       </div>
     )
