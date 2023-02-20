@@ -13,6 +13,15 @@ const TITLE =
 const SUB_TITLE = 'text-lg tracking-[-0.006em] text-black mb-[6px]'
 const DESCRIPTION = 'text-sm tracking-[-0.004em] text-textGray-100'
 
+const DEFAULT_COLORS = [
+  colors?.red,
+  colors?.pink,
+  colors?.orange,
+  colors?.skyblue,
+  colors?.blue,
+  colors?.purple,
+]
+
 export default function NewBlockContainer() {
   const [emoji, setEmoji] = useState<string>()
   const [color, setColor] = useState<string>()
@@ -49,14 +58,7 @@ export default function NewBlockContainer() {
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
         <ColorPicker
-          defaultColors={[
-            colors?.red,
-            colors?.pink,
-            colors?.orange,
-            colors?.skyblue,
-            colors?.blue,
-            colors?.purple,
-          ]}
+          defaultColors={DEFAULT_COLORS}
           onChange={handleColorChange}
           defaultPicked={colors?.red}
         />
