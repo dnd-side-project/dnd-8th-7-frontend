@@ -13,7 +13,8 @@ const Template: ComponentStory<typeof BlockInput> = (args) => (
 
 export const Basic = Template.bind({})
 Basic.args = {
-  count: true,
+  showLimitCount: true,
+  maxLength: 15,
   defaultValue: '',
   placeholder: '블록 제목을 입력하세요',
   onEmojiChange: noop,
