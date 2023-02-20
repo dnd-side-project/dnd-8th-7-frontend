@@ -1,10 +1,12 @@
-import { Block } from '@/types/block'
+import { Block, BlockList } from '@/types/block'
+
+export const DAYS = ['일', '월', '화', '수', '목', '금', '토']
 
 // mock data - 추후 제거 예정
 const MOCK_BLOCK: Block = {
   color: '#FF7154',
   icon: '',
-  blockTitle: '출근 준비',
+  title: '출근 준비',
   sumOfTask: 4,
   sumOfDoneTask: 2,
   tasks: [
@@ -31,24 +33,46 @@ const MOCK_BLOCK: Block = {
   ],
 }
 
-export const MOCK_BLOCK_LIST: Block[] = [
-  MOCK_BLOCK,
-  {
-    ...MOCK_BLOCK,
-    color: '#FFB673',
-    blockTitle: '회사',
-  },
-  {
-    ...MOCK_BLOCK,
-    color: '#7E85FF',
-    blockTitle: '디앤디',
-  },
-  {
-    ...MOCK_BLOCK,
-    color: '#5B9DFF',
-    blockTitle: '휴식',
-  },
-]
+export const MOCK_BLOCK_LIST: BlockList = {
+  date: '2022-01-25',
+  totalBlock: 2,
+  totalTask: 3,
+  blocks: [
+    {
+      color: '#FF7154',
+      icon: '😀',
+      title: '제목1',
+      sumOfTask: 2,
+      sumOfDoneTask: 1,
+      tasks: [
+        {
+          taskId: 1,
+          task: 'content',
+          isDone: true,
+        },
+        {
+          taskId: 2,
+          task: 'content2',
+          isDone: false,
+        },
+      ],
+    },
+    {
+      color: '#7E85FF',
+      icon: '🥲',
+      title: '제목2',
+      sumOfTask: 1,
+      sumOfDoneTask: 1,
+      tasks: [
+        {
+          taskId: 3,
+          task: 'content3',
+          isDone: true,
+        },
+      ],
+    },
+  ],
+}
 
 export const MOCK_COLORS: string[] = [
   '#FF7154',
@@ -57,8 +81,6 @@ export const MOCK_COLORS: string[] = [
   '#5B9DFF',
   '#7E85FF',
 ]
-
-export const DAYS = ['일', '월', '화', '수', '목', '금', '토']
 
 export const MOCK_WEEKLY_BLOCKS = [
   {

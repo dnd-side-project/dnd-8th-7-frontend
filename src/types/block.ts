@@ -1,8 +1,7 @@
-/** TODO BlockDetail 과 병합 */
 export type Block = {
-  color: string | string[]
+  color: string
   icon: string
-  blockTitle: string
+  title: string
   sumOfTask: number
   sumOfDoneTask: number
   tasks: Task[]
@@ -24,4 +23,11 @@ export type Task = {
   taskId: number
   task: string
   isDone: boolean
+}
+
+export type BlockList = {
+  date: string
+  totalBlock: number
+  totalTask: number
+  blocks: Block[]
 }
