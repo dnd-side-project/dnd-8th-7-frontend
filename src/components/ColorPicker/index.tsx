@@ -1,41 +1,25 @@
 import clsx from 'clsx'
 import { ComponentProps, useState } from 'react'
 
-type Value = string | string[] | undefined
+type Value = string
 interface Props {
   defaultColors?: string[]
   defaultPicked?: Value
-  multiple?: boolean
-  onChange?: (color: Value) => void
+  onChange?: (color: string) => void
 }
 
 export default function ColorPicker({
   defaultColors = [],
   defaultPicked,
-  multiple = false,
   onChange,
 }: Props) {
-  const [pickedColor, setPickedColor] = useState<Value>(
-    defaultPicked || (multiple ? [] : undefined),
+  const [pickedColor, setPickedColor] = useState<Value | undefined>(
+    defaultPicked,
   )
 
   const handleColorClick = (color: string) => {
-    if (multiple) {
-      let newState = Array.isArray(pickedColor) ? [...pickedColor] : [color]
-      const idx = newState.indexOf(color)
-      if (idx !== -1) {
-        newState = [...newState.slice(0, idx), ...newState.slice(idx + 1)]
-      } else {
-        newState = Array.isArray(pickedColor)
-          ? [...pickedColor, color]
-          : [color]
-      }
-      setPickedColor(newState)
-      onChange?.(newState)
-    } else {
-      onChange?.(color)
-      setPickedColor(color)
-    }
+    onChange?.(color)
+    setPickedColor(color)
   }
 
   return (
@@ -45,9 +29,7 @@ export default function ColorPicker({
           key={color}
           color={color}
           onClick={() => handleColorClick(color)}
-          picked={
-            multiple ? pickedColor?.includes(color) : pickedColor === color
-          }
+          picked={pickedColor === color}
         />
       ))}
     </div>

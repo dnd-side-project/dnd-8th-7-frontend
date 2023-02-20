@@ -21,7 +21,6 @@ Basic.args = {
     '#5B9DFF',
     '#7E85FF',
   ],
-  multiple: false,
-  defaultPicked: ['#FFB673'],
+  defaultPicked: '#FFB673',
   onChange: noop,
 }
