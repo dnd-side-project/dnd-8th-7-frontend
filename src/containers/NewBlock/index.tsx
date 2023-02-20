@@ -7,6 +7,7 @@ import BlockInput from '@/components/BlockInput'
 import ColorPicker from '@/components/ColorPicker'
 import Switch from '@/components/Switch'
 import Header from '@/components/Header'
+import BottomButtonLayout from '@/components/Layout/BottomButton'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -44,7 +45,7 @@ export default function NewBlockContainer() {
   }
 
   return (
-    <div>
+    <BottomButtonLayout buttonText="완료">
       <Header
         title={'새 블럭 만들기'}
         rightButton={'exit'}
@@ -55,6 +56,7 @@ export default function NewBlockContainer() {
         <BlockInput
           placeholder="블럭 제목을 입력해주세요"
           onEmojiChange={handleEmojiChange}
+          maxLength={15}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
         <ColorPicker
@@ -71,6 +73,6 @@ export default function NewBlockContainer() {
           <Switch onChange={handleSecretChange} />
         </div>
       </div>
-    </div>
+    </BottomButtonLayout>
   )
 }
