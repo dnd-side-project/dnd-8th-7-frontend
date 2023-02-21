@@ -17,6 +17,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   fontWeight?: FontWeight
   rounded?: Rounded
   disabled?: boolean
+  outlined?: boolean
 }
 
 const SIZE_CONFIG: SizeConfig = {
@@ -50,6 +51,7 @@ const Button = ({
   size = 'md',
   rounded = 'md',
   fontWeight = 'medium',
+  outlined = false,
   className,
   ...rest
 }: PropsWithChildren<ButtonProps>) => {
@@ -72,6 +74,9 @@ const Button = ({
         className,
         {
           'disabled:text-textGray-50 disabled:bg-gray-100': color === 'black',
+        },
+        {
+          'border border-gray-400': outlined,
         },
       )}
     >

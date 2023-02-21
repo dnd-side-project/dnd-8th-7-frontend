@@ -40,4 +40,5 @@ Basic.args = {
   color: 'black',
   fontWeight: 'medium',
   rounded: 'md',
+  outlined: false,
 }
