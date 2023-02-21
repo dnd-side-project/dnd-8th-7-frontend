@@ -1,11 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import Input, { INPUT_STATUE } from '@/components/Input'
-import BlockInput from '@/components/Input/BlockInput'
-import { noop } from '@/utils'
 
 export default {
   title: 'components/Input',
-  components: BlockInput,
+  components: Input,
   argTypes: {
     status: {
       options: INPUT_STATUE,
@@ -26,16 +24,4 @@ Basic.args = {
   statusMessage: '상태에 따른 메세지',
   noStatusMessage: false,
   status: 'default',
-}
-
-const BlockTemplate: ComponentStory<typeof BlockInput> = (args) => (
-  <BlockInput {...args} />
-)
-export const Block = BlockTemplate.bind({})
-Block.args = {
-  showLimitCount: true,
-  maxLength: 15,
-  defaultValue: '',
-  placeholder: '블록 제목 생성 Input 입니다',
-  onEmojiChange: noop,
 }

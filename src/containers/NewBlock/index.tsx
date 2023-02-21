@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 import { colors } from '@/styles/theme'
 
-import BlockInput from '@/components/Input/BlockInput'
+import BlockTitleInput from './BlockTitleInput'
 import ColorPicker from '@/components/ColorPicker'
 import Switch from '@/components/Switch'
 import Header from '@/components/Header'
@@ -52,7 +52,7 @@ export default function NewBlockContainer() {
       />
       <div className={clsx('pt-[56px]', 'px-[20px]')}>
         <div className={clsx(TITLE, 'mt-[24px]')}>블럭 제목</div>
-        <BlockInput
+        <BlockTitleInput
           showLimitCount
           maxLength={15}
           placeholder="블럭 제목을 입력해주세요"
