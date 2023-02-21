@@ -7,7 +7,7 @@ import BlockInput from '@/components/BlockInput'
 import ColorPicker from '@/components/ColorPicker'
 import Switch from '@/components/Switch'
 import Header from '@/components/Header'
-import BottomButtonLayout from '@/components/Layout/BottomButton'
+import { BottomButtonLayout } from '@/components/Layout'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'

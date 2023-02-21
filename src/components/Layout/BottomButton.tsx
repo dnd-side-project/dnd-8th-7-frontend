@@ -28,7 +28,15 @@ export default function BottomButtonLayout({
             'bg-bottom-button-layout',
           )}
         />
-        <div className={clsx('absolute', 'bottom-0', 'w-full', 'p-[20px]')}>
+        <div
+          className={clsx(
+            'absolute',
+            'bottom-0',
+            'w-full',
+            'px-[20px]',
+            'py-[15px]',
+          )}
+        >
           <Button {...buttonProps}>{buttonText}</Button>
         </div>
       </div>
