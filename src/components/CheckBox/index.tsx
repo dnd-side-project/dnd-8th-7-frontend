@@ -1,32 +1,34 @@
+import { ComponentPropsWithoutRef, ChangeEvent } from 'react'
 import { CheckBoxOnIcon, CheckBoxOffIcon } from '@/components/Icons'
-import { MouseEvent, ComponentPropsWithoutRef, useState } from 'react'
 
-interface Props
-  extends Omit<
-    ComponentPropsWithoutRef<'div'>,
-    'value' | 'defaultChecked' | 'onChange'
-  > {
-  defaultChecked?: boolean
-  onChange?: (value: boolean) => void
+interface Props extends Omit<ComponentPropsWithoutRef<'input'>, 'onChange'> {
+  onChange?: (value: boolean, e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function CheckBox({
   onChange,
-  defaultChecked = false,
+  defaultChecked,
   ...props
 }: Props) {
-  const [activeStatus, setActiveStatus] = useState(defaultChecked)
-
-  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
-    props?.onClick?.(e)
-    const newStatus = !activeStatus
-    onChange?.(newStatus)
-    setActiveStatus(newStatus)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target
+    onChange?.(checked, e)
   }
 
   return (
-    <div {...props} onClick={handleClick}>
-      {activeStatus ? <CheckBoxOnIcon /> : <CheckBoxOffIcon />}
-    </div>
+    <label>
+      <input
+        {...props}
+        type="checkbox"
+        className="peer hidden"
+        onChange={handleChange}
+      />
+      <div className="peer-checked:hidden">
+        <CheckBoxOffIcon />
+      </div>
+      <div className="hidden peer-checked:block">
+        <CheckBoxOnIcon />
+      </div>
+    </label>
   )
 }
