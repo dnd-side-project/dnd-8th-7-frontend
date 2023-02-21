@@ -1,15 +1,10 @@
+import { ArrayToUnion, Config } from '@/types/common.type'
 import {
   colorOptions,
   sizeOptions,
   fontWeightOptions,
   roundedOptions,
 } from './consts'
-
-type Config<T extends readonly string[]> = {
-  [key in T[number]]: string
-}
-
-type ArrayToUnion<T extends readonly string[]> = T[number]
 
 export type Color = ArrayToUnion<typeof colorOptions>
 export type Size = ArrayToUnion<typeof sizeOptions>
