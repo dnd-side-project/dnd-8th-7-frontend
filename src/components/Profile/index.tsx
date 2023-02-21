@@ -1,10 +1,21 @@
 import clsx from 'clsx'
+import { Size, SizeConfig } from './types'
+
+const SIZE_CONFIG: SizeConfig = {
+  sm: 'w-[50px] h-[50px]',
+  md: 'w-[100px] h-[100px]',
+}
+const DEFAULT_IMAGE_SIZE_CONFIG: Record<Size, number> = {
+  sm: 41,
+  md: 82,
+}
 
 interface Props {
   imgSrc?: string
+  size?: Size
 }
 
-const DefaultImage = () => {
+const DefaultImage = ({ size = 'sm' }: Props) => {
   return (
     <div
       className={clsx(
@@ -16,12 +27,16 @@ const DefaultImage = () => {
         'bg-gray-200',
       )}
     >
-      <img src="/assets/images/profile_default.png" alt="profile" width={41} />
+      <img
+        src="/assets/images/profile_default.png"
+        alt="profile"
+        width={DEFAULT_IMAGE_SIZE_CONFIG[size]}
+      />
     </div>
   )
 }
 
-const Profile = ({ imgSrc = '' }: Props) => {
+const Profile = ({ imgSrc = '', size = 'sm' }: Props) => {
   return (
     <div
       className={clsx(
@@ -29,13 +44,12 @@ const Profile = ({ imgSrc = '' }: Props) => {
         'items-center',
         'justify-center',
         'rounded-full',
-        'w-[50px]',
-        'h-[50px]',
+        SIZE_CONFIG[size],
         'overflow-hidden',
       )}
     >
       {!imgSrc ? (
-        <DefaultImage />
+        <DefaultImage size={size} />
       ) : (
         <img src={imgSrc} alt="" className="w-full h-full" />
       )}
