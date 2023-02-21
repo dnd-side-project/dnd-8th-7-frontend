@@ -40,6 +40,10 @@ module.exports = {
         '2xl': ['20px', '140%'],
       },
     },
+    backgroundImage: {
+      'bottom-button-layout':
+        'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.09147408963585435) 7%, rgba(255,255,255,1) 23%, rgba(255,255,255,1) 100%)',
+    },
   },
   plugins: [],
 }

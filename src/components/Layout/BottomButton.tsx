@@ -22,11 +22,13 @@ export default function BottomButtonLayout({
       </div>
       <div>
         <div
-          className={clsx('absolute', 'bottom-0', 'h-[90px]', 'w-full')}
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.09147408963585435) 7%, rgba(255,255,255,1) 23%, rgba(255,255,255,1) 100%)',
-          }}
+          className={clsx(
+            'absolute',
+            'bottom-0',
+            'h-[90px]',
+            'w-full',
+            'bg-bottom-button-layout',
+          )}
         />
         <div className={clsx('absolute', 'bottom-0', 'w-full', 'p-[20px]')}>
           {button || <Button {...buttonProps}>{buttonText}</Button>}
