@@ -37,7 +37,7 @@ export default function NewProfileContainer() {
               'font-bold',
               'text-black',
               'mt-[20px]',
-              'mb-[24px]',
+              'mb-[34px]',
             )}
           >
             가입을 축하드려요!
