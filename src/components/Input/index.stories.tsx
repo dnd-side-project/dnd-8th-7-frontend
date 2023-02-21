@@ -1,12 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Input, { INPUT_STATUE } from '@/components/Input'
+import Input from '@/components/Input'
+import { statusOptions } from './consts'
 
 export default {
   title: 'components/Input',
   components: Input,
   argTypes: {
     status: {
-      options: INPUT_STATUE,
+      options: statusOptions,
       control: { type: 'radio' },
     },
   },

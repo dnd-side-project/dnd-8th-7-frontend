@@ -7,20 +7,25 @@ import {
   ReactNode,
 } from 'react'
 import clsx from 'clsx'
+import { Status, StatusConfig } from './types'
 
-const STATUS_MESSAGE = ['text-sm', 'h-6', 'pt-1']
-const ERROR_BOX = [
-  'shadow-error',
-  'shadow-[inset_1px_0px,inset_-1px_0px,inset_0px_1px,inset_0px_-1px]',
-]
+const ERROR_BOX_CONFIG: StatusConfig = {
+  error:
+    'shadow-error shadow-[inset_1px_0px,inset_-1px_0px,inset_0px_1px,inset_0px_-1px]',
+  default: '',
+  success: '',
+}
 
-export const INPUT_STATUE = ['success', 'error', 'default'] as const
-export type InputStatus = (typeof INPUT_STATUE)[number]
+const STATUS_CONFIG: StatusConfig = {
+  error: 'text-sm h-6 pt-1',
+  default: '',
+  success: '',
+}
 
 export interface InputProps extends ComponentProps<'input'> {
   showLimitCount?: boolean
   left?: ReactNode
-  status?: InputStatus
+  status?: Status
   statusMessage?: string
   noStatusMessage?: boolean
 }
@@ -75,7 +80,7 @@ export default forwardRef<HTMLInputElement | null, InputProps>(
             'bg-gray-50',
             'p-[8px]',
             'text-black',
-            status === 'error' && ERROR_BOX,
+            ERROR_BOX_CONFIG[status],
           )}
         >
           {left}
@@ -100,7 +105,9 @@ export default forwardRef<HTMLInputElement | null, InputProps>(
           )}
         </div>
         {!noStatusMessage && (
-          <div className={clsx(STATUS_MESSAGE)}>{renderStatusMessage()}</div>
+          <div className={clsx(STATUS_CONFIG[status])}>
+            {renderStatusMessage()}
+          </div>
         )}
       </div>
     )

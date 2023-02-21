@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { INPUT_STATUE } from '@/components/Input'
+import { statusOptions } from '@/components/Input/consts'
 import BlockTitleInput from '@/containers/NewBlock/BlockTitleInput'
 import { noop } from '@/utils'
 
@@ -8,7 +8,7 @@ export default {
   components: BlockTitleInput,
   argTypes: {
     status: {
-      options: INPUT_STATUE,
+      options: statusOptions,
       control: { type: 'radio' },
     },
   },
