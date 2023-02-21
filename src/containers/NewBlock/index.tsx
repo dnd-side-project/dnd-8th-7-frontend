@@ -58,7 +58,6 @@ export default function NewBlockContainer() {
           maxLength={15}
           placeholder="블럭 제목을 입력해주세요"
           onEmojiChange={handleEmojiChange}
-          maxLength={15}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
         <ColorPicker
