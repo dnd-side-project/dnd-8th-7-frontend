@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
 import Header from '@/components/Header'
@@ -11,12 +12,21 @@ import Input from '@/components/Input'
 const LABEL = 'text-lg font-bold text-black mt-[40px] mb-[10px]'
 
 export default function NewProfileContainer() {
+  const router = useRouter()
+
   const handleGoBack = () => {
     rnWebViewBridge.close()
   }
 
+  const handleSubmit = () => {
+    router.push('/profiles/new/done')
+  }
+
   return (
-    <BottomButtonLayout buttonText="완료">
+    <BottomButtonLayout
+      buttonText="완료"
+      buttonProps={{ onClick: handleSubmit }}
+    >
       <Header title={''} leftButton={'back'} onLeftButtonClick={handleGoBack} />
       <div className={clsx('pt-[56px]', 'px-[20px]')}>
         <div className={clsx('flex', 'flex-col', 'items-center')}>
