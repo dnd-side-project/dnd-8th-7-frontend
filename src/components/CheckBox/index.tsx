@@ -1,5 +1,4 @@
-import CheckBoxOnIcon from '../Icons/CheckBoxOnIcon'
-import CheckBoxOffIcon from '../Icons/CheckBoxOffIcon'
+import { CheckBoxOnIcon, CheckBoxOffIcon } from '@/components/Icons'
 import { MouseEvent, ComponentPropsWithoutRef, useState } from 'react'
 
 interface Props
