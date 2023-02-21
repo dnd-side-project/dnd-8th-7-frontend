@@ -37,7 +37,9 @@ export default function BottomButtonLayout({
             'py-[15px]',
           )}
         >
-          <Button {...buttonProps}>{buttonText}</Button>
+          <Button {...buttonProps}>
+            <div className={clsx('text-lg')}>{buttonText}</div>
+          </Button>
         </div>
       </div>
     </div>

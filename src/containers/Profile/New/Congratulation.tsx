@@ -78,7 +78,7 @@ export default function NewProfileCongratulationContainer() {
       </div>
       <div className="mb-[15px]">
         <Button color="red" onClick={handleGoMain}>
-          하루블럭 시작하기
+          <div className={clsx('text-lg')}>하루블럭 시작하기</div>
         </Button>
       </div>
     </div>
