@@ -1,13 +1,31 @@
 import { ComponentPropsWithoutRef, ChangeEvent } from 'react'
-import { CheckBoxOnIcon, CheckBoxOffIcon } from '@/components/Icons'
+import {
+  CheckBoxOnCircleIcon,
+  CheckBoxOffCircleIcon,
+  CheckBoxOnRectIcon,
+  CheckBoxOffRectIcon,
+} from '@/components/Icons'
+import type { Shape, ShapeConfig } from './types'
+
+const CheckBoxType: ShapeConfig = {
+  circle: {
+    off: <CheckBoxOffCircleIcon />,
+    on: <CheckBoxOnCircleIcon />,
+  },
+  rectangle: {
+    off: <CheckBoxOffRectIcon />,
+    on: <CheckBoxOnRectIcon />,
+  },
+}
 
 interface Props extends Omit<ComponentPropsWithoutRef<'input'>, 'onChange'> {
   onChange?: (value: boolean, e: ChangeEvent<HTMLInputElement>) => void
+  shape?: Shape
 }
 
 export default function CheckBox({
   onChange,
-  defaultChecked,
+  shape = 'circle',
   ...props
 }: Props) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,12 +41,8 @@ export default function CheckBox({
         className="peer hidden"
         onChange={handleChange}
       />
-      <div className="peer-checked:hidden">
-        <CheckBoxOffIcon />
-      </div>
-      <div className="hidden peer-checked:block">
-        <CheckBoxOnIcon />
-      </div>
+      <div className="peer-checked:hidden">{CheckBoxType[shape].off}</div>
+      <div className="hidden peer-checked:block">{CheckBoxType[shape].on}</div>
     </label>
   )
 }
