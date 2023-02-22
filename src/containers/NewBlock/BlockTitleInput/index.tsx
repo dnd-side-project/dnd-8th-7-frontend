@@ -4,7 +4,7 @@ import { ChangeEvent, forwardRef, useState, useEffect } from 'react'
 import useRNEmojiBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNEmojiBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 
-import { SmileFaceIcon } from '@/components/Icons'
+import { FaceIcon } from '@/components/Icons'
 import Input, { InputProps } from '@/components/Input'
 
 interface Props extends Omit<InputProps, 'left' | 'ref'> {
@@ -64,7 +64,7 @@ export default forwardRef<HTMLInputElement | null, Props>(
             {!!emoji ? (
               <span className={clsx('text-lg')}>{emoji}</span>
             ) : (
-              <SmileFaceIcon />
+              <FaceIcon />
             )}
           </button>
         }
