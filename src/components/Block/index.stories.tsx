@@ -10,8 +10,8 @@ export default {
 const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />
 
 const MOCK_DATA: BlockType = {
-  color: 'FF7154',
-  icon: '',
+  color: '#FF7154',
+  icon: '😂',
   blockTitle: '출근 준비',
   sumOfTask: 4,
   sumOfDoneTask: 2,
