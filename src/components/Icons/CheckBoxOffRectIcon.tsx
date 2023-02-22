@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import CheckBoxOff from 'public/assets/icons/checkbox_off.svg'
+import CheckBoxOff from 'public/assets/icons/checkbox_off_rect.svg'
 import { SvgProps } from '@/types/svg'
 
-const CheckBoxOffIcon = ({
+const CheckBoxOffRectIcon = ({
   alt = '',
   className = '',
   width = 24,
@@ -14,11 +14,11 @@ const CheckBoxOffIcon = ({
       <CheckBoxOff
         width={width}
         height={height}
-        className={clsx('fill-black', className)}
+        className={clsx(className)}
         {...rest}
       />
     </i>
   )
 }
 
-export default CheckBoxOffIcon
+export default CheckBoxOffRectIcon
