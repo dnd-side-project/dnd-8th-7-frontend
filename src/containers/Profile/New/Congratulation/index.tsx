@@ -5,7 +5,7 @@ import lottie from 'lottie-web'
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 
 import Button from '@/components/Button'
-import { DarkProfileIcon } from '@/components/Icons'
+import DarkProfileIcon from 'public/assets/icons/dark_profile.svg'
 
 export default function NewProfileCongratulationContainer() {
   const mount = useRef(false)
