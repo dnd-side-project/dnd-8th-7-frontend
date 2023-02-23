@@ -1,7 +1,5 @@
-import axios from 'axios'
+import DayBlockAxiosAPI from './services/DayBlockAxiosAPI'
 
-const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-})
+const dayBlockAPI = new DayBlockAxiosAPI()
 
-export default API
+export default dayBlockAPI
