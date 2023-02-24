@@ -9,18 +9,22 @@ const MOCK_BLOCK: Block = {
   sumOfDoneTask: 2,
   tasks: [
     {
+      taskId: 1,
       task: '할 일 1',
       isDone: false,
     },
     {
+      taskId: 2,
       task: '할 일 2',
       isDone: true,
     },
     {
+      taskId: 3,
       task: '할 일 3',
       isDone: true,
     },
     {
+      taskId: 4,
       task: '할 일 3',
       isDone: false,
     },

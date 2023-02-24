@@ -17,18 +17,22 @@ const MOCK_DATA: BlockType = {
   sumOfDoneTask: 2,
   tasks: [
     {
+      taskId: 0,
       task: '할 일 1',
       isDone: false,
     },
     {
+      taskId: 1,
       task: '할 일 2',
       isDone: true,
     },
     {
+      taskId: 2,
       task: '할 일 3',
       isDone: true,
     },
     {
+      taskId: 3,
       task: '할 일 3',
       isDone: false,
     },
