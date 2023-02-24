@@ -3,7 +3,7 @@ import { useState } from 'react'
 import TaskCheckBox, { OnChange } from '@/components/TaskCheckBox'
 import type { Task as TaskType } from '@/types/block'
 
-const Task = ({ isDone, task }: TaskType) => {
+const Task = ({ isDone, task, taskId }: TaskType) => {
   const [isChecked, setIsChecked] = useState(isDone)
   const handleCheckTask: OnChange = ({ selected }) => {
     setIsChecked(selected)

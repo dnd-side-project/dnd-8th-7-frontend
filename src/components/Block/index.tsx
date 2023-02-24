@@ -106,9 +106,9 @@ const TodoBlock = ({
         <div className="pt-4 pl-3 pr-8">
           <AddTaskButton />
           <div className="mt-6">
-            {tasks?.map(({ isDone, task }, idx) => (
-              <div key={idx} className="mb-3">
-                <Task isDone={isDone} task={task} />
+            {tasks?.map((task) => (
+              <div key={task.taskId} className="mb-3">
+                <Task {...task} />
               </div>
             ))}
           </div>
