@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
 import { MOCK_WEEKLY_BLOCKS } from '@/constants/block'
+import { BASE_URL } from '@/constants/urls'
 import Button from '@/components/Button'
 import { AddIcon } from '@/components/Icons'
 import useSelectedDateState from '@/store/selectedDate'
@@ -39,14 +40,14 @@ const DailyBlockPanel = () => {
   const handleAddSavedBlock = () => {
     rnWebViewBridge.open({
       key: 'savedBlock',
-      url: 'http://localhost:3000/blocks/saved',
+      url: `${BASE_URL}/blocks/saved`,
     })
   }
 
   const handleAddNewBlock = () => {
     rnWebViewBridge.open({
       key: 'newBlock',
-      url: 'http://localhost:3000/blocks/new',
+      url: `${BASE_URL}/blocks/new`,
     })
   }
 

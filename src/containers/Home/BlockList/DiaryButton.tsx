@@ -1,5 +1,6 @@
 import Button from '@/components/Button'
 import { EditIcon } from '@/components/Icons'
+import { BASE_URL } from '@/constants/urls'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 
@@ -7,7 +8,7 @@ const DiaryButton = () => {
   const handleDiaryCreate = () => {
     rnWebViewBridge.open({
       key: 'dailyDiary',
-      url: 'http://localhost:3000/dailyDiary',
+      url: `${BASE_URL}/dailyDiary`,
     })
   }
 
