@@ -8,6 +8,7 @@ export const MOCK_BLOCK_LIST: BlockList = {
   totalTask: 3,
   blocks: [
     {
+      blockId: 1,
       color: '#FF7154',
       icon: '😀',
       title: '제목1',
@@ -27,6 +28,7 @@ export const MOCK_BLOCK_LIST: BlockList = {
       ],
     },
     {
+      blockId: 2,
       color: '#7E85FF',
       icon: '🥲',
       title: '제목2',

@@ -11,16 +11,16 @@ const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />
 const MOCK_DATA = {
   color: '#FF7154',
   icon: '😂',
-  blockTitle: '출근 준비',
+  title: '출근 준비',
   sumOfTask: 4,
 }
 
-const { color, icon, blockTitle, sumOfTask } = MOCK_DATA
+const { color, icon, title, sumOfTask } = MOCK_DATA
 
 export const SavedBlock = Template.bind({})
 SavedBlock.args = {
   color,
   icon,
-  blockTitle,
+  title,
   sumOfTask,
 }

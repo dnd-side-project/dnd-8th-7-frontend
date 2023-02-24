@@ -37,9 +37,13 @@ const BlockList = () => {
           </>
         ) : (
           blocks.map(
-            ({ color, icon, title, sumOfTask, sumOfDoneTask, tasks }, idx) => (
+            (
+              { blockId, color, icon, title, sumOfTask, sumOfDoneTask, tasks },
+              idx,
+            ) => (
               <div key={idx} className="mb-2">
                 <Block
+                  blockId={blockId}
                   color={color}
                   icon={icon}
                   title={title}

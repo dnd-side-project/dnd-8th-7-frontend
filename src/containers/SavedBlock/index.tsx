@@ -62,7 +62,7 @@ export default function SavedBlockContainer() {
                 <SavedBlock
                   color={colors.red}
                   icon={'😂'}
-                  blockTitle={'한둘셋넷일여아열한둘셋'}
+                  title={'한둘셋넷일여아열한둘셋'}
                   sumOfTask={12}
                 />
               </div>
