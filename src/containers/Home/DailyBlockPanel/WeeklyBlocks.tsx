@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import clsx from 'clsx'
 import DailyBlock from '@/components/DailyBlock'
@@ -66,7 +66,7 @@ const DailyBlockPanel = ({
 
   return (
     <div className="flex justify-between mx-auto my-7 min-w-80 max-w-[400px]">
-      {weeklyBlocks.map(({ date: dateTime, colors }, idx) => {
+      {weeklyBlocks.map(({ date: dateTime, color }, idx) => {
         const formattedDate = dayjs(dateTime).format('YYYY-MM-DD')
         const day = dayjs(dateTime).day()
         const date = dayjs(dateTime).date()
@@ -75,7 +75,7 @@ const DailyBlockPanel = ({
           <div key={idx} className="flex flex-col items-center text-base">
             <p className="text-textGray-50 mb-[5px]">{DAYS[day % 7]}</p>
             <DayBlock
-              colors={colors}
+              colors={color}
               date={date}
               isActive={activeBlockIdx === idx}
               onClick={() => handleBlockClick(formattedDate, idx)}
