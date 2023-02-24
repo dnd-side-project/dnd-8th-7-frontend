@@ -6,6 +6,7 @@ import { NewWebViewData } from '../types/newWebView.type'
 type ReturnType = {
   open: (data: NewWebViewData, callbacks?: RNCallBacks) => void
   close: () => void
+  sendAction: (action: string) => void
 }
 
 function rnWebViewBridge(): ReturnType {
@@ -26,7 +27,11 @@ function rnWebViewBridge(): ReturnType {
     RNNewWebView.close({ eventKey: thisKey })
   }
 
-  return { open, close }
+  const sendAction = (action: string) => {
+    RNNewWebView.sendAction(action)
+  }
+
+  return { open, close, sendAction }
 }
 
 export default rnWebViewBridge()

@@ -14,8 +14,15 @@ function close(data: MessageData) {
   }
 }
 
+function sendAction(action: string) {
+  if (window?.ReactNativeWebView) {
+    webBridge.sendAction(action)
+  }
+}
+
 const RNNewWebView = {
   open,
   close,
+  sendAction,
 }
 export default RNNewWebView
