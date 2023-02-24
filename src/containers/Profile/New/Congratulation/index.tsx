@@ -6,17 +6,16 @@ import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnW
 
 import Button from '@/components/Button'
 import DarkProfileIcon from 'public/assets/icons/dark_profile.svg'
+import { ACTION_TYPE } from '@/utils/react-native-webview-bridge/types/common.type'
 
 export default function NewProfileCongratulationContainer() {
   const mount = useRef(false)
   const lottieRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!mount.current) {
+    if (!mount.current && lottieRef.current) {
       mount.current = true
       lottie.loadAnimation({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         container: lottieRef.current,
         renderer: 'svg',
         loop: false,
@@ -30,7 +29,7 @@ export default function NewProfileCongratulationContainer() {
     /**
      * TODO 메인으로 가기
      */
-    rnWebViewBridge.close()
+    rnWebViewBridge.sendAction(ACTION_TYPE.GO_MAIN)
   }
 
   return (
@@ -49,12 +48,18 @@ export default function NewProfileCongratulationContainer() {
         ref={lottieRef}
         className={clsx(
           'absolute',
-          'top-[52%]',
-          'left-0',
+          'top-[55%]',
+          'left-[50%]',
           'translate-y-[-50%]',
+          'translate-x-[-50%]',
+          'w-[90%]',
+          'max-w-[400px]',
         )}
       />
-      <div className={clsx('flex', 'flex-1', 'items-center', 'justify-center')}>
+      <div
+        className={clsx('flex', 'flex-1', 'items-center', 'justify-center')}
+        style={{ zIndex: 2 }}
+      >
         <div className={clsx('flex', 'flex-col', 'items-center')}>
           <div className={clsx('text-red', 'text-lg', 'font-bold')}>
             프로필 생성 완료!
