@@ -1,16 +1,22 @@
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import clsx from 'clsx'
 import DailyBlock from '@/components/DailyBlock'
-import { DAYS, MOCK_WEEKLY_BLOCKS } from '@/constants/block'
+import { DAYS } from '@/constants/block'
+import type { DailyBlock as DailyBlockType } from '@/types/block'
+import { noop } from '@/utils'
+import useSelectedDateState from '@/store/selectedDate'
 
 const DayBlock = ({
   colors,
   date,
-  isToday,
+  isActive,
+  onClick = noop,
 }: {
   colors: string[]
   date: number
-  isToday: boolean
+  isActive: boolean
+  onClick?: () => void
 }) => {
   return (
     <>
@@ -23,12 +29,19 @@ const DayBlock = ({
           'pb-1',
           'px-1.5',
           'rounded-[11px]',
-          { border: isToday },
+          'cursor-pointer',
+          'border',
+          'border-white',
+          { 'border-gray-300': isActive },
         )}
+        onClick={onClick}
       >
         <DailyBlock colors={colors} />
         <p
-          className={clsx('mt-1', isToday ? 'text-black' : 'text-textGray-100')}
+          className={clsx(
+            'mt-1',
+            isActive ? 'text-black' : 'text-textGray-100',
+          )}
         >
           {date}
         </p>
@@ -37,18 +50,36 @@ const DayBlock = ({
   )
 }
 
-const WeeklyBlocks = () => {
-  const today = dayjs().day()
+const DailyBlockPanel = ({
+  weeklyBlocks,
+}: {
+  weeklyBlocks: DailyBlockType[]
+}) => {
+  const todayIdx = dayjs().day() % 7
+  const [activeBlockIdx, setActiveBlockIdx] = useState(todayIdx)
+  const setSelectedDate = useSelectedDateState((state) => state.setSelectedDate)
+
+  const handleBlockClick = (formattedDate: string, idx: number) => {
+    setSelectedDate(formattedDate)
+    setActiveBlockIdx(idx)
+  }
 
   return (
-    <div className="flex justify-between mx-auto mb-7 min-w-80 max-w-[400px]">
-      {MOCK_WEEKLY_BLOCKS.map(({ date: dateTime, colors }, idx) => {
+    <div className="flex justify-between mx-auto my-7 min-w-80 max-w-[400px]">
+      {weeklyBlocks.map(({ date: dateTime, colors }, idx) => {
+        const formattedDate = dayjs(dateTime).format('YYYY-MM-DD')
         const day = dayjs(dateTime).day()
         const date = dayjs(dateTime).date()
+
         return (
           <div key={idx} className="flex flex-col items-center text-base">
             <p className="text-textGray-50 mb-[5px]">{DAYS[day % 7]}</p>
-            <DayBlock colors={colors} date={date} isToday={today === day} />
+            <DayBlock
+              colors={colors}
+              date={date}
+              isActive={activeBlockIdx === idx}
+              onClick={() => handleBlockClick(formattedDate, idx)}
+            />
           </div>
         )
       })}
@@ -56,4 +87,4 @@ const WeeklyBlocks = () => {
   )
 }
 
-export default WeeklyBlocks
+export default DailyBlockPanel
