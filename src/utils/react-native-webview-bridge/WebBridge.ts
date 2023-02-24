@@ -5,6 +5,7 @@ import {
   ECallbackMessageType,
   CallbackDataType,
   CallbackMessageData,
+  EMessageType,
 } from './types/common.type'
 
 export default class WebBridge {
@@ -12,6 +13,12 @@ export default class WebBridge {
    * @member eventList <이벤트키, 이벤트 전달 받을 시 실행할 콜백 함수>
    */
   protected static eventList = new Map<string, Callbacks>()
+
+  sendAction(action: string) {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({ type: EMessageType.ACTION, action }),
+    )
+  }
 
   sendMessage(type: MessageType, data?: MessageData) {
     window.ReactNativeWebView.postMessage(JSON.stringify({ type, data }))
