@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
-import type { Block as BlockType } from '@/types/block'
+import type { BlockDetail } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 import AddTaskButton from './AddTaskButton'
@@ -28,6 +28,7 @@ const BlockIcon = ({ icon }: { icon: string }) => {
 }
 
 const Block = ({
+  blockId,
   color,
   icon,
   title,
@@ -35,7 +36,7 @@ const Block = ({
   sumOfDoneTask,
   tasks,
   locked = false,
-}: BlockType & { locked?: boolean }) => {
+}: BlockDetail & { locked?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open] = useRNListBottomSheet('blockMenu')
 
@@ -69,6 +70,7 @@ const Block = ({
 
   return (
     <div
+      key={blockId}
       className={clsx(
         'flex',
         'flex-col',
