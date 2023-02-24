@@ -5,6 +5,7 @@ export const PATH = {
   home: '/home',
   myProfile: '/profile',
   editProfile: '/profile/edit',
+  myProfileSettings: '/profile/settings',
   newProfile: '/profiles/new',
   newProfileDone: '/profiles/new/done',
   signUpAgreements: '/profiles/new/agreements',
