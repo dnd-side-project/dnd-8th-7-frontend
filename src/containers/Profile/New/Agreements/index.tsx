@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
+import { PATH } from '@/constants/path'
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+
 import Header from '@/components/Header'
 import BottomButtonLayout from '@/components/Layout/BottomButton'
-
-import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 import CheckBoxList from './CheckBoxList'
 
 const TEXT_STYLE = 'text-[14px] leading-[140%]'
@@ -17,7 +18,7 @@ export default function NewProfileAgreementsContainer() {
   }
 
   const handleSubmit = () => {
-    router.push('/profiles/new/done')
+    router.push(PATH.newProfileDone)
   }
 
   const handleTotalCheckChange = (checked: boolean) => {

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
+import { PATH } from '@/constants/path'
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+
 import Header from '@/components/Header'
 import BottomButtonLayout from '@/components/Layout/BottomButton'
-
-import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 import Profile from '@/components/Profile'
 import Switch from '@/components/Switch'
 import Input from '@/components/Input'
@@ -19,7 +20,7 @@ export default function NewProfileContainer() {
   }
 
   const handleSubmit = () => {
-    router.push('/profiles/new/done')
+    router.push(PATH.newProfileDone)
   }
 
   return (
