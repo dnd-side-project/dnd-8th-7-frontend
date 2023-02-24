@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import CheckBoxOn from 'public/assets/icons/checkbox_on.svg'
+import CheckBoxOff from 'public/assets/icons/checkbox_off_circle.svg'
 import { SvgProps } from '@/types/svg'
 
-const CheckBoxOnIcon = ({
+const CheckBoxOffCircleIcon = ({
   alt = '',
   className = '',
   width = 24,
@@ -11,14 +11,14 @@ const CheckBoxOnIcon = ({
 }: SvgProps) => {
   return (
     <i role="presentation" aria-label={alt}>
-      <CheckBoxOn
+      <CheckBoxOff
         width={width}
         height={height}
-        className={clsx('fill-black', className)}
+        className={clsx(className)}
         {...rest}
       />
     </i>
   )
 }
 
-export default CheckBoxOnIcon
+export default CheckBoxOffCircleIcon
