@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Size, SizeConfig } from './types'
 
-const SIZE_CONFIG: SizeConfig = {
+export const SIZE_CONFIG: SizeConfig = {
   sm: 'w-[50px] h-[50px]',
   md: 'w-[100px] h-[100px]',
 }
@@ -10,7 +10,7 @@ const DEFAULT_IMAGE_SIZE_CONFIG: Record<Size, number> = {
   md: 82,
 }
 
-interface Props {
+export interface Props {
   imgSrc?: string
   size?: Size
 }
