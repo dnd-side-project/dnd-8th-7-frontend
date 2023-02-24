@@ -40,6 +40,7 @@ module.exports = {
         lg: ['16px', '140%'],
         xl: ['18px', '140%'],
         '2xl': ['20px', '140%'],
+        '3xl': ['22px', '140%'],
       },
     },
     backgroundImage: {

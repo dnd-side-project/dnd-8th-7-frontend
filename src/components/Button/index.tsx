@@ -25,6 +25,7 @@ const SIZE_CONFIG: SizeConfig = {
 }
 
 const COLOR_CONFIG: ColorConfig = {
+  red: 'bg-red text-white',
   white: 'bg-white text-textGray-100',
   gray: 'bg-gray-100 text-textGray-100',
   black: 'bg-black text-white',
