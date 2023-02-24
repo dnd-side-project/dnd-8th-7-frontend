@@ -36,7 +36,12 @@ const DailyBlockPanel = () => {
     setSelectedDate(today)
   }, [setSelectedDate])
 
-  const handleAddSavedBlock = () => {} // TODO: 페이지 연결
+  const handleAddSavedBlock = () => {
+    rnWebViewBridge.open({
+      key: 'savedBlock',
+      url: 'http://localhost:3000/blocks/saved',
+    })
+  }
 
   const handleAddNewBlock = () => {
     rnWebViewBridge.open({
