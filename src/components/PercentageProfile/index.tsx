@@ -28,7 +28,7 @@ const PERCENTAGE_CONFIG: SizeConfig = {
   md: 'w-[125px] h-[125px]',
 }
 
-interface Props extends ProfileProps {
+export interface Props extends ProfileProps {
   percentage: number
   showNumber?: boolean
 }
