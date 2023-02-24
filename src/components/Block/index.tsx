@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
-import { Block } from '@/types/block'
+import type { BlockDetail } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 import AddTaskButton from './AddTaskButton'
@@ -27,15 +27,16 @@ const BlockIcon = ({ icon }: { icon: string }) => {
   )
 }
 
-const TodoBlock = ({
+const Block = ({
+  blockId,
   color,
   icon,
-  blockTitle,
+  title,
   sumOfTask,
   sumOfDoneTask,
   tasks,
   locked = false,
-}: Block & { locked?: boolean }) => {
+}: BlockDetail & { locked?: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open] = useRNListBottomSheet('blockMenu')
 
@@ -47,7 +48,7 @@ const TodoBlock = ({
     e.stopPropagation()
     if (locked) return
     open({
-      title: blockTitle,
+      title,
       items: [
         { key: 'edit', title: '수정하기' },
         { key: 'delete', title: '삭제하기' },
@@ -69,6 +70,7 @@ const TodoBlock = ({
 
   return (
     <div
+      key={blockId}
       className={clsx(
         'flex',
         'flex-col',
@@ -89,7 +91,7 @@ const TodoBlock = ({
               <p className="ml-2.5">{LOCKED_TEXT}</p>
             </div>
           ) : (
-            <p>{blockTitle}</p>
+            <p>{title}</p>
           )}
 
           <p className="font-medium">
@@ -118,4 +120,4 @@ const TodoBlock = ({
   )
 }
 
-export default TodoBlock
+export default Block

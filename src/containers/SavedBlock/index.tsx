@@ -9,6 +9,8 @@ import NoData from '@/components/NoData'
 import CheckBox from '@/components/CheckBox'
 import SavedBlock from './SavedBlock'
 
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+
 export default function SavedBlockContainer() {
   const checkedBlock = useRef(new Set()).current
   /**
@@ -26,9 +28,17 @@ export default function SavedBlockContainer() {
     }
   }
 
+  const handleBack = () => {
+    rnWebViewBridge.close()
+  }
+
   return (
     <BottomButtonLayout showButton={!!blocksLength} buttonText="완료">
-      <Header title="블럭 불러오기" leftButton="back" />
+      <Header
+        title="블럭 불러오기"
+        leftButton="back"
+        onLeftButtonClick={handleBack}
+      />
       <div className={clsx('pt-[56px]', 'px-[20px]', 'pb-[20px]', 'h-full')}>
         {blocksLength ? (
           <div
@@ -52,7 +62,7 @@ export default function SavedBlockContainer() {
                 <SavedBlock
                   color={colors.red}
                   icon={'😂'}
-                  blockTitle={'한둘셋넷일여아열한둘셋'}
+                  title={'한둘셋넷일여아열한둘셋'}
                   sumOfTask={12}
                 />
               </div>

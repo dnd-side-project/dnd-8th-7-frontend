@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import Block from '@/components/Block'
-import type { Block as BlockType } from '@/types/block'
+import type { BlockDetail } from '@/types/block'
 
 export default {
   title: 'components/Block',
@@ -9,10 +9,11 @@ export default {
 
 const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />
 
-const MOCK_DATA: BlockType = {
+const MOCK_DATA: BlockDetail = {
+  blockId: 1,
   color: '#FF7154',
   icon: '😂',
-  blockTitle: '출근 준비',
+  title: '출근 준비',
   sumOfTask: 4,
   sumOfDoneTask: 2,
   tasks: [
@@ -39,13 +40,13 @@ const MOCK_DATA: BlockType = {
   ],
 }
 
-const { color, icon, blockTitle, sumOfTask, sumOfDoneTask, tasks } = MOCK_DATA
+const { color, icon, title, sumOfTask, sumOfDoneTask, tasks } = MOCK_DATA
 
 export const Basic = Template.bind({})
 Basic.args = {
   color,
   icon,
-  blockTitle,
+  title,
   sumOfTask,
   sumOfDoneTask,
   tasks,

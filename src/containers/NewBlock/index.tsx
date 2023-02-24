@@ -9,6 +9,8 @@ import Switch from '@/components/Switch'
 import Header from '@/components/Header'
 import { BottomButtonLayout } from '@/components/Layout'
 
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
 const SUB_TITLE = 'text-lg tracking-[-0.006em] text-black mb-[6px]'
@@ -41,7 +43,7 @@ export default function NewBlockContainer() {
   }
 
   const handleClose = () => {
-    console.log('closed')
+    rnWebViewBridge.close()
   }
 
   return (

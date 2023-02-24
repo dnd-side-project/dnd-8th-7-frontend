@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { useEffect } from 'react'
 import { MoreVerticalIcon } from '@/components/Icons'
-import { Block as TodoBlock } from '@/types/block'
+import { BlockDetail } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 
-type Block = Pick<TodoBlock, 'color' | 'icon' | 'blockTitle' | 'sumOfTask'>
+type Block = Pick<BlockDetail, 'color' | 'icon' | 'title' | 'sumOfTask'>
 
 const BlockIcon = ({ icon }: { icon: string }) => {
   return (
@@ -28,7 +28,7 @@ const BlockIcon = ({ icon }: { icon: string }) => {
 const SavedBlock = ({
   color,
   icon,
-  blockTitle,
+  title,
   sumOfTask,
 }: Block & { locked?: boolean }) => {
   const [open] = useRNListBottomSheet('blockMenu')
@@ -36,7 +36,7 @@ const SavedBlock = ({
   const handleMoreClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
     open({
-      title: blockTitle,
+      title,
       items: [{ key: 'delete', title: '삭제하기' }],
     })
   }
@@ -65,7 +65,7 @@ const SavedBlock = ({
         <BlockIcon icon={icon} />
 
         <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
-          <p>{blockTitle}</p>
+          <p>{title}</p>
           <p className="font-medium">{sumOfTask}</p>
         </div>
 
