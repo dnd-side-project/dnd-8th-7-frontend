@@ -1,7 +1,11 @@
 import axios from 'axios'
 
+import { API_URL } from '@/constants/urls'
+
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: API_URL,
 })
+
+/** TODO interceptor 추가 */
 
 export default API

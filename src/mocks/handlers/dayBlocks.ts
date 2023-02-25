@@ -2,7 +2,7 @@ import {
   CreateBlockResponse,
   CreateDailyReviewParams,
   UpdateTaskInBlockParams,
-} from '@/api/types'
+} from '@/api/types/base.types'
 import { colors } from '@/styles/theme'
 import dayjs from 'dayjs'
 import { rest } from 'msw'

@@ -1,8 +1,5 @@
-import { AxiosResponse } from 'axios'
-import * as Type from '@/api/types'
-
-type PromiseAxios<T> = Promise<AxiosResponse<T>>
-type ServiceFunc<Params, Res> = (params: Params) => PromiseAxios<Res>
+import * as Type from '@/api/types/base.types'
+import { ServiceFunc } from './types'
 
 export default interface DayBlockService {
   getDailyBlocksOnWeek: ServiceFunc<
