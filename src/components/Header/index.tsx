@@ -39,7 +39,7 @@ const Header = ({
       )}
     >
       <HeaderButton type={leftButton} onClick={onLeftButtonClick} />
-      <p className="text-black text-2xl font-bold min-w-[calc(100%_-_40px)] text-center">
+      <p className="text-black text-xl font-bold min-w-[calc(100%_-_40px)] text-center">
         {title}
       </p>
       <HeaderButton type={rightButton} onClick={onRightButtonClick} />
