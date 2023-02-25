@@ -1,5 +1,5 @@
 import DayBlockAxiosAPI from './services/DayBlockAxiosAPI'
+import AuthAxiosAPI from './services/AuthAxiosAPI'
 
-const dayBlockAPI = new DayBlockAxiosAPI()
-
-export default dayBlockAPI
+export const dayBlockAPI = new DayBlockAxiosAPI()
+export const authAPI = new AuthAxiosAPI()

@@ -1,7 +1,7 @@
 import API from '@/api/axios'
 
 import DayBlockService from './DayBlock.interface'
-import * as Type from '@/api/types'
+import * as Type from '@/api/types/base.types'
 
 export default class DayBlockAxiosAPI implements DayBlockService {
   getDailyBlocksOnWeek(params: Type.GetDailyBlocksOnWeekParams) {
