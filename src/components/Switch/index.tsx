@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 
-interface Props {
+export interface Props {
   defaultValue?: boolean
   onChange?: (value: boolean) => void
 }
