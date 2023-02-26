@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import dayBlockAPI from '@/api'
-import { GetDailyBlocksOnWeekResponse } from '@/api/types'
+import { dayBlockAPI } from '@/api'
+import dayjs from 'dayjs'
+import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 import Tabs from '@/components/Tabs'
 import Button from '@/components/Button'
 import { AddIcon } from '@/components/Icons'
@@ -34,19 +35,16 @@ const AddButton = ({
 
 const Home = () => {
   const [data, setData] = useState<GetDailyBlocksOnWeekResponse | null>(null)
-  const handleBlockCreate = () => {
-    // 블럭 생성 페이지로 이동
-  }
-  const DATE = '2023-02-26'
+  const today = String(dayjs().format('YYYY-MM-DD'))
 
   useEffect(() => {
     const getDailyBlocks = async () => {
       await dayBlockAPI
-        .getDailyBlocksOnWeek({ date: DATE })
+        .getDailyBlocksOnWeek({ date: today })
         .then(({ data }) => setData(data))
     }
     getDailyBlocks()
-  }, [])
+  }, [today])
 
   const handleAddSavedBlock = () => {
     rnWebViewBridge.open({

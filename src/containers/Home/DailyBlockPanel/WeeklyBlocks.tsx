@@ -5,7 +5,7 @@ import DailyBlock from '@/components/DailyBlock'
 import { DAYS } from '@/constants/block'
 import { noop } from '@/utils'
 import useSelectedDateState from '@/store/selectedDate'
-import { GetDailyBlocksOnWeekResponse } from '@/api/types'
+import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 
 const DayBlock = ({
   colors,

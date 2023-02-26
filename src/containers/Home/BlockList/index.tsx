@@ -6,8 +6,8 @@ import Block from '@/components/Block'
 import NoData from '@/components/NoData'
 import useSelectedDateState from '@/store/selectedDate'
 import DiaryButton from './DiaryButton'
-import dayBlockAPI from '@/api'
-import { GetDayBlocksResponse } from '@/api/types'
+import { dayBlockAPI } from '@/api'
+import { GetDayBlocksResponse } from '@/api/types/base.types'
 
 const BlockList = () => {
   const selectedDate = useSelectedDateState((state) => state.date)

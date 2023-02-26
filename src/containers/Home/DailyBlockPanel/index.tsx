@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
-import { GetDailyBlocksOnWeekResponse } from '@/api/types'
+import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 import useSelectedDateState from '@/store/selectedDate'
 import WeeklyBlocks from './WeeklyBlocks'
 

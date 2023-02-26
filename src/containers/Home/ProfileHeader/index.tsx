@@ -1,4 +1,4 @@
-import { GetDailyBlocksOnWeekResponse } from '@/api/types'
+import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 import { AlarmIcon } from '@/components/Icons'
 import Profile from '@/components/Profile'
 
