@@ -19,14 +19,15 @@ const Task = ({ isDone, task, taskId }: TaskType) => {
   }
 
   useEffect(() => {
-    dayBlockAPI.updateTaskInBlock({
-      taskId,
-      content: debouncedValue,
-    })
+    debouncedValue &&
+      dayBlockAPI.updateTaskInBlock({
+        taskId,
+        content: debouncedValue,
+      })
   }, [taskId, debouncedValue])
 
   return (
-    <div className="flex">
+    <div className="flex mb-3">
       <TaskCheckBox
         key={taskId}
         name="task"

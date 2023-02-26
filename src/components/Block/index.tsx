@@ -108,9 +108,7 @@ const Block = ({
           <AddTaskButton blockId={blockId} />
           <div className="mt-6">
             {tasks?.map((task) => (
-              <div key={task.taskId} className="mb-3">
-                <Task {...task} />
-              </div>
+              <Task {...task} key={task.taskId} />
             ))}
           </div>
         </div>
