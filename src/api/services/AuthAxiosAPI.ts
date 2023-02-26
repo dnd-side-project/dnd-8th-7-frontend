@@ -9,8 +9,8 @@ export default class AuthAxiosAPI implements AuthService {
   }
 
   loginCallback(params: Type.GoogleLoginCallbackParams) {
-    return API.get<Type.GoogleLoginCallbackResponse>(
-      `/api/login/google?code=${params.code}`,
+    return API.post<Type.GoogleLoginCallbackResponse>(
+      `/api/login/callback/google?code=${params.code}`,
     )
   }
 }
