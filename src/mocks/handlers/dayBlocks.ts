@@ -81,7 +81,7 @@ export const getDayBlocks = rest.get(
             ],
           },
           {
-            blockId: 1,
+            blockId: 2,
             color: colors.red,
             icon: '😄',
             title: '출근 준비',

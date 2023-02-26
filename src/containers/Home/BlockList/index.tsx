@@ -27,7 +27,7 @@ const BlockList = () => {
   }, [selectedDate])
 
   if (!data) return null
-  const { totalBlock, totalTask, blocks } = data
+  const { totalBlock, totalTask, blocks = [] } = data
 
   return (
     <>
