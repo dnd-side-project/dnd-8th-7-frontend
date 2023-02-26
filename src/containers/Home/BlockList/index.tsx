@@ -51,6 +51,7 @@ const BlockList = () => {
   }
 
   useEffect(() => {
+    if (!selectedDate) return
     const getBlockList = async () => {
       dayBlockAPI
         .getDayBlocks({ date: selectedDate })
