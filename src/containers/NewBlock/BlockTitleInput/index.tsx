@@ -64,7 +64,7 @@ export default forwardRef<HTMLInputElement | null, Props>(
             {!!emoji ? (
               <span className={clsx('text-lg')}>{emoji}</span>
             ) : (
-              <FaceIcon />
+              <FaceIcon className="fill-gray-300" />
             )}
           </button>
         }
