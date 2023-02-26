@@ -9,11 +9,13 @@ const Task = ({ isDone, task, taskId }: TaskType) => {
     setIsChecked(selected)
   }
   return (
-    <TaskCheckBox
-      name="task"
-      defaultChecked={isChecked}
-      onChange={handleCheckTask}
-    >
+    <div className="flex">
+      <TaskCheckBox
+        key={taskId}
+        name="task"
+        defaultChecked={isChecked}
+        onChange={handleCheckTask}
+      />
       {/* TODO: 추후 공통 Textarea 컴포넌트로 변경 */}
       <textarea
         defaultValue={task}
@@ -25,10 +27,13 @@ const Task = ({ isDone, task, taskId }: TaskType) => {
           'resize-none',
           'text-white',
           'overflow-hidden',
+          {
+            'opacity-50': !!isChecked,
+          },
         )}
         disabled={!!isChecked}
       />
-    </TaskCheckBox>
+    </div>
   )
 }
 
