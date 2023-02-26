@@ -1,5 +1,9 @@
 import SocialContainer from '@/containers/Social'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function SocialPage() {
+const SocialPage = () => {
   return <SocialContainer />
 }
+export default withAuth(SocialPage)
+
+export const getServerSideProps = withAuthGetServerSideProps()

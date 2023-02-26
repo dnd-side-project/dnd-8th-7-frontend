@@ -1,5 +1,9 @@
 import DailyDiaryContainer from '@/containers/DailyDiary'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function DailyDiary() {
+const DailyDiary = () => {
   return <DailyDiaryContainer />
 }
+export default withAuth(DailyDiary)
+
+export const getServerSideProps = withAuthGetServerSideProps()

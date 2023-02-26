@@ -1,5 +1,9 @@
 import ReportContainer from '@/containers/Report'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function ReportPage() {
+const ReportPage = () => {
   return <ReportContainer />
 }
+export default withAuth(ReportPage)
+
+export const getServerSideProps = withAuthGetServerSideProps()
