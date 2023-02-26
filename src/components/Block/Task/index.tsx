@@ -1,13 +1,30 @@
+import { useState, useEffect } from 'react'
 import clsx from 'clsx'
-import { useState } from 'react'
 import TaskCheckBox, { OnChange } from '@/components/TaskCheckBox'
 import type { Task as TaskType } from '@/types/block'
+import useDebounce from '@/hooks/useDebounce'
+import { dayBlockAPI } from '@/api'
 
 const Task = ({ isDone, task, taskId }: TaskType) => {
   const [isChecked, setIsChecked] = useState(isDone)
+  const [taskValue, setTaskValue] = useState<string>('')
+  const debouncedValue = useDebounce<string>(taskValue, 500)
+
   const handleCheckTask: OnChange = ({ selected }) => {
     setIsChecked(selected)
   }
+
+  const handleTaskChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTaskValue(e.target.value)
+  }
+
+  useEffect(() => {
+    dayBlockAPI.updateTaskInBlock({
+      taskId,
+      content: debouncedValue,
+    })
+  }, [taskId, debouncedValue])
+
   return (
     <div className="flex">
       <TaskCheckBox
@@ -18,6 +35,7 @@ const Task = ({ isDone, task, taskId }: TaskType) => {
       />
       {/* TODO: 추후 공통 Textarea 컴포넌트로 변경 */}
       <textarea
+        onChange={handleTaskChange}
         defaultValue={task}
         className={clsx(
           'w-full',
