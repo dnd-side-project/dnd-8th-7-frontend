@@ -10,4 +10,6 @@ export const PATH = {
   newProfileDone: '/profiles/new/done',
   signUpAgreements: '/profiles/new/agreements',
   agreements: '/agreements',
+  login: '/login',
+  loginCallback: '/login/callback',
 }
