@@ -1,5 +1,9 @@
 import HomeContainer from '@/containers/Home'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function Home() {
+const Home = () => {
   return <HomeContainer />
 }
+export default withAuth(Home)
+
+export const getServerSideProps = withAuthGetServerSideProps()
