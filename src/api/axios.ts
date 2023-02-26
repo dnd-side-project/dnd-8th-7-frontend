@@ -8,13 +8,6 @@ const API = axios.create({
   baseURL: API_URL,
 })
 
-API.interceptors.request.use((config) => {
-  if (process.env.NODE_ENV === 'development') {
-    config.headers.Authorization = `Bearer ${process.env.NEXT_PUBLIC_DEV_TOKEN}`
-  }
-  return config
-})
-
 API.interceptors.response.use(
   (response) => response,
   (error: AxiosError<{ code: string }>) => {
