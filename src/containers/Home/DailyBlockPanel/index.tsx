@@ -15,10 +15,6 @@ const DailyBlockPanel = ({
     setSelectedDate(today)
   }, [setSelectedDate])
 
-  return (
-    <div className="px-5">
-      <WeeklyBlocks weeklyBlocks={dailyBlocks} />
-    </div>
-  )
+  return <WeeklyBlocks weeklyBlocks={dailyBlocks} />
 }
 export default DailyBlockPanel

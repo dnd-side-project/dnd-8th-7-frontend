@@ -64,7 +64,7 @@ const Home = () => {
   const { user, dailyBlocks } = data
 
   return (
-    <div className="inner">
+    <div className="inner px-5">
       <ProfileHeader user={user} />
 
       <Tabs>
