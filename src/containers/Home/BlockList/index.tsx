@@ -5,16 +5,49 @@ import { AddIcon } from '@/components/Icons'
 import Block from '@/components/Block'
 import NoData from '@/components/NoData'
 import useSelectedDateState from '@/store/selectedDate'
-import DiaryButton from './DiaryButton'
 import { dayBlockAPI } from '@/api'
 import { GetDayBlocksResponse } from '@/api/types/base.types'
+import { BASE_URL } from '@/constants/urls'
+import DiaryButton from './DiaryButton'
+
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+
+const AddButton = ({
+  text,
+  onClick,
+}: {
+  text: string
+  onClick: () => void
+}) => {
+  return (
+    <Button
+      color="gray"
+      fontWeight="bold"
+      className="py-[11px]"
+      onClick={onClick}
+    >
+      <AddIcon className="!fill-textGray-200" width={18} height={18} />
+      {text}
+    </Button>
+  )
+}
 
 const BlockList = () => {
   const selectedDate = useSelectedDateState((state) => state.date)
   const [data, setData] = useState<GetDayBlocksResponse | null>(null)
 
-  const handleBlockCreate = () => {
-    // 블럭 생성 페이지로 이동
+  const handleAddSavedBlock = () => {
+    rnWebViewBridge.open({
+      key: 'savedBlock',
+      url: `${BASE_URL}/blocks/saved`,
+    })
+  }
+
+  const handleAddNewBlock = () => {
+    rnWebViewBridge.open({
+      key: 'newBlock',
+      url: `${BASE_URL}/blocks/new`,
+    })
   }
 
   useEffect(() => {
@@ -47,7 +80,7 @@ const BlockList = () => {
             <Button
               rounded="lg"
               className="!py-[15px] mt-5"
-              onClick={handleBlockCreate}
+              onClick={handleAddNewBlock}
             >
               <AddIcon width={18} height={18} className="!fill-white" />
               <p className="ml-px">새 블럭 만들기</p>
@@ -74,6 +107,13 @@ const BlockList = () => {
           )
         )}
       </div>
+
+      {blocks.length !== 0 && (
+        <div className="flex gap-2">
+          <AddButton text="블럭 불러오기" onClick={handleAddSavedBlock} />
+          <AddButton text="새 블럭 만들기" onClick={handleAddNewBlock} />
+        </div>
+      )}
     </>
   )
 }
