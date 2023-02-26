@@ -1,8 +1,9 @@
+import { GetDailyBlocksOnWeekResponse } from '@/api/types'
 import { AlarmIcon } from '@/components/Icons'
 import Profile from '@/components/Profile'
 
 interface Props {
-  user: string
+  user: GetDailyBlocksOnWeekResponse['user']
   profileImage?: string
 }
 

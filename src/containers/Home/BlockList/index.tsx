@@ -1,24 +1,42 @@
+import { useEffect, useState } from 'react'
 import Button from '@/components/Button'
 import Date from '@/components/Date'
 import { AddIcon } from '@/components/Icons'
 import Block from '@/components/Block'
 import NoData from '@/components/NoData'
-import { MOCK_BLOCK_LIST } from '@/constants/block'
 import useSelectedDateState from '@/store/selectedDate'
 import DiaryButton from './DiaryButton'
+import dayBlockAPI from '@/api'
+import { GetDayBlocksResponse } from '@/api/types'
 
 const BlockList = () => {
-  const selectedDate = useSelectedDateState((state) => state.date) // TODO: 해당 날짜의 api 불러올 것
-  const { date, totalBlock, totalTask, blocks } = MOCK_BLOCK_LIST
+  const selectedDate = useSelectedDateState((state) => state.date)
+  const [data, setData] = useState<GetDayBlocksResponse | null>(null)
 
   const handleBlockCreate = () => {
     // 블럭 생성 페이지로 이동
   }
 
+  useEffect(() => {
+    const getBlockList = async () => {
+      dayBlockAPI
+        .getDayBlocks({ date: selectedDate })
+        .then(({ data }) => setData(data))
+    }
+    getBlockList()
+  }, [selectedDate])
+
+  if (!data) return null
+  const { totalBlock, totalTask, blocks } = data
+
   return (
     <>
       <div className="flex items-end justify-between">
-        <Date date={date} totalBlock={totalBlock} totalTask={totalTask} />
+        <Date
+          date={selectedDate}
+          totalBlock={totalBlock}
+          totalTask={totalTask}
+        />
         <DiaryButton />
       </div>
 
