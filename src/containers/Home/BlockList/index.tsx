@@ -39,14 +39,14 @@ const BlockList = () => {
   const handleAddSavedBlock = () => {
     rnWebViewBridge.open({
       key: 'savedBlock',
-      url: `${BASE_URL}/blocks/saved`,
+      url: `${BASE_URL}/blocks/saved?date=${selectedDate}`,
     })
   }
 
   const handleAddNewBlock = () => {
     rnWebViewBridge.open({
       key: 'newBlock',
-      url: `${BASE_URL}/blocks/new`,
+      url: `${BASE_URL}/blocks/new?date=${selectedDate}`,
     })
   }
 
