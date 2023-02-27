@@ -3,9 +3,9 @@ import dayjs from 'dayjs'
 import clsx from 'clsx'
 import DailyBlock from '@/components/DailyBlock'
 import { DAYS } from '@/constants/block'
-import type { DailyBlock as DailyBlockType } from '@/types/block'
 import { noop } from '@/utils'
 import useSelectedDateState from '@/store/selectedDate'
+import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 
 const DayBlock = ({
   colors,
@@ -53,7 +53,7 @@ const DayBlock = ({
 const DailyBlockPanel = ({
   weeklyBlocks,
 }: {
-  weeklyBlocks: DailyBlockType[]
+  weeklyBlocks: GetDailyBlocksOnWeekResponse['dailyBlocks']
 }) => {
   const todayIdx = dayjs().day() % 7
   const [activeBlockIdx, setActiveBlockIdx] = useState(todayIdx)

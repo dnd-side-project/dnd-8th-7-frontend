@@ -9,9 +9,7 @@ export default {
 export const Main: ComponentStory<typeof TaskCheckBox> = () => {
   return (
     <div className="bg-red rounded-lg px-4 py-2">
-      <TaskCheckBox value="task" name="task">
-        <p className="ml-2.5 text-white">체크박스 내용</p>
-      </TaskCheckBox>
+      <TaskCheckBox value="task" name="task" />
     </div>
   )
 }

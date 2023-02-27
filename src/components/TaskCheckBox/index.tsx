@@ -1,5 +1,5 @@
+import React from 'react'
 import clsx from 'clsx'
-import React, { PropsWithChildren } from 'react'
 
 export type OnChange = ({
   selected,
@@ -18,13 +18,7 @@ interface Props {
 
 const CHECK_BOX_STYLE = 'flex w-[22px] h-[22px] rounded-sm bg-white'
 
-const TaskCheckBox = ({
-  value,
-  name,
-  defaultChecked,
-  onChange,
-  children,
-}: PropsWithChildren<Props>) => {
+const TaskCheckBox = ({ value, name, defaultChecked, onChange }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = e.target
     onChange?.({ selected: checked, value })
@@ -55,8 +49,6 @@ const TaskCheckBox = ({
           <img src="/assets/icons/task_check.svg" alt="" draggable="false" />
         </span>
       </span>
-
-      <div className="peer-checked:opacity-50 w-full">{children}</div>
     </label>
   )
 }

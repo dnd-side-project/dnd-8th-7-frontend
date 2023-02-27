@@ -1,7 +1,9 @@
+import Preparing from '@/components/Preparing'
+
 const CalendarPanel = () => {
   return (
-    <div className="w-full h-52 flex items-center justify-center">
-      calendar 준비중입니다
+    <div className="w-full py-6 flex items-center justify-center">
+      <Preparing />
     </div>
   )
 }

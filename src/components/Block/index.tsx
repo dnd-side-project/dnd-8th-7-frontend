@@ -56,7 +56,6 @@ const Block = ({
           key: 'saveBlock',
           title: '블럭 저장하기',
         },
-        { key: 'delay', title: '다른 날로 미루기' },
       ],
     })
   }
@@ -106,12 +105,10 @@ const Block = ({
 
       {isExpanded && (
         <div className="pt-4 pl-3 pr-8">
-          <AddTaskButton />
+          <AddTaskButton blockId={blockId} />
           <div className="mt-6">
             {tasks?.map((task) => (
-              <div key={task.taskId} className="mb-3">
-                <Task {...task} />
-              </div>
+              <Task {...task} key={task.taskId} />
             ))}
           </div>
         </div>
