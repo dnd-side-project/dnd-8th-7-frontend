@@ -29,4 +29,10 @@ export default interface DayBlockService {
     Type.DeleteTaskInBlockParams,
     Type.DeleteTaskInBlockResponse
   >
+
+  updateMyProfile: ServiceFunc<
+    Type.UpdateMyProfileParams,
+    Type.UpdateMyProfileResponse
+  >
+  getMyProfile: ServiceFunc<Type.GetMyProfileParams, Type.GetMyProfileResponse>
 }

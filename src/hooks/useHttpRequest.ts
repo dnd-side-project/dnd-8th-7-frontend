@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export type IHttpRequestReturn<T, H = void> = [
   T | undefined,
-  (payload?: H, callbacks?: CallbackFunctions<T>) => Promise<T>,
+  (payload: H, callbacks?: CallbackFunctions<T>) => Promise<T>,
   boolean,
   boolean,
   boolean,
@@ -16,7 +16,7 @@ type CallbackFunctions<T> = {
 }
 
 export default function useHttpRequest<T, H = void>(
-  dataFetchCallback: (payload?: H) => Promise<T>,
+  dataFetchCallback: (payload: H) => Promise<T>,
   initialValue?: T,
 ): IHttpRequestReturn<T, H> {
   const [loading, setLoading] = useState(false)
@@ -25,7 +25,7 @@ export default function useHttpRequest<T, H = void>(
   const [fetchCount, setFetchCount] = useState(0)
   const [data, setData] = useState<T | undefined>(initialValue)
 
-  async function fetch(payload?: H, callbacks?: CallbackFunctions<T>) {
+  async function fetch(payload: H, callbacks?: CallbackFunctions<T>) {
     setLoading(true)
 
     return dataFetchCallback?.(payload)
