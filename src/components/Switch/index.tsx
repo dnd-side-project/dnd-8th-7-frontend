@@ -22,7 +22,7 @@ export default function Switch({ defaultValue = false, onChange }: Props) {
         'rounded-[20px]',
         'flex',
         'items-center',
-        'px-[3px]',
+        'px-[2px]',
         'py-[2px]',
         'transition-all',
         active ? 'bg-red' : 'bg-gray-300',
