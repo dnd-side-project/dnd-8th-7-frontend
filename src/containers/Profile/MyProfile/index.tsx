@@ -1,7 +1,11 @@
+import { useEffect } from 'react'
 import clsx from 'clsx'
 
-import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import useHttpRequest from '@/hooks/useHttpRequest'
+import { dayBlockAPI } from '@/api'
 import { BASE_URL } from '@/constants/urls'
+
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 
 import List from '@/components/List'
 import { PATH } from '@/constants/path'
@@ -23,6 +27,10 @@ const SETTING_LIST = [
 ]
 
 export default function MyProfileContainer() {
+  const [myProfile, fetchMyProfile, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.getMyProfile().then(({ data }) => data),
+  )
+
   const handleItemClick = (path: string) => {
     rnWebViewBridge.open({
       key: 'newWebView',
@@ -30,10 +38,18 @@ export default function MyProfileContainer() {
     })
   }
 
+  useEffect(() => {
+    fetchMyProfile()
+  }, [])
+
   return (
     <div className={clsx('py-[30px]')}>
       <div className={clsx('px-[20px]', 'mb-[14px]')}>
-        <ProfileHeader percentage={70} user={'짱구'} />
+        <ProfileHeader
+          percentage={0}
+          user={myProfile?.user || ''}
+          imgSrc={myProfile?.imgPath}
+        />
         <div
           className={clsx(
             'py-4',
@@ -44,7 +60,7 @@ export default function MyProfileContainer() {
             'text-textGray-200',
           )}
         >
-          프로필 한 줄 소개 공미포 최대 28자
+          {myProfile?.introduction}
         </div>
       </div>
       <List items={SETTING_LIST} onItemClick={handleItemClick} />
