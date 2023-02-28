@@ -2,15 +2,32 @@ import { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import lottie from 'lottie-web'
 
+import DarkProfileIcon from 'public/assets/icons/dark_profile.svg'
+
+import useHttpRequest from '@/hooks/useHttpRequest'
+import { dayBlockAPI } from '@/api'
+
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import { ACTION_TYPE } from '@/utils/react-native-webview-bridge/types/common.type'
 
 import Button from '@/components/Button'
-import DarkProfileIcon from 'public/assets/icons/dark_profile.svg'
-import { ACTION_TYPE } from '@/utils/react-native-webview-bridge/types/common.type'
+import PercentageProfile from '@/components/PercentageProfile'
 
 export default function NewProfileCongratulationContainer() {
   const mount = useRef(false)
   const lottieRef = useRef<HTMLDivElement>(null)
+
+  const [myProfile, fetchMyProfile, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.getMyProfile().then(({ data }) => data),
+  )
+
+  const handleGoMain = () => {
+    rnWebViewBridge.sendAction(ACTION_TYPE.GO_MAIN)
+  }
+
+  useEffect(() => {
+    fetchMyProfile()
+  }, [])
 
   useEffect(() => {
     if (!mount.current && lottieRef.current) {
@@ -24,13 +41,6 @@ export default function NewProfileCongratulationContainer() {
       })
     }
   }, [])
-
-  const handleGoMain = () => {
-    /**
-     * TODO 메인으로 가기
-     */
-    rnWebViewBridge.sendAction(ACTION_TYPE.GO_MAIN)
-  }
 
   return (
     <div
@@ -74,11 +84,22 @@ export default function NewProfileCongratulationContainer() {
               'mb-[74px]',
             )}
           >
-            {'닉네임'}님, 하루 블럭에
+            {myProfile?.user}님, 하루 블럭에
             <br />
             오신 것을 환영해요
           </div>
-          <DarkProfileIcon />
+          {myProfile?.imgPath?.includes(
+            '/onboarding/default_profile_image.png',
+          ) ? (
+            <DarkProfileIcon />
+          ) : (
+            <PercentageProfile
+              dark
+              percentage={65}
+              imgSrc={myProfile?.imgPath}
+              size="md"
+            />
+          )}
         </div>
       </div>
       <div className="mb-[15px]">

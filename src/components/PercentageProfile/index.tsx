@@ -30,15 +30,17 @@ const PERCENTAGE_CONFIG: SizeConfig = {
 
 export interface Props extends ProfileProps {
   showNumber?: boolean
+  percentage?: number
+  dark?: boolean
 }
 
 const PercentageProfile = ({
   imgSrc = '',
   size = 'sm',
-  percentage,
+  percentage = 0,
   showNumber = false,
   dark = false,
-}: Props & Pick<PercentageProps, 'percentage' | 'dark'>) => {
+}: Props) => {
   return (
     <div className={clsx('relative', SIZE_CONFIG[size])}>
       <div className={clsx(PERCENTAGE_CONFIG[size], CENTER_STYLE)}>
