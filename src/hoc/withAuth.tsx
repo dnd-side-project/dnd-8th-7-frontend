@@ -28,6 +28,11 @@ export const withAuthGetServerSideProps =
     const isServer = !!context?.req
     let token = ''
     if (isServer) {
+      if (process.env.NODE_ENV === 'development') {
+        context.req.headers.authorization =
+          process.env.NEXT_PUBLIC_DEV_TOKEN || ''
+      }
+
       if (context.req?.headers?.authorization) {
         token = context.req.headers.authorization
       } else {
