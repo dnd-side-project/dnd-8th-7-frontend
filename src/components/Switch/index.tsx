@@ -36,7 +36,7 @@ export default function Switch({ defaultValue = false, onChange }: Props) {
           'bg-white',
           'rounded-[99px]',
           'transition-all',
-          active ? 'translate-x-[18px]' : 'translate-x-[0px]',
+          active ? 'translate-x-[20px]' : 'translate-x-[0px]',
           'ease-in-out',
         )}
       ></div>

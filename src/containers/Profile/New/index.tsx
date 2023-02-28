@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import clsx from 'clsx'
 
 import useHttpRequest from '@/hooks/useHttpRequest'
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 import { dayBlockAPI } from '@/api'
 import { UpdateMyProfileParams } from '@/api/types/base.types'
+import { UserProfile } from '@/types/common.type'
 
 import ProfileForm from '@/containers/Profile/ProfileForm'
 import Header from '@/components/Header'
@@ -18,51 +19,39 @@ export default function NewProfileContainer() {
       dayBlockAPI.updateMyProfile(params).then(({ data }) => data),
   )
 
-  const [profileImage, setProfileImage] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [introduction, setIntroduction] = useState('')
-  const [isSecret, setIsSecret] = useState(false)
+  const [value, setValue] = useState<UserProfile>()
+  const isValid = !!value?.imgPath && !!value?.user && !!value?.introduction
 
-  const handleProfileImageChange = (url: string) => {
-    setProfileImage(url)
-  }
-
-  const handleNickNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setNickname(target.value)
-  }
-  const handleDescritionChange = ({
-    target,
-  }: ChangeEvent<HTMLInputElement>) => {
-    setIntroduction(target.value)
-  }
-  const handlePublicNickNameChange = (value: boolean) => {
-    setIsSecret(value)
-  }
-  const handleGoBack = () => {
-    rnWebViewBridge.close()
+  const handleValueChange = (forms: UserProfile) => {
+    setValue(forms)
   }
 
   const handleSubmit = () => {
-    updateProfile(
-      {
-        imgPath: profileImage,
-        user: nickname,
-        introduction: introduction,
-        lock: isSecret,
+    if (!isValid) return
+
+    updateProfile(value, {
+      onSuccess: () => {
+        rnWebViewBridge.open({
+          key: 'newProfileDone',
+          url: BASE_URL + PATH.newProfileDone,
+          reset: true,
+        })
       },
-      {
-        onSuccess: () => {
-          rnWebViewBridge.open({
-            key: 'newProfileDone',
-            url: BASE_URL + PATH.newProfileDone,
-            reset: true,
-          })
-        },
-        onError: () => {
-          // TODO 에러 메세지 전달
-        },
+      onError: () => {
+        // TODO 에러 메세지 전달
       },
-    )
+      onFinished: () => {
+        rnWebViewBridge.open({
+          key: 'newProfileDone',
+          url: BASE_URL + PATH.newProfileDone,
+          reset: true,
+        })
+      },
+    })
+  }
+
+  const handleGoBack = () => {
+    rnWebViewBridge.close()
   }
 
   return (
@@ -70,8 +59,7 @@ export default function NewProfileContainer() {
       buttonText="완료"
       buttonProps={{
         onClick: handleSubmit,
-        disabled:
-          isUpdateLoading || !(profileImage && nickname && introduction),
+        disabled: isUpdateLoading || !isValid,
       }}
     >
       <Header title={''} leftButton={'back'} onLeftButtonClick={handleGoBack} />
@@ -89,15 +77,7 @@ export default function NewProfileContainer() {
           <br />
           프로필을 등록해보세요
         </div>
-        <ProfileForm
-          nickNameProps={{ onChange: handleNickNameChange }}
-          descriptionPrps={{ onChange: handleDescritionChange }}
-          publicNickNameProps={{
-            onChange: handlePublicNickNameChange,
-            defaultValue: false,
-          }}
-          onProfileImageChange={handleProfileImageChange}
-        />
+        <ProfileForm onFormChange={handleValueChange} />
       </div>
     </BottomButtonLayout>
   )
