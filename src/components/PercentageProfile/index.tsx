@@ -21,15 +21,14 @@ export const SIZE_CONFIG: SizeConfig = {
 }
 export const BORDER_CONFIG: SizeConfig = {
   sm: 'border-[2px]',
-  md: 'border-[3px]',
+  md: 'border-[2px]',
 }
 const PERCENTAGE_CONFIG: SizeConfig = {
   sm: 'w-[65px] h-[65px]',
-  md: 'w-[125px] h-[125px]',
+  md: 'w-[132px] h-[132px]',
 }
 
 export interface Props extends ProfileProps {
-  percentage: number
   showNumber?: boolean
 }
 
@@ -38,11 +37,17 @@ const PercentageProfile = ({
   size = 'sm',
   percentage,
   showNumber = false,
-}: Props) => {
+  dark = false,
+}: Props & Pick<PercentageProps, 'percentage' | 'dark'>) => {
   return (
     <div className={clsx('relative', SIZE_CONFIG[size])}>
       <div className={clsx(PERCENTAGE_CONFIG[size], CENTER_STYLE)}>
-        <Percentage percentage={percentage} width={'100%'} height={'100%'} />
+        <Percentage
+          percentage={percentage}
+          width={'100%'}
+          height={'100%'}
+          dark={dark}
+        />
       </div>
       <div className={clsx(CENTER_STYLE)}>
         <Profile imgSrc={imgSrc} size={size} />
@@ -79,12 +84,18 @@ const PercentageProfile = ({
 }
 export default PercentageProfile
 
-interface PrecentageProps {
+interface PercentageProps {
   percentage: number
   width?: number | string
   height?: number | string
+  dark?: boolean
 }
-function Percentage({ percentage, width = 65, height = 65 }: PrecentageProps) {
+function Percentage({
+  percentage,
+  width = 65,
+  height = 65,
+  dark = false,
+}: PercentageProps) {
   return (
     <svg viewBox="0 0 36 36" width={width} height={height}>
       <path
@@ -92,7 +103,7 @@ function Percentage({ percentage, width = 65, height = 65 }: PrecentageProps) {
 a 15.9155 15.9155 0 0 1 0 31.831
 a 15.9155 15.9155 0 0 1 0 -31.831"
         fill="none"
-        stroke={colors.gray[200]}
+        stroke={dark ? colors.gray[300] : colors.gray[200]}
         strokeWidth="1"
       />
       <path
@@ -100,7 +111,7 @@ a 15.9155 15.9155 0 0 1 0 -31.831"
   a 15.9155 15.9155 0 0 1 0 31.831
   a 15.9155 15.9155 0 0 1 0 -31.831"
         fill="none"
-        stroke={colors.black}
+        stroke={dark ? colors.red : colors.black}
         strokeWidth="1"
         strokeDasharray={`${percentage}, 100`}
       />
