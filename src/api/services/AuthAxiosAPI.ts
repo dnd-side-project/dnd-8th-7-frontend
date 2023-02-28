@@ -13,4 +13,8 @@ export default class AuthAxiosAPI implements AuthService {
       `/api/login/callback/google?code=${params.code}`,
     )
   }
+
+  withdraw() {
+    return API.delete(`/api/user`)
+  }
 }
