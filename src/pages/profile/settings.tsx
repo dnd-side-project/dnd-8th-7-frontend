@@ -1,5 +1,9 @@
 import ProfileSettingsContainer from '@/containers/Profile/Settings'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function ProfileSettingsPage() {
+const ProfileSettingsPage = () => {
   return <ProfileSettingsContainer />
 }
+export default withAuth(ProfileSettingsPage)
+
+export const getServerSideProps = withAuthGetServerSideProps()

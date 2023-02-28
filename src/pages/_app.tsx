@@ -7,7 +7,7 @@ import { BaseLayout } from '@/components/Layout'
 import '@/styles/globals.css'
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  msw()
+  // msw()
 }
 
 export default function App({ Component, pageProps }: AppProps) {

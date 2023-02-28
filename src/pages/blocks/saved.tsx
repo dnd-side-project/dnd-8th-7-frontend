@@ -1,5 +1,9 @@
 import SavedBlockContainer from '@/containers/SavedBlock'
+import { withAuth, withAuthGetServerSideProps } from '@/hoc/withAuth'
 
-export default function SavedBlolckPage() {
+const SavedBlolckPage = () => {
   return <SavedBlockContainer />
 }
+export default withAuth(SavedBlolckPage)
+
+export const getServerSideProps = withAuthGetServerSideProps()
