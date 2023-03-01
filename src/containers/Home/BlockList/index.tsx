@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Button from '@/components/Button'
 import Date from '@/components/Date'
 import { AddIcon } from '@/components/Icons'
@@ -6,7 +6,7 @@ import Block from '@/components/Block'
 import NoData from '@/components/NoData'
 import useSelectedDateState from '@/store/selectedDate'
 import { dayBlockAPI } from '@/api'
-import { GetDayBlocksResponse } from '@/api/types/base.types'
+import useHttpRequest from '@/hooks/useHttpRequest'
 import { BASE_URL } from '@/constants/urls'
 import DiaryButton from './DiaryButton'
 
@@ -34,7 +34,10 @@ const AddButton = ({
 
 const BlockList = () => {
   const selectedDate = useSelectedDateState((state) => state.date)
-  const [data, setData] = useState<GetDayBlocksResponse | null>(null)
+
+  const [dayBlocks, fetchDayBlocks, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.getDayBlocks({ date: selectedDate }).then(({ data }) => data),
+  )
 
   const handleAddSavedBlock = () => {
     rnWebViewBridge.open({
@@ -51,17 +54,25 @@ const BlockList = () => {
   }
 
   useEffect(() => {
-    if (!selectedDate) return
-    const getBlockList = async () => {
-      dayBlockAPI
-        .getDayBlocks({ date: selectedDate })
-        .then(({ data }) => setData(data))
-    }
-    getBlockList()
+    fetchDayBlocks()
   }, [selectedDate])
 
-  if (!data) return null
-  const { totalBlock, totalTask, blocks = [] } = data
+  const onVisibility = () => {
+    if (!document.hidden) {
+      fetchDayBlocks()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  })
+
+  if (!dayBlocks || isLoading) return null
+  const { totalBlock, totalTask, blocks = [] } = dayBlocks
 
   return (
     <>
