@@ -16,6 +16,20 @@ export default class DayBlockAxiosAPI implements DayBlockService {
     )
   }
 
+  getSavedBlocks() {
+    return API.get<Type.GetSavedBlocksResponse>(`/api/block/save`)
+  }
+
+  getSingleBlock(params: Type.GetSingleBlockParams) {
+    return API.get<Type.GetSingleBlockResponse>(
+      `/api/block/single/${params.blockId}`,
+    )
+  }
+
+  saveBlock(params: Type.SaveBlockParams) {
+    return API.post<Type.CreateBlockResponse>(`/api/block/${params.blockId}`)
+  }
+
   createBlock(params: Type.CreateBlockParams) {
     return API.post<Type.CreateBlockResponse>(`/api/block`, params)
   }
@@ -29,7 +43,10 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   }
 
   createTaskInBlock(params: Type.CreateTaskInBlockParams) {
-    return API.post<Type.CreateTaskInBlockResponse>(`/api/task`, params)
+    return API.post<Type.CreateTaskInBlockResponse>(
+      `/api/task/${params.blockId}`,
+      { content: params.content },
+    )
   }
 
   updateTaskInBlock(params: Type.UpdateTaskInBlockParams) {
@@ -37,6 +54,15 @@ export default class DayBlockAxiosAPI implements DayBlockService {
       `/api/task/${params.taskId}`,
       params,
     )
+  }
+
+  updateBlock(params: Type.UpdateBlockParams) {
+    return API.patch<Type.UpdateBlockResponse>(`/api/block/${params.blockId}`, {
+      title: params.title,
+      emoticon: params.emoticon,
+      blockColor: params.blockColor,
+      isSecret: params.isSecret,
+    })
   }
 
   deleteTaskInBlock(params: Type.DeleteTaskInBlockParams) {
