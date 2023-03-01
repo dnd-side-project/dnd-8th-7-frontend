@@ -2,7 +2,7 @@ import {
   ListBottomSheetContents,
   EBottomSheetType,
   RNCallBacks,
-} from '@/utils/react-native-webview-bridge/types/bottomSheet.type'
+} from '@/utils/react-native-webview-bridge/bottom-sheet/bottomSheet.type'
 import RNBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet'
 import webBridge from '@/utils/react-native-webview-bridge'
 

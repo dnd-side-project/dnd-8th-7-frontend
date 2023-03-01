@@ -1,4 +1,4 @@
-import { BottomSheetType } from '@/utils/react-native-webview-bridge/types/bottomSheet.type'
+import { BottomSheetType } from '@/utils/react-native-webview-bridge/bottom-sheet/bottomSheet.type'
 import { EMessageType, MessageData } from '../types/common.type'
 import webBridge from '@/utils/react-native-webview-bridge'
 

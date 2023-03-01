@@ -1,7 +1,7 @@
-import { RNCallBacks } from '@/utils/react-native-webview-bridge/types/newWebView.type'
+import { RNCallBacks } from '@/utils/react-native-webview-bridge/new-webview/newWebView.type'
 import RNNewWebView from '@/utils/react-native-webview-bridge/new-webview'
 import webBridge from '@/utils/react-native-webview-bridge'
-import { NewWebViewData } from '../types/newWebView.type'
+import { NewWebViewData } from './newWebView.type'
 
 type ReturnType = {
   open: (data: NewWebViewData, callbacks?: RNCallBacks) => void

@@ -1,6 +1,6 @@
 import webBridge from '@/utils/react-native-webview-bridge'
 import { EMessageType } from '@/utils/react-native-webview-bridge/types/common.type'
-import { RNCallBacks } from '@/utils/react-native-webview-bridge/types/imagePicker.type'
+import { RNCallBacks } from '@/utils/react-native-webview-bridge/image-picker/imagePicker.type'
 
 type Functions = {
   open: (callbacks?: RNCallBacks) => void
