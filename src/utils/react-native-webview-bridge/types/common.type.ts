@@ -6,6 +6,7 @@ export enum EMessageType {
   CLOSE_BOTTOM_SHEET = 'CLOSE_BOTTOM_SHEET',
   OPEN_NEW_WEBVIEW = 'OPEN_NEW_WEBVIEW',
   CLOSE_NEW_WEBVIEW = 'CLOSE_NEW_WEBVIEW',
+  PICK_IMAGE_FROM_LIBRARY = 'PICK_IMAGE_FROM_LIBRARY',
   ACTION = 'ACTION',
 }
 export type MessageType = keyof typeof EMessageType

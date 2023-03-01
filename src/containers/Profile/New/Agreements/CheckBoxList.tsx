@@ -7,38 +7,45 @@ interface Props {
     defaultChecked?: boolean
     title: string
   }[]
-  onTotalCheckChange: (checked: boolean) => void
+  onTotalCheckChange?: (checked: boolean) => void
 }
 
 const TEXT_STYLE = 'text-[14px] leading-[140%]'
 
 export default function CheckBoxList({ values, onTotalCheckChange }: Props) {
   const [totalChecked, setTotalChecked] = useState(false)
-  const [checked, setChecked] = useState(0)
+  const [checked, setChecked] = useState(values.map(() => false))
 
   const handleChange = (value: boolean, idx: number) => {
-    const newChecked = value ? (1 << idx) | checked : ~(1 << idx) & checked
+    const newChecked = [...checked]
+    newChecked[idx] = value
     setChecked(newChecked)
 
-    const newTotalChecked = newChecked === (1 << values.length) - 1
+    const newTotalChecked = newChecked.reduce((res, cur) => res && cur, true)
+    if (newTotalChecked !== totalChecked) {
+      onTotalCheckChange?.(newTotalChecked)
+    }
     setTotalChecked(newTotalChecked)
-    onTotalCheckChange(newTotalChecked)
   }
 
   const handleTotalClick = () => {
     if (totalChecked) {
-      setChecked(0)
+      setChecked(values.map(() => false))
     } else {
-      setChecked((1 << values.length) - 1)
+      setChecked(values.map(() => true))
     }
     setTotalChecked(!totalChecked)
-    onTotalCheckChange(!totalChecked)
+    onTotalCheckChange?.(!totalChecked)
   }
 
   return (
     <>
       <div className={clsx('flex', 'gap-[8px]', 'font-bold', 'mb-[25px]')}>
-        <CheckBox checked={totalChecked} onClick={handleTotalClick} />
+        <CheckBox
+          shape="rectangle"
+          checked={totalChecked}
+          onClick={handleTotalClick}
+        />
         <div>전체 동의</div>
       </div>
 
@@ -54,8 +61,9 @@ export default function CheckBoxList({ values, onTotalCheckChange }: Props) {
         {values.map(({ defaultChecked, title }, idx) => (
           <div key={idx} className={clsx('flex', 'gap-[8px]', 'items-center')}>
             <CheckBox
+              shape="rectangle"
               defaultChecked={defaultChecked}
-              checked={!!((checked >> idx) & 1)}
+              checked={checked[idx]}
               onChange={(value) => handleChange(value, idx)}
             />
             <div>{title}</div>

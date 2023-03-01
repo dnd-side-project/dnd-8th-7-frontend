@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
 import { PATH } from '@/constants/path'
@@ -7,30 +6,31 @@ import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnW
 import Header from '@/components/Header'
 import BottomButtonLayout from '@/components/Layout/BottomButton'
 import CheckBoxList from './CheckBoxList'
+import { useState } from 'react'
+import { BASE_URL } from '@/constants/urls'
 
 const TEXT_STYLE = 'text-[14px] leading-[140%]'
 
 export default function NewProfileAgreementsContainer() {
-  const router = useRouter()
-
-  const handleGoBack = () => {
-    rnWebViewBridge.close()
-  }
+  const [agreed, setAgreed] = useState(false)
 
   const handleSubmit = () => {
-    router.push(PATH.newProfileDone)
+    rnWebViewBridge.open({
+      key: 'dailyDiary',
+      url: BASE_URL + PATH.newProfile,
+    })
   }
 
   const handleTotalCheckChange = (checked: boolean) => {
-    console.log(checked)
+    setAgreed(checked)
   }
 
   return (
     <BottomButtonLayout
       buttonText="다음"
-      buttonProps={{ onClick: handleSubmit }}
+      buttonProps={{ onClick: handleSubmit, disabled: !agreed }}
     >
-      <Header title={''} leftButton={'back'} onLeftButtonClick={handleGoBack} />
+      <Header title={''} />
       <div className={clsx('pt-[56px]', 'px-[20px]')}>
         <div
           className={clsx(

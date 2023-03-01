@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import qs from 'query-string'
 
 import { authAPI } from '@/api'
 import { BASE_URL } from '@/constants/urls'
@@ -12,8 +13,10 @@ export default async function OAuthGoogleLoginPage(
   if (!code) return res.status(404)
 
   try {
-    const { data: token } = await authAPI.loginCallback({ code })
-    return res.redirect(BASE_URL + `${PATH.loginCallback}?token=${token}`)
+    const { data } = await authAPI.loginCallback({ code })
+    return res.redirect(
+      BASE_URL + `${PATH.loginCallback}?${qs.stringify(data)}`,
+    )
   } catch {
     return res.status(404)
   }
