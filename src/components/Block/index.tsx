@@ -6,6 +6,10 @@ import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-she
 import webBridge from '@/utils/react-native-webview-bridge'
 import AddTaskButton from './AddTaskButton'
 import Task from './Task'
+import { dayBlockAPI } from '@/api'
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import { BASE_URL } from '@/constants/urls'
+import useHttpRequest from '@/hooks/useHttpRequest'
 
 const LOCKED_TEXT = '쉿! 비밀이에요'
 
@@ -36,28 +40,66 @@ const Block = ({
   sumOfDoneTask,
   tasks,
   locked = false,
-}: BlockDetail & { locked?: boolean }) => {
+}: BlockDetail & { locked?: boolean; handleDelete?: () => void }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [open] = useRNListBottomSheet('blockMenu')
+  const [open, close] = useRNListBottomSheet('blockMenu')
+  const [, postSaveBlock, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.saveBlock({ blockId }).then(({ data }) => data),
+  )
 
   const handleBlockClick = () => {
     setIsExpanded((expanded) => !expanded)
   }
 
+  const handleEditBlock = () => {
+    rnWebViewBridge.open({
+      key: 'updateBlock',
+      url: `${BASE_URL}/blocks/update?blockId=${blockId}`,
+    })
+    close()
+  }
+
+  const handleDeleteBlock = () => {
+    dayBlockAPI.deleteBlock({ blockId }).then(() => {
+      close()
+    })
+  }
+
+  const handleSaveBlock = () => {
+    postSaveBlock(undefined, {
+      onSuccess: () => {
+        close()
+      },
+      onError: () => {
+        console.log('error')
+        // TODO 에러 처리
+      },
+    })
+  }
+
   const handleMoreClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
     if (locked) return
-    open({
-      title,
-      items: [
-        { key: 'edit', title: '수정하기' },
-        { key: 'delete', title: '삭제하기' },
-        {
-          key: 'saveBlock',
-          title: '블럭 저장하기',
+    open(
+      {
+        title,
+        items: [
+          { key: 'edit', title: '수정하기' },
+          { key: 'delete', title: '삭제하기' },
+          {
+            key: 'saveBlock',
+            title: '블럭 저장하기',
+          },
+        ],
+      },
+      {
+        onItemClick: (key: string) => {
+          if (key === 'edit') handleEditBlock()
+          if (key === 'delete') handleDeleteBlock()
+          if (key === 'saveBlock') handleSaveBlock()
         },
-      ],
-    })
+      },
+    )
   }
 
   useEffect(() => {
