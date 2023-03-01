@@ -39,7 +39,7 @@ export default function NewBlockContainer() {
   const [blockColor, setBlockColor] = useState<string>(colors?.red)
   const [isSecret, setIsSecret] = useState(false)
   const [, postNewBlock, isLoading] = useHttpRequest(
-    (params: CreateBlockParams | undefined) =>
+    (params: CreateBlockParams) =>
       dayBlockAPI.createBlock(params).then(({ data }) => data),
   )
 
