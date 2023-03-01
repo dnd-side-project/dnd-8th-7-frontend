@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import clsx from 'clsx'
 
 import ProfilePlusSvg from 'public/assets/svgs/profile_plus.svg'
 
 import useRNImagePicker from '@/utils/react-native-webview-bridge/image-picker/useImagePicker'
-import webBridge from '@/utils/react-native-webview-bridge'
 
 import { UserProfile } from '@/types/common.type'
 
@@ -33,37 +32,35 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
     openImagePicker({
       onImagePick: (data) => {
         setImageUrl(data)
+        handleValueChange({ imgPath: data })
       },
     })
   }
 
   const handleNickNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value)
+    handleValueChange({ user: target.value })
   }
   const handleDescritionChange = ({
     target,
   }: ChangeEvent<HTMLInputElement>) => {
     setIntroduction(target.value)
+    handleValueChange({ introduction: target.value })
   }
   const handlePublicNickNameChange = (value: boolean) => {
     setIsSecret(value)
+    handleValueChange({ lock: value })
   }
 
-  useEffect(() => {
+  const handleValueChange = (value: Partial<UserProfile>) => {
     onFormChange?.({
       imgPath: profileImageUrl,
       user: nickname,
       introduction: introduction,
       lock: isSecret,
+      ...value,
     })
-  }, [profileImageUrl, nickname, introduction, isSecret])
-
-  useEffect(() => {
-    webBridge.init()
-    return () => {
-      webBridge.unmount()
-    }
-  }, [])
+  }
 
   // TODO 특수문자 입력 방지
 

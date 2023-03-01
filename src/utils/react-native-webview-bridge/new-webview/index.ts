@@ -1,4 +1,4 @@
-import { NewWebViewData } from '@/utils/react-native-webview-bridge/types/newWebView.type'
+import { NewWebViewData } from '@/utils/react-native-webview-bridge/new-webview/newWebView.type'
 import { EMessageType, MessageData } from '../types/common.type'
 import webBridge from '@/utils/react-native-webview-bridge'
 

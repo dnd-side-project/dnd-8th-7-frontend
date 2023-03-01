@@ -40,13 +40,6 @@ export default function NewProfileContainer() {
       onError: () => {
         // TODO 에러 메세지 전달
       },
-      onFinished: () => {
-        rnWebViewBridge.open({
-          key: 'newProfileDone',
-          url: BASE_URL + PATH.newProfileDone,
-          reset: true,
-        })
-      },
     })
   }
 

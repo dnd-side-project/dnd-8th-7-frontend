@@ -1,15 +1,18 @@
+import { useState, MouseEvent } from 'react'
 import clsx from 'clsx'
 
 import { PATH } from '@/constants/path'
+import { BASE_URL, DOCS_URL } from '@/constants/urls'
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import linkingBridge from '@/utils/react-native-webview-bridge/linking'
 
 import Header from '@/components/Header'
 import BottomButtonLayout from '@/components/Layout/BottomButton'
 import CheckBoxList from './CheckBoxList'
-import { useState } from 'react'
-import { BASE_URL } from '@/constants/urls'
 
 const TEXT_STYLE = 'text-[14px] leading-[140%]'
+
+type DocsKey = keyof typeof DOCS_URL
 
 export default function NewProfileAgreementsContainer() {
   const [agreed, setAgreed] = useState(false)
@@ -23,6 +26,15 @@ export default function NewProfileAgreementsContainer() {
 
   const handleTotalCheckChange = (checked: boolean) => {
     setAgreed(checked)
+  }
+
+  const handleUrlClick = (e: MouseEvent, key: DocsKey) => {
+    e.preventDefault()
+
+    linkingBridge.open({
+      type: 'url',
+      url: DOCS_URL[key],
+    })
   }
 
   return (
@@ -65,7 +77,7 @@ export default function NewProfileAgreementsContainer() {
               TEXT_STYLE,
             )}
           >
-            <a>이용약관</a>
+            <a onClick={(e) => handleUrlClick(e, 'termsOfUse')}>이용약관</a>
             <div
               className={clsx(
                 'w-[1px]',
@@ -74,7 +86,9 @@ export default function NewProfileAgreementsContainer() {
                 'mx-[12px]',
               )}
             />
-            <a>개인정보 처리 방침</a>
+            <a onClick={(e) => handleUrlClick(e, 'privacyPolicy')}>
+              개인정보처리방침
+            </a>
           </div>
         </div>
       </div>
