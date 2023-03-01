@@ -33,10 +33,10 @@ export default function UpdateBlockContainer() {
     query: { blockId },
   } = useRouter()
   const blockIdNumber = Number(blockId?.toString())
-  const [blockTitle, setBlockTitle] = useState<string>('')
+  const [blockTitle, setBlockTitle] = useState<string>()
   const [emoticon, setEmoticon] = useState<string>()
-  const [blockColor, setBlockColor] = useState<string>(colors?.red)
-  const [isSecret, setIsSecret] = useState(false)
+  const [blockColor, setBlockColor] = useState<string>()
+  const [isSecret, setIsSecret] = useState<boolean>()
   const [blockDetail, fetchBlockDetail, isLoading] = useHttpRequest(() =>
     dayBlockAPI
       .getSingleBlock({ blockId: blockIdNumber })
@@ -64,14 +64,14 @@ export default function UpdateBlockContainer() {
   }
 
   const handleSubmit = () => {
-    if (!blockIdNumber || !emoticon || !blockColor) return
+    if (!blockDetail) return
     dayBlockAPI
       .updateBlock({
         blockId: blockIdNumber,
-        title: blockTitle,
-        emoticon,
-        blockColor,
-        isSecret,
+        title: blockTitle ?? blockDetail?.title,
+        emoticon: emoticon ?? blockDetail?.emoticon,
+        blockColor: blockColor ?? blockDetail?.blockColor,
+        isSecret: isSecret ?? blockDetail?.isSecret,
       })
       .then(() => rnWebViewBridge.close())
       .catch(() => console.log('error'))

@@ -7,7 +7,7 @@ export interface Props {
 }
 
 export default function Switch({ defaultValue = false, onChange }: Props) {
-  const [active, setActive] = useState(defaultValue)
+  const [active, setActive] = useState<boolean | undefined>(defaultValue)
 
   const handleClick = () => {
     setActive(!active)
