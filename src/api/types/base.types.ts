@@ -1,4 +1,5 @@
 import { BlockDetail, DailyBlock } from '@/types/block'
+import { UserProfile } from '@/types/common.type'
 
 export type GetDailyBlocksOnWeekParams = {
   date: string
@@ -102,3 +103,9 @@ export type UpdateBlockResponse = {
   blockColor: string
   isSecret: boolean
 }
+
+export type UpdateMyProfileParams = UserProfile
+export type UpdateMyProfileResponse = UserProfile
+
+export type GetMyProfileParams = Record<string, never>
+export type GetMyProfileResponse = UserProfile

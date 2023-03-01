@@ -70,4 +70,11 @@ export default class DayBlockAxiosAPI implements DayBlockService {
       `/api/task/${params.taskId}`,
     )
   }
+
+  updateMyProfile(params: Type.UpdateMyProfileParams) {
+    return API.patch(`/api/user`, params)
+  }
+  getMyProfile() {
+    return API.get<Type.GetMyProfileResponse>(`/api/user`)
+  }
 }

@@ -8,4 +8,6 @@ export default interface AuthService {
     Type.GoogleLoginCallbackParams,
     Type.GoogleLoginCallbackResponse
   >
+
+  withdraw: ServiceFunc
 }

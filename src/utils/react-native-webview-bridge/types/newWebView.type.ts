@@ -3,6 +3,7 @@ export type Key = string
 export type NewWebViewData = {
   key: Key
   url: string
+  reset?: boolean
 }
 
 export enum RN_EVENT_TYPE {
