@@ -9,12 +9,16 @@ import Input, { InputProps } from '@/components/Input'
 
 interface Props extends Omit<InputProps, 'left' | 'ref'> {
   onEmojiChange?: (emoji: string) => void
+  defaultEmoji?: string
 }
 
 export default forwardRef<HTMLInputElement | null, Props>(
-  function BlockTitleInput({ onEmojiChange, ...props }, ref = null) {
+  function BlockTitleInput(
+    { onEmojiChange, defaultEmoji, ...props },
+    ref = null,
+  ) {
     const [value, setValue] = useState(props?.defaultValue || '')
-    const [emoji, setEmoji] = useState<string>()
+    const [emoji, setEmoji] = useState<string | undefined>(defaultEmoji)
     const [open, close] = useRNEmojiBottomSheet('newBlock')
 
     const handleEmojiClick = () => {

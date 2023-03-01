@@ -21,7 +21,6 @@ const ProfileHeader = ({
       <div className="flex gap-x-[12px] items-center">
         <PercentageProfile
           imgSrc={profileImage}
-          showNumber
           percentage={
             numOfTasks ? Math.round(numOfdoneTasks / numOfTasks) * 100 : 0
           }

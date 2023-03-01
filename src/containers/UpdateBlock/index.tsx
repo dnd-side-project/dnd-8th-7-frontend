@@ -1,19 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
+import { dayBlockAPI } from '@/api'
 
 import { colors } from '@/styles/theme'
 
-import BlockTitleInput from './BlockTitleInput'
 import ColorPicker from '@/components/ColorPicker'
 import Switch from '@/components/Switch'
 import Header from '@/components/Header'
 import { BottomButtonLayout } from '@/components/Layout'
+import BlockTitleInput from '../NewBlock/BlockTitleInput'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
-import { useRouter } from 'next/router'
-import { dayBlockAPI } from '@/api'
 import useHttpRequest from '@/hooks/useHttpRequest'
-import { CreateBlockParams } from '@/api/types/base.types'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -29,18 +28,19 @@ const DEFAULT_COLORS = [
   colors?.purple,
 ]
 
-export default function NewBlockContainer() {
+export default function UpdateBlockContainer() {
   const {
-    query: { date },
+    query: { blockId },
   } = useRouter()
-  const dateValue = date?.toString()
-  const [blockTitle, setBlockTitle] = useState<string>('')
+  const blockIdNumber = Number(blockId?.toString())
+  const [blockTitle, setBlockTitle] = useState<string>()
   const [emoticon, setEmoticon] = useState<string>()
-  const [blockColor, setBlockColor] = useState<string>(colors?.red)
-  const [isSecret, setIsSecret] = useState(false)
-  const [, postNewBlock, isLoading] = useHttpRequest(
-    (params: CreateBlockParams) =>
-      dayBlockAPI.createBlock(params).then(({ data }) => data),
+  const [blockColor, setBlockColor] = useState<string>()
+  const [isSecret, setIsSecret] = useState<boolean>()
+  const [blockDetail, fetchBlockDetail, isLoading] = useHttpRequest(() =>
+    dayBlockAPI
+      .getSingleBlock({ blockId: blockIdNumber })
+      .then(({ data }) => data),
   )
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,24 +64,24 @@ export default function NewBlockContainer() {
   }
 
   const handleSubmit = () => {
-    if (!dateValue || !emoticon || !blockColor) {
-      console.log('입력 에러') // TODO: 에러 처리
-      return
-    }
-    postNewBlock(
-      {
-        date: dateValue,
-        title: blockTitle,
-        emoticon,
-        blockColor,
-        isSecret,
-      },
-      {
-        onSuccess: () => rnWebViewBridge.close(),
-        onError: () => console.log('error'), // TODO: 에러 처리
-      },
-    )
+    if (!blockDetail) return
+    dayBlockAPI
+      .updateBlock({
+        blockId: blockIdNumber,
+        title: blockTitle ?? blockDetail?.title,
+        emoticon: emoticon ?? blockDetail?.emoticon,
+        blockColor: blockColor ?? blockDetail?.blockColor,
+        isSecret: isSecret ?? blockDetail?.isSecret,
+      })
+      .then(() => rnWebViewBridge.close())
+      .catch(() => console.log('error'))
   }
+
+  useEffect(() => {
+    fetchBlockDetail()
+  }, [])
+
+  if (!blockDetail) return null
 
   return (
     <BottomButtonLayout
@@ -89,7 +89,7 @@ export default function NewBlockContainer() {
       buttonProps={{ type: 'submit', onClick: handleSubmit }}
     >
       <Header
-        title={'새 블럭 만들기'}
+        title={blockDetail.title}
         rightButton={'exit'}
         onRightButtonClick={handleClose}
       />
@@ -102,12 +102,14 @@ export default function NewBlockContainer() {
           maxLength={15}
           placeholder="블럭 제목을 입력해주세요"
           onEmojiChange={handleEmojiChange}
+          defaultEmoji={blockDetail.emoticon}
+          defaultValue={blockDetail.title}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
         <ColorPicker
           defaultColors={DEFAULT_COLORS}
           onChange={handleColorChange}
-          defaultPicked={colors?.red}
+          defaultPicked={blockDetail.blockColor}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>추가 설정</div>
         <div className={clsx('flex', 'justify-between')}>
@@ -115,7 +117,10 @@ export default function NewBlockContainer() {
             <div className={clsx(SUB_TITLE)}>쉿! 비밀로 하기</div>
             <div className={clsx(DESCRIPTION)}>친구들에게 보이지 않아요</div>
           </div>
-          <Switch onChange={handleSecretChange} />
+          <Switch
+            onChange={handleSecretChange}
+            defaultValue={blockDetail.isSecret}
+          />
         </div>
       </div>
     </BottomButtonLayout>

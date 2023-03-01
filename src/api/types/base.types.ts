@@ -20,9 +20,33 @@ export type GetDayBlocksResponse = {
   blocks: Array<BlockDetail>
 }
 
+export type GetSingleBlockParams = {
+  blockId: number
+}
+
+export type GetSingleBlockResponse = {
+  date: string
+  title: string
+  emoticon: string
+  blockColor: string
+  isSecret: boolean
+}
+
+export type GetSavedBlocksResponse = {
+  blockId: number
+  color: string
+  icon: string
+  title: string
+  sumOfTask: number
+}
+
+export type SaveBlockParams = {
+  blockId: number
+}
+
 export type CreateBlockParams = {
   date: string
-  blockTitle: string
+  title: string
   emoticon: string
   blockColor: string
   isSecret: boolean
@@ -49,7 +73,6 @@ export type CreateTaskInBlockParams = {
   content: string
 }
 export type CreateTaskInBlockResponse = {
-  blockId: number
   taskId: number
   content: string
 }
@@ -65,6 +88,21 @@ export type DeleteTaskInBlockParams = {
   taskId: number
 }
 export type DeleteTaskInBlockResponse = unknown
+
+export type UpdateBlockParams = {
+  blockId: number
+  title: string
+  emoticon: string
+  blockColor: string
+  isSecret: boolean
+}
+
+export type UpdateBlockResponse = {
+  title: string
+  emoticon: string
+  blockColor: string
+  isSecret: boolean
+}
 
 export type UpdateMyProfileParams = UserProfile
 export type UpdateMyProfileResponse = UserProfile
