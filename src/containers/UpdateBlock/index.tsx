@@ -96,6 +96,7 @@ export default function UpdateBlockContainer() {
       <div className={clsx('pt-[56px]', 'px-[20px]')}>
         <div className={clsx(TITLE, 'mt-[24px]')}>블럭 제목</div>
         <BlockTitleInput
+          value={blockTitle}
           onChange={handleInputChange}
           showLimitCount
           maxLength={15}
