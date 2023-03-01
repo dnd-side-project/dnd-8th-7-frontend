@@ -1,28 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { dayBlockAPI } from '@/api'
 import dayjs from 'dayjs'
-import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
 import Tabs from '@/components/Tabs'
 import ProfileHeader from './ProfileHeader'
 import CalendarPanel from './CalendarPanel'
 import DailyBlockPanel from './DailyBlockPanel'
 import BlockList from './BlockList'
+import useHttpRequest from '@/hooks/useHttpRequest'
 
 const Home = () => {
-  const [data, setData] = useState<GetDailyBlocksOnWeekResponse | null>(null)
   const today = String(dayjs().format('YYYY-MM-DD'))
+  const [weeklyBlocks, fetchWeeklyBlocks, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.getDailyBlocksOnWeek({ date: today }).then(({ data }) => data),
+  )
 
   useEffect(() => {
-    const getDailyBlocks = async () => {
-      await dayBlockAPI
-        .getDailyBlocksOnWeek({ date: today })
-        .then(({ data }) => setData(data))
-    }
-    getDailyBlocks()
-  }, [today])
+    fetchWeeklyBlocks()
+  }, [])
 
-  if (!data) return null
-  const { user, dailyBlocks } = data
+  const onVisibility = () => {
+    if (!document.hidden) {
+      fetchWeeklyBlocks()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  })
+
+  if (!weeklyBlocks || isLoading) return null
+  const { user, dailyBlocks } = weeklyBlocks
 
   return (
     <div className="inner px-5 pb-14">
