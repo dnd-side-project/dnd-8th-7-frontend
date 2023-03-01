@@ -10,6 +10,10 @@ import Header from '@/components/Header'
 import { BottomButtonLayout } from '@/components/Layout'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import { useRouter } from 'next/router'
+import { dayBlockAPI } from '@/api'
+import useHttpRequest from '@/hooks/useHttpRequest'
+import { CreateBlockParams } from '@/api/types/base.types'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -26,16 +30,29 @@ const DEFAULT_COLORS = [
 ]
 
 export default function NewBlockContainer() {
-  const [emoji, setEmoji] = useState<string>()
-  const [color, setColor] = useState<string>()
+  const {
+    query: { date },
+  } = useRouter()
+  const dateValue = date?.toString()
+  const [blockTitle, setBlockTitle] = useState<string>('')
+  const [emoticon, setEmoticon] = useState<string>()
+  const [blockColor, setBlockColor] = useState<string>(colors?.red)
   const [isSecret, setIsSecret] = useState(false)
+  const [, postNewBlock, isLoading] = useHttpRequest(
+    (params: CreateBlockParams | undefined) =>
+      dayBlockAPI.createBlock(params).then(({ data }) => data),
+  )
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBlockTitle(e.target.value)
+  }
 
   const handleEmojiChange = (emoji: string) => {
-    setEmoji(emoji)
+    setEmoticon(emoji)
   }
 
   const handleColorChange = (color: string) => {
-    setColor(color)
+    setBlockColor(color)
   }
 
   const handleSecretChange = (value: boolean) => {
@@ -46,8 +63,31 @@ export default function NewBlockContainer() {
     rnWebViewBridge.close()
   }
 
+  const handleSubmit = () => {
+    if (!dateValue || !emoticon || !blockColor) {
+      console.log('입력 에러') // TODO: 에러 처리
+      return
+    }
+    postNewBlock(
+      {
+        date: dateValue,
+        title: blockTitle,
+        emoticon,
+        blockColor,
+        isSecret,
+      },
+      {
+        onSuccess: () => rnWebViewBridge.close(),
+        onError: () => console.log('error'), // TODO: 에러 처리
+      },
+    )
+  }
+
   return (
-    <BottomButtonLayout buttonText="완료">
+    <BottomButtonLayout
+      buttonText="완료"
+      buttonProps={{ type: 'submit', onClick: handleSubmit }}
+    >
       <Header
         title={'새 블럭 만들기'}
         rightButton={'exit'}
@@ -56,6 +96,8 @@ export default function NewBlockContainer() {
       <div className={clsx('pt-[56px]', 'px-[20px]')}>
         <div className={clsx(TITLE, 'mt-[24px]')}>블럭 제목</div>
         <BlockTitleInput
+          value={blockTitle}
+          onChange={handleInputChange}
           showLimitCount
           maxLength={15}
           placeholder="블럭 제목을 입력해주세요"
