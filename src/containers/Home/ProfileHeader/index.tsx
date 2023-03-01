@@ -1,5 +1,4 @@
 import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
-import { AlarmIcon } from '@/components/Icons'
 import PercentageProfile from '@/components/PercentageProfile'
 
 interface Props {
@@ -19,10 +18,6 @@ const ProfileHeader = ({ user, profileImage = '' }: Props) => {
           오늘 하루도 화이팅!
         </div>
       </div>
-
-      <button type="button">
-        <AlarmIcon />
-      </button>
     </div>
   )
 }
