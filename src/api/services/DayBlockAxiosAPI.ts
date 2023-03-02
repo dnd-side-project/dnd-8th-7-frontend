@@ -57,6 +57,15 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   createDailyReview(params: Type.CreateDailyReviewParams) {
     return API.post<Type.CreateDailyReviewResponse>(`/api/review`, params)
   }
+  getDailyReview({ reviewId }: Type.GetDailyReviewParams) {
+    return API.get<Type.GetDailyReviewResponse>(`/api/review/${reviewId}`)
+  }
+  updateDailyReview({ reviewId, ...params }: Type.UpdateDailyReviewParams) {
+    return API.patch<Type.UpdateDailyReviewResponse>(
+      `/api/review/${reviewId}`,
+      params,
+    )
+  }
 
   /** 태스크 */
   createTaskInBlock(params: Type.CreateTaskInBlockParams) {

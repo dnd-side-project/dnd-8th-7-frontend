@@ -35,6 +35,14 @@ export default interface DayBlockService {
     Type.CreateDailyReviewParams,
     Type.CreateDailyReviewResponse
   >
+  getDailyReview: ServiceFunc<
+    Type.GetDailyReviewParams,
+    Type.GetDailyReviewResponse
+  >
+  updateDailyReview: ServiceFunc<
+    Type.UpdateDailyReviewParams,
+    Type.UpdateDailyReviewResponse
+  >
 
   /** 태스크 */
   createTaskInBlock: ServiceFunc<

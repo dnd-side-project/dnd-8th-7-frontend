@@ -58,6 +58,12 @@ export type CreateDailyReviewParams = {
 export type CreateDailyReviewResponse = {
   reviewId: number
 }
+export type GetDailyReviewParams = { reviewId: number }
+export type GetDailyReviewResponse = CreateDailyReviewParams
+
+export type UpdateDailyReviewParams = GetDailyReviewParams &
+  GetDailyReviewResponse
+export type UpdateDailyReviewResponse = Record<string, never>
 
 export type DeleteBlockParams = { blockId: number }
 export type DeleteBlockResponse = unknown

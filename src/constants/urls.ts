@@ -8,4 +8,4 @@ export const DOCS_URL = {
 }
 
 export const DEFAULT_PROFILE_IMAGE_URL =
-  S3_URL + 'onboarding/default_profile_image.png'
+  S3_URL + '/onboarding/default_profile_image.png'
