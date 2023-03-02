@@ -21,6 +21,7 @@ type Actions = {
   updateTask: (blockId: number, taskId: number, content: string) => void
   updateTaskStatus: (blockId: number, taskId: number, isDone: boolean) => void
   deleteTask: (blockId: number, taskId: number) => void
+  deleteBlock: (blockId: number) => void
 }
 
 const useBlockListStore = create(
@@ -65,6 +66,14 @@ const useBlockListStore = create(
         block.tasks.splice(taskIndex, 1)
         block.sumOfTask -= 1
         blockList.totalTask -= 1
+      })
+    },
+
+    deleteBlock: (blockId) => {
+      set(({ blockList }) => {
+        const { blockIndex } = getItem(blockList.blocks, blockId)
+        blockList.blocks.splice(blockIndex, 1)
+        blockList.totalBlock -= 1
       })
     },
   })),
