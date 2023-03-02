@@ -1,22 +1,35 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
-import { colors } from '@/styles/theme'
+import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
+import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
+
+import { dayBlockAPI } from '@/api'
+import useHttpRequest from '@/hooks/useHttpRequest'
+
+import { SavedBlock as SavedBlockType } from '@/types/block'
 
 import { BottomButtonLayout } from '@/components/Layout'
 import Header from '@/components/Header'
 import NoData from '@/components/NoData'
-import CheckBox from '@/components/CheckBox'
+import LoadingContainer from '@/components/Loading/Container'
 import SavedBlock from './SavedBlock'
 
-import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
-
 export default function SavedBlockContainer() {
+  const router = useRouter()
   const checkedBlock = useRef(new Set()).current
-  /**
-   * TODO 임시 length
-   */
-  const blocksLength = 0
+
+  const [open, close] = useRNListBottomSheet('blockMenu')
+
+  const date = router.query?.date as string
+
+  const [blocks, fetchSavedBlocks, isLoading] = useHttpRequest(() =>
+    dayBlockAPI.getSavedBlocks().then(({ data }) => data),
+  )
+  const [, deleteSavedBlock, isDeleteLoading] = useHttpRequest(
+    dayBlockAPI.deleteSavedBlock,
+  )
 
   const handleCheckClick = (value: boolean, blockId: number) => {
     if (value) {
@@ -28,51 +41,79 @@ export default function SavedBlockContainer() {
     }
   }
 
+  const handleMoreClick = (block: SavedBlockType) => {
+    open(
+      {
+        title: block.title,
+        items: [{ key: 'delete', title: '삭제하기' }],
+      },
+      {
+        onItemClick: (key: string) => {
+          if (key === 'delete') handleDeleteBlock(block.blockId)
+        },
+      },
+    )
+  }
+
+  const handleDeleteBlock = (blockId: number) => {
+    deleteSavedBlock(
+      { blockId },
+      {
+        onSuccess: () => {
+          close()
+          fetchSavedBlocks()
+        },
+      },
+    )
+  }
+
   const handleBack = () => {
     rnWebViewBridge.close()
   }
 
+  useEffect(() => {
+    fetchSavedBlocks()
+  }, [])
+
   return (
-    <BottomButtonLayout showButton={!!blocksLength} buttonText="완료">
-      <Header
-        title="블럭 불러오기"
-        leftButton="back"
-        onLeftButtonClick={handleBack}
-      />
-      <div className={clsx('pt-[56px]', 'px-[20px]', 'pb-[20px]', 'h-full')}>
-        {blocksLength ? (
-          <div
-            className={clsx(
-              'flex',
-              'flex-col',
-              'pt-[30px]',
-              'w-full',
-              'gap-[8px]',
-            )}
-          >
-            {Array.from({ length: blocksLength }).map((_, idx) => (
-              <div
-                key={idx}
-                className={clsx('flex', 'gap-[14px]', 'w-full', 'items-center')}
-              >
-                <CheckBox
-                  shape="rectangle"
-                  onChange={(value) => handleCheckClick(value, idx)}
-                />
+    <LoadingContainer loading={isLoading}>
+      <LoadingContainer loading={isDeleteLoading} backgroundMask />
+      <BottomButtonLayout
+        showButton={!!date && !!blocks?.length}
+        buttonText="완료"
+      >
+        <Header
+          title="블럭 불러오기"
+          leftButton="back"
+          onLeftButtonClick={handleBack}
+        />
+        <div className={clsx('pt-[56px]', 'px-[20px]', 'pb-[20px]', 'h-full')}>
+          {blocks?.length ? (
+            <div
+              className={clsx(
+                'flex',
+                'flex-col',
+                'pt-[30px]',
+                'w-full',
+                'gap-[8px]',
+              )}
+            >
+              {blocks?.map((block) => (
                 <SavedBlock
-                  color={colors.red}
-                  icon={'😂'}
-                  title={'한둘셋넷일여아열한둘셋'}
-                  sumOfTask={12}
+                  key={block.blockId}
+                  onMoreClick={handleMoreClick}
+                  onCheckClick={handleCheckClick}
+                  checkable={!!date}
+                  {...block}
                 />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <NoBlocks />
-        )}
-      </div>
-    </BottomButtonLayout>
+              ))}
+            </div>
+          ) : (
+            <NoBlocks />
+          )}
+        </div>
+      </BottomButtonLayout>
+    </LoadingContainer>
   )
 }
 

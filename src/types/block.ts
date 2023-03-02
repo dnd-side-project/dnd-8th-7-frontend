@@ -13,6 +13,8 @@ export type BlockDetail = {
   tasks: Array<Task>
 }
 
+export type SavedBlock = Omit<BlockDetail, 'sumOfDoneTask'>
+
 export type Task = {
   taskId: number
   task: string

@@ -32,13 +32,7 @@ export type GetSingleBlockResponse = {
   isSecret: boolean
 }
 
-export type GetSavedBlocksResponse = {
-  blockId: number
-  color: string
-  icon: string
-  title: string
-  sumOfTask: number
-}
+export type GetSavedBlocksResponse = Omit<BlockDetail, 'sumOfDoneTask'>[]
 
 export type SaveBlockParams = {
   blockId: number
@@ -109,3 +103,6 @@ export type UpdateMyProfileResponse = UserProfile
 
 export type GetMyProfileParams = Record<string, never>
 export type GetMyProfileResponse = UserProfile
+
+export type DeleteSavedBlockParams = { blockId: number }
+export type DeleteSavedBlockResponse = Record<string, never>

@@ -51,7 +51,7 @@ const Profile = ({ imgSrc = '', size = 'sm' }: Props) => {
       {!imgSrc ? (
         <DefaultImage size={size} />
       ) : (
-        <img src={imgSrc} alt="" className="w-full h-full" />
+        <img src={imgSrc} alt="" className="w-full h-full object-cover" />
       )}
     </div>
   )

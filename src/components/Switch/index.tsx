@@ -1,45 +1,49 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { ChangeEvent, ComponentProps } from 'react'
 
-export interface Props {
-  defaultValue?: boolean
+interface Props extends Omit<ComponentProps<'input'>, 'onChange'> {
   onChange?: (value: boolean) => void
 }
 
-export default function Switch({ defaultValue = false, onChange }: Props) {
-  const [active, setActive] = useState<boolean | undefined>(defaultValue)
-
-  const handleClick = () => {
-    setActive(!active)
-    onChange?.(!active)
+export default function Switch({ onChange, ...props }: Props) {
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(target.checked)
   }
 
   return (
-    <div
-      className={clsx(
-        'w-[40px]',
-        'h-[20px]',
-        'rounded-[20px]',
-        'flex',
-        'items-center',
-        'px-[2px]',
-        'py-[2px]',
-        'transition-all',
-        active ? 'bg-red' : 'bg-gray-300',
-      )}
-      onClick={handleClick}
-    >
+    <label className="relative inline-flex items-center">
+      <input
+        type="checkbox"
+        value=""
+        className="sr-only peer"
+        {...props}
+        onChange={handleChange}
+      />
       <div
         className={clsx(
-          'w-[16px]',
-          'h-[16px]',
-          'bg-white',
-          'rounded-[99px]',
+          'w-[40px]',
+          'h-[20px]',
+          'bg-gray-200',
+          'rounded-[20px]',
+          'peer',
+          'peer-checked:bg-red',
+          'px-[2px]',
+          'py-[2px]',
           'transition-all',
-          active ? 'translate-x-[20px]' : 'translate-x-[0px]',
           'ease-in-out',
+
+          "after:content-['']",
+          'after:absolute',
+          'after:bg-white',
+          'after:rounded-full',
+          'after:h-[16px]',
+          'after:w-[16px]',
+          'after:transition-all',
+          'after:ease-in-out',
+
+          'peer-checked:after:translate-x-[20px]',
         )}
       ></div>
-    </div>
+    </label>
   )
 }

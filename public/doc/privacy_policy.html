@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>개인정보처리방침</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1857f35b-d185-4e69-b5da-39d7f4f6572c" class="page sans"><header><h1 class="page-title">개인정보처리방침</h1></header><div class="page-body"><p id="49b61a37-e1b5-4f8b-80d1-7b374f09c1df" class="">&lt; 하루블럭 &gt;(&#x27;harublock.app@gmail.com&#x27;이하 &#x27;하루블럭&#x27;)은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.</p><p id="f5897e16-123d-4568-a7aa-ed6b189ca887" class="">○ 이 개인정보처리방침은 2023년 1월 1일부터 적용됩니다.</p><h3 id="0ef94186-5afd-41b0-95da-26777057965d" class=""><strong>제1조(개인정보의 처리 목적)</strong></h3><p id="61fab7dd-d02e-4a85-83d0-337375d3b703" class="">&lt; 하루블럭 &gt;(&#x27;harublock.app@gmail.com&#x27;이하 &#x27;하루블럭&#x27;)은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p><p id="7938e898-ccce-4576-83d1-520229008178" class="">1. 홈페이지 회원가입 및 관리</p><p id="16f41e9a-47e1-4d65-a8f5-3e7b33b8ebfd" class="">회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증, 회원자격 유지·관리, 서비스 부정이용 방지, 만14세 미만 아동의 개인정보 처리 시 법정대리인의 동의여부 확인, 각종 고지·통지, 고충처리 목적으로 개인정보를 처리합니다.</p><p id="78b62ce6-f5ee-402b-b9cd-36a605059e43" class="">2. 민원사무 처리</p><p id="72692ad6-6e92-4da5-ad45-381fa7ee18eb" class="">민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락·통지, 처리결과 통보 목적으로 개인정보를 처리합니다.</p><p id="555f1cf2-809b-43a9-a4c0-c868374c595e" class="">3. 재화 또는 서비스 제공</p><p id="7e43080f-80ba-4839-9982-88bbff6dfa48" class="">서비스 제공, 콘텐츠 제공, 맞춤서비스 제공을 목적으로 개인정보를 처리합니다.</p><p id="df67d549-0c29-4bca-a71e-3c211f44eea3" class="">4. 마케팅 및 광고에의 활용</p><p id="2168f48d-6966-4689-af64-e7545bfdabc9" class="">신규 서비스(제품) 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보 제공 및 참여기회 제공 , 서비스의 유효성 확인, 접속빈도 파악 또는 회원의 서비스 이용에 대한 통계 등을 목적으로 개인정보를 처리합니다.</p><h3 id="b5955ee2-582b-4e1c-a7ca-f703a58281d1" class=""><strong>제2조(개인정보의 처리 및 보유 기간)</strong></h3><p id="76dfb120-052a-4b20-bb25-7b17f29a55c8" class="">① &lt; 하루블럭 &gt;은(는) 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.</p><p id="fd1e60cc-459c-4d71-b67a-0f44bc82c111" class="">② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.</p><p id="d6ebfc03-7097-48a7-8ca7-e3bb54d85a8a" class="">1.&lt;홈페이지 회원가입 및 관리&gt;</p><p id="61c90e81-7361-4562-b9df-035f48bbca16" class="">&lt;홈페이지 회원가입 및 관리&gt;와 관련한 개인정보는 수집.이용에 관한 동의일로부터&lt;지체없이 파기&gt;까지 위 이용목적을 위하여 보유.이용됩니다.</p><ul id="ab8e6f88-db50-48ce-af12-304005a28c21" class="bulleted-list"><li style="list-style-type:disc">보유근거 : 내부 방침</li></ul><ul id="90ddaf7a-5712-43cc-8303-4bacdfdaaf07" class="bulleted-list"><li style="list-style-type:disc">관련법령 : 관련 법령</li></ul><ul id="b8f794f6-b5f6-47cb-afbf-ade689eced84" class="bulleted-list"><li style="list-style-type:disc">예외사유 : 법률에 의한 경우</li></ul><h3 id="35eef574-8b61-48fe-92e7-0f24c2e2401a" class=""><strong>제3조(처리하는 개인정보의 항목)</strong></h3><p id="41d72b33-e488-4932-8200-8e487f2cff3c" class="">①<em> </em>&lt; 하루블럭 &gt;은(는) 다음의 개인정보 항목을 처리하고 있습니다.</p><p id="a0b62d5e-8793-4514-9850-59eecb5ac89e" class="">1&lt; 재화 또는 서비스 제공 &gt;</p><ul id="952273da-d643-4f67-bcec-36b13107d8a6" class="bulleted-list"><li style="list-style-type:disc">필수항목 : 구글 로그인 계정 및 닉네임</li></ul><h3 id="fc723150-be86-45d3-a10a-98d31fe87624" class=""><strong>제4조(만 14세 미만 아동의 개인정보 처리에 관한 사항)</strong></h3><p id="50d2a5bf-38b6-47ae-87ec-53b51d7b5cdf" class="">① &lt;개인정보처리자명&gt;은(는) 만 14세 미만 아동에 대해 개인정보를 수집할 때 법정대리인의 동의를 얻어 해당 서비스 수행에 필요한 최소한의 개인정보를 수집합니다.</p><ul id="68ecc8a8-1e1b-413e-941b-5567a94fbb2d" class="bulleted-list"><li style="list-style-type:disc">필수항목 : 법정 대리인의 성명, 관계, 연락처</li></ul><p id="4f73387d-bc59-4d25-a144-9e51b85a4e6d" class="">② 또한, &lt;개인정보처리자명&gt;의 &lt;처리목적&gt; 관련 홍보를 위해 아동의 개인정보를 수집할 경우에는 법정대리인으로부터 별도의 동의를 얻습니다.</p><p id="5dce4f59-6abd-4f84-85b4-82736c465c92" class="">③ &lt;개인정보처리자명&gt;은(는) 만 1 4세 미만 아동의 개인정보를 수집할 때에는 아동에게 법정대리인의 성명, 연락처와 같이 최소한의 정보를 요구할 수 있으며, 다음 중 하나의 방법으로 적법한 법정대리인이 동의하였는지를 확인합니다.</p><ul id="730be0c3-6a18-40c9-9f69-25cda32be78a" class="bulleted-list"><li style="list-style-type:disc">동의 내용을 게재한 인터넷 사이트에 법정대리인이 동의 여부를 표시하도록 하고 개인정보처리자가 그 동의 표시를 확인했음을 법정대리인의 휴대전화 문자 메시지로 알리는 방법</li></ul><ul id="096d50bf-8edb-4a27-8b7f-b0b22e91bfa3" class="bulleted-list"><li style="list-style-type:disc">동의 내용을 게재한 인터넷 사이트에 법정대리인이 동의 여부를 표시하도록 하고 법정대리인의 신용카드·직불카드 등의 카드정보를 제공받는 방법</li></ul><ul id="96d10e8c-f147-4fcf-bb8c-2332d53f536c" class="bulleted-list"><li style="list-style-type:disc">동의 내용을 게재한 인터넷 사이트에 법정대리인이 동의 여부를 표시하도록 하고 법정대리인의 휴대전화 본인인증 등을 통해 본인 여부를 확인하는 방법</li></ul><ul id="1adfc0f8-82ae-400a-998e-d358f2f720d8" class="bulleted-list"><li style="list-style-type:disc">동의 내용이 적힌 서면을 법정대리인에게 직접 발급하거나, 우편 또는 팩스를 통하여 전달하고 법정대리인이 동의 내용에 대하여 서명날인 후 제출하도록 하는 방법</li></ul><ul id="5f09bc80-4858-4355-b738-66d16a59e901" class="bulleted-list"><li style="list-style-type:disc">동의 내용이 적힌 전자우편을 발송하여 법정대리인으로부터 동의의 의사표시가 적힌 전자우편을 전송받는 방법</li></ul><ul id="57f6c8cf-be5c-4217-b740-7799a6907e1a" class="bulleted-list"><li style="list-style-type:disc">전화를 통하여 동의 내용을 법정대리인에게 알리고 동의를 얻거나 인터넷주소 등 동의 내용을 확인할 수 있는 방법을 안내하고 재차 전화 통화를 통하여 동의를 얻는 방법</li></ul><ul id="6aba3696-a993-4e11-8e09-70fca8b92b4d" class="bulleted-list"><li style="list-style-type:disc">그 밖에 위와 준하는 방법으로 법정대리인에게 동의 내용을 알리고 동의의 의사표시를 확인하는 방법</li></ul><h3 id="3e1c5d2d-82b5-4e3e-898a-f78fba6d986b" class=""><strong>제5조(개인정보처리의 위탁에 관한 사항)</strong></h3><p id="1c2ca44e-91bf-498c-b8b2-0c84e592ade4" class="">① &lt; 하루블럭 &gt;은(는) 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p><p id="c3a84abb-29a6-4ff9-9c1f-26954672d5ed" class="">1. &lt; 없음 &gt;</p><ul id="04f92129-911d-4b83-a337-19585e561e6e" class="bulleted-list"><li style="list-style-type:disc">위탁받는 자 (수탁자) : 없음</li></ul><ul id="c7fca58f-7ae5-4180-944f-e8b548d64aa5" class="bulleted-list"><li style="list-style-type:disc">위탁하는 업무의 내용 : 기타</li></ul><ul id="497dcaa1-fac4-464e-8d92-5226ce1dc473" class="bulleted-list"><li style="list-style-type:disc">위탁기간 : 기타</li></ul><p id="4c53cdb3-da21-48c5-b3b8-d60cd0bd6de8" class="">② &lt; 하루블럭 &gt;은(는) 위탁계약 체결시 「개인정보 보호법」 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적․관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리․감독, 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p><p id="ebe1fe11-da4c-455b-8ed3-cc21a3fcfc8d" class="">③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</p><h3 id="78fbb8f0-103d-4184-a618-34f86a69bcf0" class=""><strong>제6조(개인정보의 파기절차 및 파기방법)</strong></h3><p id="7d58cc49-f3fa-4de8-908b-c930f7428d5e" class="">① &lt; 하루블럭 &gt; 은(는) 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.</p><p id="3cd1538b-0b2d-49ac-ab25-3cafefacf974" class="">② 정보주체로부터 동의받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.
+1. 법령 근거 :
+2. 보존하는 개인정보 항목 : 계좌정보, 거래날짜</p><p id="4a3ff7c6-ee6e-4676-b2a0-2fb6612caa7f" class="">③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.
+1. 파기절차&lt; 하루블럭 &gt; 은(는) 파기 사유가 발생한 개인정보를 선정하고, &lt; 하루블럭 &gt; 의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.
+2. 파기방법
+전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.
+종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다</p><h3 id="51c01ea3-ae6a-4d46-af5c-0f0b1f4e80ff" class=""><strong>제7조(미이용자의 개인정보 파기 등에 관한 조치)</strong></h3><p id="8fd3927c-bbab-4c2c-8766-76912494c6b4" class="">① &lt;개인정보처리자명&gt;은(는) 1년간 서비스를 이용하지 않은 이용자의 정보를 파기하고 있습니다. 다만, 다른 법령에서 정한 보존기간이 경과할 때까지 다른 이용자의 개인정보와 분리하여 별도로 저장·관리할 수 있습니다.</p><p id="beae309b-4bc9-43a0-9005-ee75f172ec35" class="">② &lt;개인정보처리자명&gt;은(는) 개인정보의 파기 30일 전까지 개인정보가 파기되는 사실, 기간 만료일 및 파기되는 개인정보의 항목을 이메일, 문자 등 이용자에게 통지 가능한 방법으로 알리고 있습니다.</p><p id="9cd5c85f-e2ab-4f62-af88-bfd76be992aa" class="">③ 개인정보의 파기를 원하지 않으시는 경우, 기간 만료 전 서비스 로그인을 하시면 됩니다.</p><h3 id="fdb5843f-9947-4cb5-81d1-88a17ea6accb" class=""><strong>제8조(정보주체와 법정대리인의 권리·의무 및 그 행사방법에 관한 사항)</strong></h3><p id="18477782-520c-42a9-a5d9-c5a014bb0dc8" class="">① 정보주체는 하루블럭에 대해 언제든지 개인정보 열람·정정·삭제·처리정지 요구 등의 권리를 행사할 수 있습니다.</p><p id="b85a63f9-4efb-4713-a981-45335eaf468d" class="">② 제1항에 따른 권리 행사는하루블럭에 대해 「개인정보 보호법」 시행령 제41조제1항에 따라 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 하루블럭은(는) 이에 대해 지체 없이 조치하겠습니다.</p><p id="3d53a0a9-9c61-45dd-bd30-fe4e315a18f0" class="">③ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다.이 경우 “개인정보 처리 방법에 관한 고시(제2020-7호)” 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.</p><p id="947d1e57-7e3a-4883-84d1-e5e8e0511245" class="">④ 개인정보 열람 및 처리정지 요구는 「개인정보 보호법」 제35조 제4항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다.</p><p id="40854a84-c002-4b96-b8d6-c2cd3137b895" class="">⑤ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다.</p><p id="ddc132ca-c1a5-4458-9477-195a08280dc8" class="">⑥ 하루블럭은(는) 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다.</p><h3 id="85ebfefc-2dde-4142-8e65-ca3de8479b89" class=""><strong>제9조(개인정보의 안전성 확보조치에 관한 사항)</strong></h3><p id="1363b200-ed14-4aad-a00d-a80db3c35f59" class=""><strong>&lt; 하루블럭 &gt;은(는) 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.</strong></p><p id="3afc096b-65cd-4909-9000-d3fefbe25dca" class="">1. 내부관리계획의 수립 및 시행</p><p id="62ad4e77-6ef4-4f76-baa4-9b91825ec1f8" class="">개인정보의 안전한 처리를 위하여 내부관리계획을 수립하고 시행하고 있습니다.</p><p id="4cca0c96-59e2-403b-ad8d-588418b0bc19" class="">2. 개인정보의 암호화</p><p id="3451b55b-174f-4e07-ad59-2f5fde9d749c" class="">이용자의 개인정보는 비밀번호는 암호화 되어 저장 및 관리되고 있어, 본인만이 알 수 있으며 중요한 데이터는 파일 및 전송 데이터를 암호화 하거나 파일 잠금 기능을 사용하는 등의 별도 보안기능을 사용하고 있습니다.</p><h3 id="ae159de6-93b8-4ce3-a060-87a55feb70d6" class=""><strong>제10조(개인정보를 자동으로 수집하는 장치의 설치·운영 및 그 거부에 관한 사항)</strong></h3><p id="cdb8663b-4687-4ad5-bb4e-ee62165e391f" class="">① 하루블럭 은(는) 이용자에게 개별적인 맞춤서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.</p><p id="39809e52-cb83-4f65-962d-af8f5e19ccf1" class="">② 쿠키는 웹사이트를 운영하는데 이용되는 서버(http)가 이용자의 컴퓨터 브라우저에게 보내는 소량의 정보이며 이용자들의 PC 컴퓨터내의 하드디스크에 저장되기도 합니다.</p><p id="0c595577-3228-442b-970e-e442544fbc66" class="">가. 쿠키의 사용 목적 : 이용자가 방문한 각 서비스와 웹 사이트들에 대한 방문 및 이용형태, 인기 검색어, 보안접속 여부, 등을 파악하여 이용자에게 최적화된 정보 제공을 위해 사용됩니다.</p><p id="a187836b-83ff-4c1a-bbb8-ee88618ab048" class="">나. 쿠키의 설치•운영 및 거부 : 웹브라우저 상단의 도구&gt;인터넷 옵션&gt;개인정보 메뉴의 옵션 설정을 통해 쿠키 저장을 거부 할 수 있습니다.</p><p id="e8f9aa68-9701-48f2-a173-0cbe7c9ec0db" class="">다. 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</p><h3 id="58b6562d-8467-4b5e-b07b-25101eec328b" class=""><strong>제11조(행태정보의 수집·이용·제공 및 거부 등에 관한 사항)</strong></h3><p id="d5209af8-66a8-45c4-a3bf-1c32db71c9fd" class="">행태정보의 수집·이용·제공 및 거부등에 관한 사항
+&lt;개인정보처리자명&gt;은(는) 온라인 맞춤형 광고 등을 위한 행태정보를 수집·이용·제공하지 않습니다.</p><h3 id="d727f16d-9adc-4374-80fb-37c35eadceea" class=""><strong>제12조(추가적인 이용·제공 판단기준)</strong></h3><p id="258880e3-e92f-401c-a72b-0516e1f38ca8" class="">&lt; 하루블럭 &gt; 은(는) ｢개인정보 보호법｣ 제15조제3항 및 제17조제4항에 따라 ｢개인정보 보호법 시행령｣ 제14조의2에 따른 사항을 고려하여 정보주체의 동의 없이 개인정보를 추가적으로 이용·제공할 수 있습니다.</p><p id="e6a2ff0a-7858-400a-9881-96cedc5e9e9d" class="">이에 따라 &lt; 하루블럭 &gt; 가(이) 정보주체의 동의 없이 추가적인 이용·제공을 하기 위해서 다음과 같은 사항을 고려하였습니다.</p><p id="573132a0-d18f-41aa-927a-03090005c713" class="">▶ 개인정보를 추가적으로 이용·제공하려는 목적이 당초 수집 목적과 관련성이 있는지 여부
+▶ 개인정보를 수집한 정황 또는 처리 관행에 비추어 볼 때 추가적인 이용·제공에 대한 예측 가능성이 있는지 여부
+▶ 개인정보의 추가적인 이용·제공이 정보주체의 이익을 부당하게 침해하는지 여부
+▶ 가명처리 또는 암호화 등 안전성 확보에 필요한 조치를 하였는지 여부</p><p id="fc76f908-f9e5-4ac2-b854-d0c2e0c052e2" class="">※ 추가적인 이용·제공 시 고려사항에 대한 판단기준은 사업자/단체 스스로 자율적으로 판단하여 작성·공개함</p><h3 id="88ac3182-3422-4e80-a4d1-a8ae4a71a00a" class=""><strong>제13조(개인정보 처리방침 변경)</strong></h3><p id="11655dd3-b4bf-4ce9-befb-949e3492f8b7" class="">① 이 개인정보처리방침은 2023년 1월 1부터 적용됩니다.</p><p id="bbea3da9-e00e-4c54-9c69-1979882d661a" class="">② 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p><h3 id="698d6d9d-4915-4461-9b1b-a539a930b61f" class="">제14조(개인정보에 관한 민원서비스)</h3><p id="b0635610-8185-4bd4-8bd9-fcb2fac7bd12" class="">개인정보 보호에 관한 질문이나 문의가 있는 경우 또는 고객 지원이 필요한 경우 아래에 기재된 연락처로 문의해 주시기 바랍니다.</p><p id="52f263c9-807a-4223-a782-6061e1951411" class="">▶ 개인정보보호책임자</p><ul id="29f6a861-b453-4712-a101-9ddd22449883" class="bulleted-list"><li style="list-style-type:disc">성명 : 정인우</li></ul><ul id="c23cff05-bd55-44b9-aa95-47c9a5795f1e" class="bulleted-list"><li style="list-style-type:disc">직위 : Software Developer</li></ul><ul id="99c48121-aba1-426e-a279-09a35a83c1b1" class="bulleted-list"><li style="list-style-type:disc">연락처 : <a href="mailto:harublock.app@gmail.com">harublock.app@gmail.com</a></li></ul><p id="b6b80ee3-72b9-4bb7-82b1-9c6fe30c3e2e" class="">
+</p><p id="21187606-89c4-4c9c-8f69-086cf4d419c2" class="">귀하께서는 회사의 서비스를 이용하시며 발생하는 모든 개인정보보호 관련 민원을 개인정보관리책임자 혹은 담당 부서로 신고하실 수 있습니다. 회사는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 드릴 것입니다</p><p id="9549fa55-c4e1-4a64-9181-64e93afaf36d" class="">
+</p><p id="e550cddb-0cae-4ba6-adbf-b0af7c6d7ebf" class="">공고 일자: 2023년 3월 1일</p><p id="2b1e9f7b-c584-4f63-9113-35a80c9986f2" class="">시행 일자: 2023년 3월 1일</p><p id="98784cbb-fa20-487f-af36-a4a5fe8616a7" class="">
+</p></div></article></body></html>

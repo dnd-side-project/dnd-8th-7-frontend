@@ -1,15 +1,19 @@
 import { useEffect } from 'react'
 import clsx from 'clsx'
 
-import useHttpRequest from '@/hooks/useHttpRequest'
 import { dayBlockAPI } from '@/api'
+import useHttpRequest from '@/hooks/useHttpRequest'
+import useVisibilityChange from '@/hooks/useVisibilityChange'
+
 import { BASE_URL } from '@/constants/urls'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 
 import List from '@/components/List'
 import { PATH } from '@/constants/path'
+
 import ProfileHeader from './ProfileHeader'
+import LoadingContainer from '@/components/Loading/Container'
 
 const SETTING_LIST = [
   {
@@ -27,7 +31,7 @@ const SETTING_LIST = [
 ]
 
 export default function MyProfileContainer() {
-  const [myProfile, fetchMyProfile, isLoading] = useHttpRequest(() =>
+  const [myProfile, fetchMyProfile, isLoading, , isFetch] = useHttpRequest(() =>
     dayBlockAPI.getMyProfile().then(({ data }) => data),
   )
 
@@ -42,28 +46,35 @@ export default function MyProfileContainer() {
     fetchMyProfile()
   }, [])
 
+  useVisibilityChange(() => {
+    fetchMyProfile()
+  })
+
   return (
-    <div className={clsx('py-[30px]')}>
-      <div className={clsx('px-[20px]', 'mb-[14px]')}>
-        <ProfileHeader
-          percentage={0}
-          user={myProfile?.user || ''}
-          imgSrc={myProfile?.imgPath}
-        />
-        <div
-          className={clsx(
-            'py-4',
-            'px-4',
-            'rounded-lg',
-            'bg-gray-50',
-            'text-base',
-            'text-textGray-200',
-          )}
-        >
-          {myProfile?.introduction}
+    <LoadingContainer loading={!isFetch}>
+      <LoadingContainer loading={isLoading} />
+      <div className={clsx('py-[30px]')}>
+        <div className={clsx('px-[20px]', 'mb-[14px]')}>
+          <ProfileHeader
+            percentage={0}
+            user={myProfile?.user || ''}
+            imgSrc={myProfile?.imgPath}
+          />
+          <div
+            className={clsx(
+              'py-4',
+              'px-4',
+              'rounded-lg',
+              'bg-gray-50',
+              'text-base',
+              'text-textGray-200',
+            )}
+          >
+            {myProfile?.introduction}
+          </div>
         </div>
+        <List items={SETTING_LIST} onItemClick={handleItemClick} />
       </div>
-      <List items={SETTING_LIST} onItemClick={handleItemClick} />
-    </div>
+    </LoadingContainer>
   )
 }
