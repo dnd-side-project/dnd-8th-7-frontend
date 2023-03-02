@@ -7,6 +7,7 @@ export type IHttpRequestReturn<T, H = void> = [
   boolean,
   boolean,
   boolean,
+  boolean,
   number,
 ]
 type CallbackFunctions<T> = {
@@ -19,6 +20,7 @@ export default function useHttpRequest<T, H = void>(
   dataFetchCallback: (payload: H) => Promise<T>,
   initialValue?: T,
 ): IHttpRequestReturn<T, H> {
+  const [isFetch, setIsFetch] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isError, setError] = useState(false)
   const [isSuccess, setSuccess] = useState(false)
@@ -34,6 +36,7 @@ export default function useHttpRequest<T, H = void>(
         setSuccess(true)
         setError(false)
         callbacks?.onSuccess?.(data)
+        setIsFetch(true)
         return data
       })
       .catch((e) => {
@@ -49,5 +52,5 @@ export default function useHttpRequest<T, H = void>(
       })
   }
 
-  return [data, fetch, loading, isSuccess, isError, fetchCount]
+  return [data, fetch, loading, isSuccess, isFetch, isError, fetchCount]
 }
