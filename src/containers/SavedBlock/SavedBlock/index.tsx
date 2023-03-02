@@ -1,11 +1,9 @@
 import clsx from 'clsx'
-import { useEffect } from 'react'
-import { MoreVerticalIcon } from '@/components/Icons'
-import { BlockDetail } from '@/types/block'
-import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
-import webBridge from '@/utils/react-native-webview-bridge'
 
-type Block = Pick<BlockDetail, 'color' | 'icon' | 'title' | 'sumOfTask'>
+import { SavedBlock as SavedBlockType } from '@/types/block'
+
+import { MoreVerticalIcon } from '@/components/Icons'
+import CheckBox from '@/components/CheckBox'
 
 const BlockIcon = ({ icon }: { icon: string }) => {
   return (
@@ -25,53 +23,55 @@ const BlockIcon = ({ icon }: { icon: string }) => {
   )
 }
 
-const SavedBlock = ({
-  color,
-  icon,
-  title,
-  sumOfTask,
-}: Block & { locked?: boolean }) => {
-  const [open] = useRNListBottomSheet('blockMenu')
+interface Props extends SavedBlockType {
+  checkable: boolean
+  onMoreClick: (block: SavedBlockType) => void
+  onCheckClick: (value: boolean, id: number) => void
+}
 
+const SavedBlock = ({
+  checkable,
+  onMoreClick,
+  onCheckClick,
+  ...blockData
+}: Props) => {
   const handleMoreClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
-    open({
-      title,
-      items: [{ key: 'delete', title: '삭제하기' }],
-    })
+    onMoreClick(blockData)
   }
 
-  useEffect(() => {
-    webBridge.init()
-    return () => {
-      webBridge.unmount()
-    }
-  }, [])
-
   return (
-    <div
-      className={clsx(
-        'flex',
-        'flex-col',
-        'rounded-lg',
-        'px-2',
-        'py-[7px]',
-        'text-white',
-        'w-full',
+    <div className={clsx('flex', 'gap-[14px]', 'w-full', 'items-center')}>
+      {checkable && (
+        <CheckBox
+          shape="rectangle"
+          onChange={(value) => onCheckClick(value, blockData.blockId)}
+        />
       )}
-      style={{ backgroundColor: color as string }}
-    >
-      <div className="flex items-center">
-        <BlockIcon icon={icon} />
+      <div
+        className={clsx(
+          'flex',
+          'flex-col',
+          'rounded-lg',
+          'px-2',
+          'py-[7px]',
+          'text-white',
+          'w-full',
+        )}
+        style={{ backgroundColor: blockData.color }}
+      >
+        <div className="flex items-center">
+          <BlockIcon icon={blockData.icon} />
 
-        <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
-          <p>{title}</p>
-          <p className="font-medium">{sumOfTask}</p>
+          <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
+            <p>{blockData.title}</p>
+            <p className="font-medium">{blockData.sumOfTask}</p>
+          </div>
+
+          <button type="button" className="w-6 h-6" onClick={handleMoreClick}>
+            <MoreVerticalIcon className="!fill-white" />
+          </button>
         </div>
-
-        <button type="button" className="w-6 h-6" onClick={handleMoreClick}>
-          <MoreVerticalIcon className="!fill-white" />
-        </button>
       </div>
     </div>
   )

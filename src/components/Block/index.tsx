@@ -10,6 +10,7 @@ import { dayBlockAPI } from '@/api'
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 import { BASE_URL } from '@/constants/urls'
 import useHttpRequest from '@/hooks/useHttpRequest'
+import LoadingContainer from '../Loading/Container'
 
 const LOCKED_TEXT = '쉿! 비밀이에요'
 
@@ -43,7 +44,7 @@ const Block = ({
 }: BlockDetail & { locked?: boolean; handleDelete?: () => void }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open, close] = useRNListBottomSheet('blockMenu')
-  const [, postSaveBlock, isLoading] = useHttpRequest(() =>
+  const [, postSaveBlock, isSaveLoading] = useHttpRequest(() =>
     dayBlockAPI.saveBlock({ blockId }).then(({ data }) => data),
   )
 
@@ -110,52 +111,55 @@ const Block = ({
   }, [])
 
   return (
-    <div
-      key={blockId}
-      className={clsx(
-        'flex',
-        'flex-col',
-        'rounded-lg',
-        'px-2',
-        'py-[7px]',
-        'text-white',
-      )}
-      style={{ backgroundColor: color as string }}
-    >
-      <div className="flex items-center" onClick={handleBlockClick}>
-        <BlockIcon icon={icon} />
+    <>
+      <LoadingContainer loading={isSaveLoading} />
+      <div
+        key={blockId}
+        className={clsx(
+          'flex',
+          'flex-col',
+          'rounded-lg',
+          'px-2',
+          'py-[7px]',
+          'text-white',
+        )}
+        style={{ backgroundColor: color as string }}
+      >
+        <div className="flex items-center" onClick={handleBlockClick}>
+          <BlockIcon icon={icon} />
 
-        <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
-          {locked ? (
-            <div className="flex items-center">
-              <LockIcon className="fill-white" width={18} height={18} />
-              <p className="ml-2.5">{LOCKED_TEXT}</p>
-            </div>
-          ) : (
-            <p>{title}</p>
-          )}
+          <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
+            {locked ? (
+              <div className="flex items-center">
+                <LockIcon className="fill-white" width={18} height={18} />
+                <p className="ml-2.5">{LOCKED_TEXT}</p>
+              </div>
+            ) : (
+              <p>{title}</p>
+            )}
 
-          <p className="font-medium">
-            {sumOfDoneTask}/{sumOfTask}
-          </p>
-        </div>
-
-        <button type="button" className="w-6 h-6" onClick={handleMoreClick}>
-          <MoreVerticalIcon className="!fill-white" />
-        </button>
-      </div>
-
-      {isExpanded && (
-        <div className="pt-4 pl-3 pr-8">
-          <AddTaskButton blockId={blockId} />
-          <div className="mt-6">
-            {tasks?.map((task) => (
-              <Task {...task} key={task.taskId} />
-            ))}
+            <p className="font-medium">
+              {sumOfDoneTask}/{sumOfTask}
+            </p>
           </div>
+
+          <button type="button" className="w-6 h-6" onClick={handleMoreClick}>
+            <MoreVerticalIcon className="!fill-white" />
+          </button>
         </div>
-      )}
-    </div>
+
+        {isExpanded && (
+          <div className="pt-4 pl-3 pr-8">
+            <AddTaskButton blockId={blockId} />
+            <div className="mt-6">
+              {tasks?.map((task) => (
+                <Task {...task} key={task.taskId} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
