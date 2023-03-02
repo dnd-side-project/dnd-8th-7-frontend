@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
@@ -18,7 +18,7 @@ import SavedBlock from './SavedBlock'
 
 export default function SavedBlockContainer() {
   const router = useRouter()
-  const checkedBlock = useRef(new Set()).current
+  const [checkedBlock, setCheckedBlock] = useState<number[]>([])
 
   const [open, close] = useRNListBottomSheet('blockMenu')
 
@@ -30,13 +30,17 @@ export default function SavedBlockContainer() {
   const [, deleteSavedBlock, isDeleteLoading] = useHttpRequest(
     dayBlockAPI.deleteSavedBlock,
   )
+  const [, loadSavedBlock, isloadSavedBlockLoading] = useHttpRequest(
+    dayBlockAPI.loadSavedBlock,
+  )
 
   const handleCheckClick = (value: boolean, blockId: number) => {
     if (value) {
-      checkedBlock.add(blockId)
+      setCheckedBlock((ids) => [...ids, blockId])
     } else {
-      if (checkedBlock.has(blockId)) {
-        checkedBlock.delete(blockId)
+      if (checkedBlock.includes(blockId)) {
+        const idx = checkedBlock.findIndex((id) => id === blockId)
+        setCheckedBlock((ids) => [...ids.slice(0, idx), ...ids.slice(idx + 1)])
       }
     }
   }
@@ -67,6 +71,13 @@ export default function SavedBlockContainer() {
     )
   }
 
+  const handleSavedBlocksLoad = () => {
+    loadSavedBlock(
+      { blockId: checkedBlock, date },
+      { onSuccess: () => handleBack() },
+    )
+  }
+
   const handleBack = () => {
     rnWebViewBridge.close()
   }
@@ -77,10 +88,17 @@ export default function SavedBlockContainer() {
 
   return (
     <LoadingContainer loading={isLoading}>
-      <LoadingContainer loading={isDeleteLoading} backgroundMask />
+      <LoadingContainer
+        loading={isDeleteLoading || isloadSavedBlockLoading}
+        backgroundMask
+      />
       <BottomButtonLayout
         showButton={!!date && !!blocks?.length}
         buttonText="완료"
+        buttonProps={{
+          onClick: handleSavedBlocksLoad,
+          disabled: !checkedBlock.length,
+        }}
       >
         <Header
           title="블럭 불러오기"

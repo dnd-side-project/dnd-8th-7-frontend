@@ -49,6 +49,9 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   deleteSavedBlock({ blockId }: Type.DeleteSavedBlockParams) {
     return API.delete(`api/block/${blockId}/save`)
   }
+  loadSavedBlock({ date, ...params }: Type.LoadSavedBlockParams) {
+    return API.post(`/api/block/load/${date}`, params)
+  }
 
   /** 하루 일기 */
   createDailyReview(params: Type.CreateDailyReviewParams) {

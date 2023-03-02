@@ -106,3 +106,6 @@ export type GetMyProfileResponse = UserProfile
 
 export type DeleteSavedBlockParams = { blockId: number }
 export type DeleteSavedBlockResponse = Record<string, never>
+
+export type LoadSavedBlockParams = { date: string; blockId: number[] }
+export type LoadSavedBlockResponse = Record<string, never>
