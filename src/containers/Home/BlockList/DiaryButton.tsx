@@ -9,7 +9,7 @@ import qs from 'query-string'
 
 interface Props {
   date: string
-  reviewId?: number
+  reviewId?: number | null
 }
 
 const DiaryButton = ({ date, reviewId }: Props) => {
