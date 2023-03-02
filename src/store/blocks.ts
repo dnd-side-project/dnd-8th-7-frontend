@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { GetDayBlocksResponse } from '@/api/types/base.types'
+import getItem from '@/utils/getItem'
 
 type State = {
   blockList: GetDayBlocksResponse
@@ -25,56 +26,45 @@ type Actions = {
 const useBlockListStore = create(
   immer<State & Actions>((set) => ({
     blockList: INITIAL_STATE,
+
     setBlockList: (data) =>
       set((state) => {
         state.blockList = data
       }),
+
     addNewTask: (blockId) =>
-      set((state) => {
-        const blockIndex = state.blockList.blocks.findIndex(
-          (block) => block.blockId === blockId,
-        )
-        state.blockList.blocks[blockIndex].tasks.push({
-          taskId: state.blockList.blocks[blockIndex].tasks.length + 1,
+      set(({ blockList: { blocks, totalTask } }) => {
+        const { block } = getItem(blocks, blockId)
+        const newTask = {
+          taskId: block.tasks.length + 1,
           task: '',
           isDone: false,
-        })
-        state.blockList.blocks[blockIndex].sumOfTask += 1
-        state.blockList.totalTask += 1
+        }
+        block.tasks.push(newTask)
+        block.sumOfTask += 1
+        totalTask += 1
       }),
+
     updateTask: (blockId, taskId, content) =>
-      set((state) => {
-        const blockIndex = state.blockList.blocks.findIndex(
-          (block) => block.blockId === blockId,
-        )
-        const taskIndex = state.blockList.blocks[blockIndex].tasks.findIndex(
-          (task) => task.taskId === taskId,
-        )
-        state.blockList.blocks[blockIndex].tasks[taskIndex].task = content
+      set(({ blockList: { blocks } }) => {
+        const { task } = getItem(blocks, blockId, taskId)
+        task.task = content
       }),
+
     updateTaskStatus: (blockId, taskId, isDone) =>
-      set((state) => {
-        const blockIndex = state.blockList.blocks.findIndex(
-          (block) => block.blockId === blockId,
-        )
-        const taskIndex = state.blockList.blocks[blockIndex].tasks.findIndex(
-          (task) => task.taskId === taskId,
-        )
-        state.blockList.blocks[blockIndex].tasks[taskIndex].isDone = isDone
-        if (isDone) state.blockList.blocks[blockIndex].sumOfDoneTask += 1
-        else state.blockList.blocks[blockIndex].sumOfDoneTask -= 1
+      set(({ blockList: { blocks } }) => {
+        const { block, task } = getItem(blocks, blockId, taskId)
+        task.isDone = isDone
+        if (isDone) block.sumOfDoneTask += 1
+        else block.sumOfDoneTask -= 1
       }),
+
     deleteTask: (blockId, taskId) => {
-      set((state) => {
-        const blockIndex = state.blockList.blocks.findIndex(
-          (block) => block.blockId === blockId,
-        )
-        const taskIndex = state.blockList.blocks[blockIndex].tasks.findIndex(
-          (task) => task.taskId === taskId,
-        )
-        state.blockList.blocks[blockIndex].tasks.splice(taskIndex, 1)
-        state.blockList.blocks[blockIndex].sumOfTask -= 1
-        state.blockList.totalTask -= 1
+      set(({ blockList: { blocks, totalTask } }) => {
+        const { block, taskIndex } = getItem(blocks, blockId, taskId)
+        block.tasks.splice(taskIndex, 1)
+        block.sumOfTask -= 1
+        totalTask -= 1
       })
     },
   })),
