@@ -75,7 +75,7 @@ export default function EditProfileContainer() {
 
   return (
     <LoadingContainer loading={!isFetch}>
-      <LoadingContainer loading={isUpdateLoading} />
+      <LoadingContainer loading={isUpdateLoading} backgroundMask />
       <BottomButtonLayout
         buttonText="수정하기"
         buttonProps={{
