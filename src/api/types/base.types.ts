@@ -104,6 +104,8 @@ export type UpdateBlockResponse = {
   isSecret: boolean
 }
 
+export type UpdateTaskStatusParams = { taskId: number }
+
 export type UpdateMyProfileParams = UserProfile
 export type UpdateMyProfileResponse = UserProfile
 
