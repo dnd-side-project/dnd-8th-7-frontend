@@ -5,7 +5,12 @@ import type { Task as TaskType } from '@/types/block'
 import useDebounce from '@/hooks/useDebounce'
 import { dayBlockAPI } from '@/api'
 
-const Task = ({ isDone, task, taskId }: TaskType) => {
+const Task = ({
+  isDone,
+  task,
+  taskId,
+  blockId,
+}: TaskType & { blockId: number }) => {
   const [isChecked, setIsChecked] = useState(isDone)
   const [taskValue, setTaskValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(taskValue, 500)
