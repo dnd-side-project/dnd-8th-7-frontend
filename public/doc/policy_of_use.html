@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>서비스 이용약관</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4a83eca0-a094-4f38-858b-cae1e0552913" class="page sans"><header><h1 class="page-title">서비스 이용약관</h1></header><div class="page-body"><h2 id="04e66687-ec22-4eb8-8efe-cd580d286a64" class=""><strong>총칙</strong></h2><p id="505f8e47-527b-4dc7-b54f-0d8a1feaa861" class=""><strong>제1조 [목적]</strong></p><p id="84241c25-c6f5-4472-906b-ca0844dc7355" class="">본 이용약관은 하루블럭 (이하 &quot;회사&quot;라 합니다)이 운영하는 “하루블럭” 서비스 (이하 &quot;하루블럭&quot;이라 합니다)을 이용하는 자(이하 “이용자”라 합니다) 사이의 권리, 의무, 기타 필요한 사항을 정함으로써 상호 이익을 도모하는 것을 그 목적으로 합니다.</p><p id="580d6a4f-e0fa-487d-b40f-c65b6dcf8b2b" class=""><strong>제2조 [약관의 명시, 효력과 개정]</strong></p><ol type="1" id="8944ff62-01c2-42ae-a04b-25d30d80b7a0" class="numbered-list" start="1"><li>본 약관은 서비스를 이용하고자 하는 모든 이용자에 대하여 그 효력이 발생합니다.</li></ol><ol type="1" id="264198e0-9b6b-432b-8e0d-7805cb542f65" class="numbered-list" start="2"><li>본 약관의 내용은 서비스 내에 게시하는 방법으로 이용자에게 공지하고, 이에 동의한 이용자가 회사가 제공하는 서비스를 이용함으로써 효력이 발생합니다.</li></ol><ol type="1" id="5fd61f36-027c-4585-bb44-b6519979848d" class="numbered-list" start="3"><li>회사는 약관의 규제에 관한 법률, 전자문서 및 전자거래기본법, 전자금융거래법, 전자 서명법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 전자상거래 등에서의 소비자보호에 관한 법률, 소비자기본법 등 관련법령을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.</li></ol><ol type="1" id="f5c5b3d8-faaa-4188-a9f3-972100262f75" class="numbered-list" start="4"><li>회사가 약관을 변경할 경우에는 적용일자 및 변경 사유를 서비스 내의 배너 또는 공지사항 게시판 등을 통해 그 적용일자 7일 전부터 공지합니다. 다만, 이용자에게 불리한 약관의 변경인 경우에는 그 적용일자 30일 전부터 공지하며, 어플리케이션 알림(PNS)의 발송, 전자우편 등으로 이용자에게 개별 통지합니다. 단, 이용자의 연락처 미기재, 변경 후 미수정 등으로 인하여 개별 통지가 어려운 경우에 한하여 서비스 내의 공지 사항 게시판에 공지를 함으로써 개별 통지한 것으로 간주합니다.</li></ol><ol type="1" id="308e7751-494b-4320-bb0b-3f3a7f4f59d4" class="numbered-list" start="5"><li>이용자는 회사가 전항에 따라 변경하는 약관에 동의하지 않을 권리가 있으며, 이 경우 회사에서 제공하는 서비스 이용 중단 및 탈퇴 의사를 표시하고 서비스 이용 종료를 요청할 수 있습니다. 다만, 회사가 이용자에게 변경된 약관의 내용을 통보하면서 약관 변경 적용 일까지 거부 의사 표시를 하지 않을 경우 약관의 변경에 동의한 것으로 간주한다는 내용을 공지 또는 통지하였음에도 불구하고, 거부의 의사표시를 하지 아니한 경우 이용자가 변경된 약관에 동의하는 것으로 봅니다.</li></ol><p id="b87f92af-87bc-411c-b415-3c670ee65f50" class=""><strong>제3조 [용어의 정의]</strong></p><ol type="1" id="109a3e3c-59f4-45f1-9907-6c7133a5d2c2" class="numbered-list" start="1"><li>본 약관에서 사용하는 용어의 정의는 다음과 같습니다.</li></ol><ol type="1" id="e09bb322-ff23-4887-8ab2-8d638d7cda9b" class="numbered-list" start="2"><li>이용자: 하루블럭 서비스를 이용하는 자</li></ol><ol type="1" id="7bcb8466-3cce-4012-a8b6-8398832dd057" class="numbered-list" start="3"><li>이름(닉네임): 회원의 표시를 위하여 회원이 설정한 문자의 조합을 말합니다.</li></ol><ol type="1" id="2cac6968-378e-424b-89b7-926ead84a73b" class="numbered-list" start="4"><li>ID: 이용자 식별과 서비스 이용을 위하여 회사가 부여한 문자, 특수문자, 숫자 등의 조합</li></ol><ol type="1" id="ed94ab7d-123a-4bb3-a960-ad28228d2d0c" class="numbered-list" start="5"><li>게시물: 이용자가 “하루블럭”이 제공하는 서비스에 게시한 문자, 문서, 그림, 링크, 파일 혹은 이들의 조합으로 이루어진 정보 등 모든 정보나 자료를 말합니다.</li></ol><p id="8c14518a-4bf5-4627-a1bc-3cf3f85bc275" class=""><strong>제4조 [이용계약의 체결]</strong></p><ol type="1" id="372d0043-768c-4386-bbc0-167773a621f5" class="numbered-list" start="1"><li>이용계약은 별도의 회원가입이 없이 이용자가 서비스에서 제공하는 이용 시작 페이지에서 서비스 이용약관에 동의한 후 이용신청을 함으로써 체결됩니다.</li></ol><ol type="1" id="b8784a33-01a3-46ca-ba8f-10b0ba7c0129" class="numbered-list" start="2"><li>회사는 서비스 관련 설비의 여유가 없거나, 기술상 또는 업무상 문제가 있는 경우에는 이용을 유보할 수 있습니다.</li></ol><ol type="1" id="63a2b1f0-230f-4ac3-b0a4-08e3f0957730" class="numbered-list" start="3"><li>제2항에 따라 이용 신청의 승낙을 하지 아니하거나 유보한 경우, 회사는 원칙적으로 이를 이용신청자에게 관련된 사항을 서비스 화면에 게시하여 알리도록 합니다.</li></ol><p id="23360b55-eeb0-49f5-9268-dc46b60ce2d1" class=""><strong>제5조 [이용자 정보변경]</strong></p><ol type="1" id="24460591-9391-40a9-89e9-7edb2164b039" class="numbered-list" start="1"><li>이용자는 프로필 수정화면을 통하여 언제든지 본인의 닉네임을 변경할 수 있습니다.</li></ol><p id="597c586b-eaea-487a-aae4-d9399fe74565" class=""><strong>제6조 [회사의 의무]</strong></p><ol type="1" id="a0b25c41-189a-475c-aeea-89d91187b37c" class="numbered-list" start="1"><li>회사는 계속적이고 안정적인 서비스의 제공을 위하여 최선을 다하여 노력합니다.</li></ol><ol type="1" id="6ec8185b-637a-4d62-a3ac-013a6d4bbb59" class="numbered-list" start="2"><li>회사는 이용자가 안전하게 서비스를 이용할 수 있도록 현재 인터넷 보안기술의 발전 수준과 회사가 제공하는 서비스의 성격에 적합한 보안시스템을 갖추고 운영해야 합니다.</li></ol><ol type="1" id="1ee1236e-c283-4c78-ba3b-2071c3a555b8" class="numbered-list" start="3"><li>회사는 이용자로부터 제기되는 의견이나 불만이 정당하다고 인정할 경우를 이를 처리하여야 합니다. 이때 처리과정에 대해서 고객에게 메일 및 게시판 등의 방법으로 전달합니다.</li></ol><ol type="1" id="639baf5e-cb43-4c22-b96d-cfdd0312820c" class="numbered-list" start="4"><li>회사는 정보통신망 이용촉진 및 정보보호에 관한 법률, 통신비밀보호법, 전기통신사업법 등 서비스의 운영, 유지와 관련 있는 법규를 준수합니다.</li></ol><p id="1ae58145-88c6-4e37-a2a6-92ce5c324bbf" class=""><strong>제7조 [이용자의 의무]</strong></p><ol type="1" id="9d176b96-7041-4a6a-bcf9-f2dda06caf0f" class="numbered-list" start="1"><li>이용자는 본인의 책임 하에 본 서비스 및 본 서비스에서 제공되는 각종 아이템을 이용하며, 이용자는 본 서비스를 통해 이루어진 일체의 행위 및 그 결과에 대하여 책임을 지며, 다음 각 호의 행위를 하여서는 안 됩니다.</li></ol><ol type="1" id="706d9adc-2a54-47c2-b0dc-ed19bab6f367" class="numbered-list" start="2"><li>타인의 정보 도용</li></ol><ol type="1" id="7fe702d3-9ce3-495c-bd2e-fd50c610c251" class="numbered-list" start="3"><li>회사의 운영자, 임직원, 회사를 사칭하거나 관련 정보를 도용</li></ol><ol type="1" id="204a8a1b-a410-48c7-a9fe-f9b3399ed595" class="numbered-list" start="4"><li>회사가 게시한 정보의 변경</li></ol><ol type="1" id="5c58e263-5137-4dca-9a6d-167adb4cbf60" class="numbered-list" start="5"><li>회사와 기타 제3자의 저작권, 영업비밀, 특허권 등 지적재산권에 대한 침해</li></ol><ol type="1" id="daf97ce9-3ec7-40b3-bf60-bc87354afe96" class="numbered-list" start="6"><li>회사와 다른 이용자 및 기타 제3자를 희롱하거나, 위협하거나 명예를 손상시키는 행위</li></ol><ol type="1" id="7beba5c6-5914-497b-b1bf-5f8852198e22" class="numbered-list" start="7"><li>외설, 폭력적인 메시지, 기타 공서양속에 반하는 정보를 공개 또는 게시하는 행위</li></ol><ol type="1" id="a3d46cb0-ff00-4917-8c01-b0a411afd092" class="numbered-list" start="8"><li>회사와 사전 협의되지 않은 광고 및 홍보물을 게시하는 행위</li></ol><ol type="1" id="abc40cae-5429-4975-8c4c-ef5bafb680a3" class="numbered-list" start="9"><li>해킹을 통해서 이용자의 정보를 취득하는 행위</li></ol><ol type="1" id="82686c0d-2ab8-4b5e-aaaf-e60d41be9004" class="numbered-list" start="10"><li>기타 현행 법령에 위반되는 불법적인 행위</li></ol><p id="c1811684-c553-4acf-9ea8-416f4a222948" class=""><strong>제8조 [이용자의 대한 통지]</strong></p><ol type="1" id="cae719cf-4556-4353-8d16-57d07353f463" class="numbered-list" start="1"><li>회사는 이용자의 서비스 이용에 필요한 권리 및 의무 등의 관한 사항을 어플리케이션에서 알림(PNS)를 하는 방법으로 통지를 할 수 있습니다.</li></ol><ol type="1" id="62d98391-9d01-4f1c-97fe-954b969b9cf7" class="numbered-list" start="2"><li>회사는 불특정다수 회원에 대한 통지의 경우 1주일 이상 서비스에 게시함으로써 개별 통지에 갈음할 수 있습니다.</li></ol><p id="49a8c82a-4797-4998-952a-642afc7bc3c5" class=""><strong>제9조 [하루블럭의 서비스 제공 범위 및 한계]</strong></p><ol type="1" id="b6bae6b3-8643-49c5-86bc-8ab69e55c0d3" class="numbered-list" start="1"><li>회사는 이용자에게 다음과 같은 서비스를 제공합니다.</li></ol><ol type="1" id="c0e2ceae-04ac-478d-a34f-9b65afab1a4e" class="numbered-list" start="2"><li>텍스트/이미지/링크 형태의 자료의 관리/저장를 통해 생산성을 증대시키는 아카이빙 서비스</li></ol><ol type="1" id="71776875-d407-4b2a-8fe1-c97e43982866" class="numbered-list" start="3"><li>회사가 제공하는 서비스의 형태와 기능, 디자인 등 필요한 경우 수시로 변경되거나, 중단될 수 있습니다. 회사는 이 경우 개별적인 변경에 대해서 이용자에게 사전 통지하지 않습니다. 다만, 이용자에게 불리한 것으로 판단되는 경우 전자게시판에 공지하는 방법으로 이를 공지합니다.</li></ol><ol type="1" id="58bd1586-3c11-499a-8bf4-49e61925cabf" class="numbered-list" start="4"><li>회사가 제공하는 전항의 서비스는 회원이 재화 등을 거래할 수 있도록 사이버몰의 이용을 허락하거나, 통신판매를 알선하는 것을 목적으로 하며, 개별 이용자가 “하루블럭&quot;에 등록한 상품과 관련해서는 일체의 책임을 지지 않습니다.</li></ol><p id="314ce3ec-653c-41f9-abf2-df64ad70abcc" class=""><strong>제10조 [서비스의 기간과 중단]</strong></p><ol type="1" id="9c8baaf4-8e07-42d4-9fec-2cec89b319fb" class="numbered-list" start="1"><li>본 약관에 따른 서비스 기간은 서비스 신청일로부터 이용계약의 해지시까지입니다.</li></ol><ol type="1" id="9cb05310-2126-480f-8808-3bbde06ba0b2" class="numbered-list" start="2"><li>회사는 업무상 또는 기술상 특별한 사정이 없는 한 연중무휴, 1일 24시간 서비스를 제공합니다.</li></ol><ol type="1" id="526805cd-3f8a-47f3-bd80-e743cbf30c13" class="numbered-list" start="3"><li>회사는 컴퓨터 등 정보통신설비의 보수, 점검, 증설, 교체 및 고장, 통신의 두절, 시스템 장애 또는 운영 상의 상당한 사유가 있는 경우 서비스의 제공을 일시적으로 중단할 수 있습니다. 이 경우 서비스 일시 중단 사실과 그 사유를 “하루블럭&quot; 초기화면에 통지합니다.</li></ol><ol type="1" id="8d66ef4c-c26e-43ed-85ea-c129b1054133" class="numbered-list" start="4"><li>회사는 국가비상사태, 정전, 서비스 설비의 장애 또는 서비스 이용의 폭주 등으로 정상적인 서비스 이용에 지장이 있는 때에는 서비스의 전부 또는 일부의 이용을 제한하거나 정지할 수 있습니다.</li></ol><ol type="1" id="e28ea50c-7275-4b7f-9db9-69e4f15f08f7" class="numbered-list" start="5"><li>회사는 천재지변 또는 이에 준하는 불가항력으로 인하여 회사 서비스를 제공할 수 없는 경우에는 서비스의 제공을 제한하거나 일시 중단할 수 있습니다.</li></ol><ol type="1" id="d0a397b1-78e2-4035-9b8f-031dd44e1983" class="numbered-list" start="6"><li>제4항 및 제5항의 경우 회사는 “하루블럭&quot; 화면에 게시하거나 기타의 방법으로 회원들에게 통지합니다. 단, 부득이한 사유가 있는 경우에는 사후 통지로 대체할 수 있습니다.</li></ol><p id="5747bd75-5f14-4d7b-af4b-f8680d06a3e0" class=""><strong>제11조 [정보의 제공 및 광고의 게재]</strong></p><ol type="1" id="3fab346f-92b1-44bc-bccd-ac07ce55e8b2" class="numbered-list" start="1"><li>회사는 이용자가 서비스 이용에 필요하다고 인정되는 다양한 정보를 어플리케이션 내의 푸시알림, 이용자가 제공한 정보를 통하여 알림톡, 메시지 등으로 제공할 수 있습니다.</li></ol><ol type="1" id="00c9e0b6-cbc1-4bce-a329-6fab39d315e9" class="numbered-list" start="2"><li>제품 또는 서비스 결제 또는 배송과 관련한 이용자와 광고업체의 거래는 전적으로 이용자와 광고업체 사이의 행위입니다. 회사의 서비스는 외부 사이트, 앱 또는 기타 리소스에 대한 링크를 포함할 수 있습니다. 게재된 광고나 서비스를 통한 광고주의 판촉활동에 이용자가 참여하거나 교신 또는 거래를 함으로써 발생하는 손실과 손해에 대해 책임을 지지 않습니다.</li></ol><p id="3aba22f6-7c37-4f74-8584-7fc6427b5288" class=""><strong>제12조 [데이터 및 기타 자료의 수집 및 사용 등]</strong></p><ol type="1" id="5b78bd00-0fd5-4097-b1c2-1b79a8a8ff9b" class="numbered-list" start="1"><li> 회사는 사용자에게 제공되는 제품지원 서비스의 일환으로 회원의 디바이스의 데이터를 수집하고 사용할 수 있습니다.</li></ol><ol type="1" id="981c19d7-4159-4788-9001-e7f51d16a167" class="numbered-list" start="2"><li>회사는 제1항의 자료를 서비스를 개선하거나 이용자의 사용환경에 적합한 서비스 또는 기술을 제공하기 위한 목적으로만 사용하며 그 외의 다른 목적으로 사용하지 않습니다.</li></ol><p id="77ba2abd-dc5f-4e47-9af2-397327a37fef" class="">
+</p><h2 id="5295dbc8-b9d1-4bb7-b28a-e8a3bc1d9d12" class=""><strong>이용자 관리 및 보호</strong></h2><p id="034d91b2-9f42-4f62-9e97-cc1b7ef88a84" class=""><strong>제13조 [이용자관리]</strong></p><ol type="1" id="8fcd457d-aee0-4461-b759-7a944b49b744" class="numbered-list" start="1"><li>회사는 본 약관의 본지와 관련 법령 및 상거래의 일반원칙을 위반한 이용자에 대하여 다음과 같은 조치를 할 수 있습니다.</li></ol><ol type="1" id="a3fd63fa-fbc2-4f39-ac4b-26eb7178aee2" class="numbered-list" start="2"><li>회사가 부가적으로 제공한 혜택의 일부 또는 전부의 회수</li></ol><ol type="1" id="ec3e3a90-8546-450e-a0da-a92858ffcaaf" class="numbered-list" start="3"><li>특정 서비스 이용제한</li></ol><ol type="1" id="99a866c8-0924-43e7-aa95-08c6f76bac10" class="numbered-list" start="4"><li>적법하지 않은 게시물의 삭제</li></ol><ol type="1" id="ffe869cb-eee7-49e1-9e9e-aa393a1004de" class="numbered-list" start="5"><li>이용계약의 해지</li></ol><ol type="1" id="cbf485ab-3454-41a1-8f37-5412b4c42f6f" class="numbered-list" start="6"><li>손해배상의 청구</li></ol><ol type="1" id="a6501df0-5df3-4ecf-91ed-8b4b663a1ce3" class="numbered-list" start="7"><li>회사가 전항 각 호에 정한 조치를 할 경우 회사는 사전에 이용자에게 접속 정보로 통보하며, 이용자의 연락이 두절되거나 긴급을 요하는 것과 같이 부득이한 경우 선 조치 후 통보할 수 있습니다.</li></ol><ol type="1" id="6d73bab0-336a-44d1-aa2e-e0543f6da02f" class="numbered-list" start="8"><li>이용자는 본 조에 의한 회사의 조치에 대하여 항변의 사유가 있는 경우 이에 대하여 항변을 할 수 있습니다.</li></ol><p id="609a0172-f46f-4c5b-9cf6-9346505f0d76" class=""><strong>제14조 [저작권의 귀속 및 이용제한]</strong></p><ol type="1" id="48a86438-c3cf-49d3-a046-c382f3dd3d9d" class="numbered-list" start="1"><li>서비스 이용자가 서비스 내에 게시한 아이템의 저작권은 해당 게시물의 게시자가 아닌 게시물의 원저작자에게 귀속됩니다.</li></ol><ol type="1" id="11ce1a14-e690-4d06-af5a-78fc315a850c" class="numbered-list" start="2"><li>서비스 이용자가 서비스 내에 작성한 게시물에 대한 책임 및 권리는 게시물을 등록한 이용자에게 있으며, 해당 게시물이 타인의 지적 재산권을 침해하여 발생되는 모든 책임은 이용자 본인에게 있습니다.</li></ol><ol type="1" id="dbbc759f-2d77-4668-a144-258d0e901008" class="numbered-list" start="3"><li>서비스에 대한 저작권 및 지적재산권, 회사가 작성한 게시물의 저작권은 회사에 귀속됩니다.</li></ol><ol type="1" id="a4bac72e-8c3d-4b10-b00c-b61f810eb12f" class="numbered-list" start="4"><li>이용자는 “하루블럭”을 이용함으로써 얻은 정보를 회사의 사전 승낙 없이 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리 목적으로 이용하거나 제3자에게 이용하게 하여서는 안 됩니다.</li></ol><ol type="1" id="67797215-e827-4033-8e79-63e4d65c241f" class="numbered-list" start="5"><li>이용자는 자신이 창작, 등록한 게시물을 회사의 서비스를 운영, 전송 배포 또는 홍보를 위해 사용료 없는 영구적인 사용권을 회사에 부여합니다. 사용권은 이용자가 탈퇴한 후에도 유효하며, 세부사항은 아래와 같습니다.<ul id="72427698-254d-4d91-8972-613dbf7537dd" class="bulleted-list"><li style="list-style-type:disc">회사가 제공하는 관련 서비스 내에서 이용자의 게시물에 대한 복제, 전시, 배포, 편집 저작물 작성</li></ul><ul id="e2619504-4828-4d7b-91cf-ef8087e03fa9" class="bulleted-list"><li style="list-style-type:disc">제휴사에게 이용자의 게시물 내용을 제공. 단 이용자의 닉네임 외의 개인정보는 제공하지 않습니다.</li></ul></li></ol><ol type="1" id="11be54c3-b956-46bc-8124-64bce31318cf" class="numbered-list" start="6"><li>이용자의 게시물에 대해 제3자로부터 저작권 및 기타 권리의 침해로 이의가 제기된 경우, 회사는 해당 게시물을 임의로 삭제할 수 있으며 해당 게시물에 대한 법적 문제가 종결된 후 이용자가 이를 근거로 회사에 신청하는 경우에만 상기 임시 삭제된 게시물을 다시 게재할 수 있습니다.</li></ol><ol type="1" id="310d0575-387d-4598-afd1-8694a0d7c967" class="numbered-list" start="7"><li>회사는 게시물이 다음 각 호에 해당하는 경우 사전 통보 없이 해당 게시물을 삭제하거나 게시자에 대하여 특정 서비스의 이용제한, 이용계약의 해지 등의 조치를 할 수 있습니다.</li></ol><blockquote id="6a89466e-1dec-415a-aefb-8fd2a23e5655" class="">① 대한민국의 법령을 위반하는 내용을 포함하는 경우<p id="dcf67804-4dfc-427f-b738-9de9b987f8df" class="">② 관계법령에 의거 판매가 금지된 불법 제품 또는 음란물을 게시, 광고하는 경우</p><p id="1c93c0ca-43a8-4b60-a692-a08aea191e4b" class="">③ 허위 또는 과대 광고의 내용을 포함하는 경우</p><p id="a4354df0-3e0d-4b3c-968b-a41aff4c0fbb" class="">④ 타인의 권리나 명예, 신용 기타 정당한 이익을 침해하는 경우</p><p id="4ec526da-7df3-495b-b53a-3b66637a40be" class="">⑤ 직거래 유도 또는 타사이트의 링크를 게시하는 경우</p><p id="7bb45d6d-8e2f-4a13-bccb-d3dc56518689" class="">⑥ 정보통신기기의 오작동을 일으킬 수 있는 악성코드나 데이터를 포함하는 경우</p><p id="38b82153-1c0b-4900-a66d-a78ef65d0740" class="">⑦ 사회 공공질서나 미풍양속에 위배되는 경우</p><p id="7b587035-c290-494f-89e6-322aa4315e62" class="">⑧ 회사가 제공하는 서비스의 원활한 진행을 방해하는 것으로 판단되는 경우</p></blockquote><h2 id="d0136a89-879d-4b5b-b601-5c0a1914122d" class=""><strong>기타</strong></h2><p id="281dd387-faa8-4852-ae8a-49588f479549" class=""><strong>제15조 [약관 외 준칙 및 관련 법령과의 관계]</strong></p><ol type="1" id="44740b0f-5117-4879-9e42-46eade5de08e" class="numbered-list" start="1"><li>회사는 제공하는 개별 서비스에 대해서 별도의 이용약관 및 정책을 둘 수 있으며, 해당 내용이 이 약관과 상충할 경우 개별 서비스의 이용약관을 우선하여 적용합니다.</li></ol><ol type="1" id="59cff855-4d10-446b-a314-237cf801c423" class="numbered-list" start="2"><li>본 약관에 명시되지 않은 사항이 관계법령에 규정되어 있을 경우에는 그 규정에 따릅니다.</li></ol><p id="1250caa2-7ede-46de-8e85-3735424f8b1e" class=""><strong>제16조 [타사 링크, 사이트, 서비스]</strong></p><ol type="1" id="98b6a458-4993-4388-9a2d-b17158a0c11d" class="numbered-list" start="1"><li>회사는 타사 웹사이트, 광고주, 서비스, 특별혜택 또는 회사가 소유하거나 관리하지 않는 기타 이벤트나 활동으로 연결되는 링크를 제공할 수 있습니다.</li></ol><ol type="1" id="a2042256-68fd-4b4d-9ce6-ce8bc2689e4a" class="numbered-list" start="2"><li>회사는 이러한 타사 사이트, 정보, 자료, 제품, 서비스에 대해 어떠한 보증을 하거나 책임을 지지 않습니다.</li></ol><ol type="1" id="aef115cf-4140-4c7e-a1df-b8eea6bd2340" class="numbered-list" start="3"><li>‘하루블럭’에서 타사 웹사이트, 서비스, 콘텐츠에 접근할 때 이로부터 발생할 수 있는 모든 위험은 이용자가 감수해야 하며, 이용자는 타사 웹사이트, 서비스, 콘텐츠에 접근하거나 사용함으로써 발생하는 손실에 대해서 회사가 어떠한 책임도 지지 않는 다는 것에 동의합니다.</li></ol><p id="c05f2b8d-0175-4e17-88f0-c15449063996" class=""><strong>제17조 [회사의 면책]</strong></p><p id="b1cb8df0-0e88-4cb9-81c4-025b4b8eff8e" class="">1.  제10조 제3항, 제4항의 사유로 인하여 서비스를 일시적으로 중단하는 경우 회사는 이로 인하여 회원 또는 제3자가 입은 손해에 대하여 책임지지 않습니다. 단, 회사의 고의 또는 중과실로 인한 경우에는 그러하지 아니합니다.</p><ol type="1" id="2dc63b0b-248b-41fa-ab3f-52a2fe795a6d" class="numbered-list" start="1"><li>제10조 5항의 사유로 인하여 서비스를 제한하거나 중단하는 경우 회사는 불가항력을 이유로 그 책임을 면합니다.</li></ol><ol type="1" id="6b7e1b9d-e367-4571-a5f1-cb343247f75b" class="numbered-list" start="2"><li>회사는 이용자 또는 제휴사의 귀책사유로 인한 서비스 이용의 장애에 대하여 책임을 지지 않습니다.</li></ol><ol type="1" id="81a4e6e2-e3cb-4fdd-ba19-c255469cba18" class="numbered-list" start="3"><li>회사는 신상정보 및 전자우편 주소의 부정확한 기재, 비밀번호 관리의 소홀 등 이용자의 귀책사유로 인해 손해가 발생한 경우, 회사는 책임을 지지 않습니다.</li></ol><ol type="1" id="a5f4cd60-f095-4147-9d59-cca6c62da0ff" class="numbered-list" start="4"><li>회사는 상품 홍보/광고 마케팅 서비스를 통하여 거래되는 재화 또는 용역의 하자, 물품등록정보의 오류, 미비 등으로 인하여 이용자가 입는 손해에 대해서는 책임(제조물 책임 포함)을 지지 않습니다.</li></ol><ol type="1" id="fccaa2bd-5d0e-46d7-8fbe-2a3ee53fda4b" class="numbered-list" start="5"><li>회사는 이용자가 제휴사 혹은 다른 이용자가 게재한 정보, 자료, 사실의 정확성 등을 신뢰함으로써 입은 손해에 대하여 책임을 지지 않습니다.</li></ol><ol type="1" id="b8904978-7916-43cd-b2e0-9f0a7f24e03c" class="numbered-list" start="6"><li>회원이 자신의 개인정보를 타인에게 유출 또는 제공함으로써, 발생하는 피해에 대해서 회사는 일체의 책임을 지지 않습니다.</li></ol><ol type="1" id="584c083a-69e9-4e7c-bfe6-207ff3688e37" class="numbered-list" start="7"><li>회사는 무료로 제공하는 서비스 이용과 관련하여 관련 법령에 특별한 규정이 없는 한, 이용자에게 손해가 생기더라도 책임지지 않습니다.</li></ol><p id="d49bc1ff-9a83-41ce-ba0b-67343e522fa5" class=""><strong>제18조 [관할법원]</strong></p><p id="59a66b7f-4e1d-4ff7-9496-de4977e9b6a1" class="">이 약관에 따른 회사와 회원 간의 서비스 이용계약 및 회원 상호간의 분쟁에 대하여 회사를 당사자로 하는 소송이 제기될 경우에는 대한민국 법을 준거법으로 하며, 회사의 본사 소재지를 관할하는 법원을 전속적 합의 관할법원으로 정합니다.</p><h2 id="a4b9e61f-6ae9-400d-92a1-966f20b6356f" class=""><strong>부칙</strong></h2><p id="b409c07f-2290-4b5a-b053-838efc51f48b" class="">이용약관 버전 1.1</p><p id="61692e41-8456-4b64-a0ad-0416b4cec041" class="">본 이용약관 시행일자 2023년 2월 28일</p></div></article></body></html>

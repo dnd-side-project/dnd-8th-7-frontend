@@ -25,7 +25,7 @@ export default function ProfileSettingsContainer() {
     } else {
       authAPI
         .withdraw()
-        .then(() => rnWebViewBridge.sendAction(ACTION_TYPE.LOGOUT))
+        .finally(() => rnWebViewBridge.sendAction(ACTION_TYPE.LOGOUT))
     }
   }
 

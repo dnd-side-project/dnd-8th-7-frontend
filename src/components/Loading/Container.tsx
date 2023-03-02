@@ -16,7 +16,7 @@ export default function LoadingContainer({
     <>
       {loading ? (
         <div className={clsx(FULL_SCREEN, 'z-20')}>
-          <div className={clsx(FULL_SCREEN, 'bg-black', 'opacity-40')}></div>
+          <div className={clsx(FULL_SCREEN)}></div>
           <Loading
             className={clsx(
               'w-[80px]',
