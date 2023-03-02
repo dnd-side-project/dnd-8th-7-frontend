@@ -72,7 +72,7 @@ const Block = ({
       { blockId },
       {
         onSuccess: () => {
-          deleteBlockStore(blockId)
+          deleteBlockStore(blockId, sumOfTask)
           close()
         },
       },
