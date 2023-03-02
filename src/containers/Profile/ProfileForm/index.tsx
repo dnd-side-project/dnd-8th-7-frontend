@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import ProfilePlusSvg from 'public/assets/svgs/profile_plus.svg'
 
 import useRNImagePicker from '@/utils/react-native-webview-bridge/image-picker/useImagePicker'
+import { DEFAULT_PROFILE_IMAGE_URL } from '@/constants/urls'
 
 import { UserProfile } from '@/types/common.type'
 
@@ -21,7 +22,9 @@ interface Props {
 export default function ProfileForm({ onFormChange, defaultValue }: Props) {
   const openImagePicker = useRNImagePicker('profile')
 
-  const [profileImageUrl, setImageUrl] = useState(defaultValue?.imgPath || '')
+  const [profileImageUrl, setImageUrl] = useState(
+    defaultValue?.imgPath || DEFAULT_PROFILE_IMAGE_URL,
+  )
   const [nickname, setNickname] = useState(defaultValue?.user || '')
   const [introduction, setIntroduction] = useState(
     defaultValue?.introduction || '',
@@ -62,8 +65,6 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
     })
   }
 
-  // TODO 특수문자 입력 방지
-
   return (
     <>
       <div className={clsx('flex', 'flex-col', 'items-center', 'mt-[20px]')}>
@@ -71,24 +72,7 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
           onClick={handleProfileImageChangeClick}
           className={clsx('relative', 'w-[100px]', 'h-[100px]')}
         >
-          {profileImageUrl ? (
-            <div
-              className={clsx(
-                'rounded-full',
-                'overflow-hidden',
-                'w-[100px]',
-                'h-[100px]',
-              )}
-            >
-              <img
-                alt="프로필 이미지"
-                src={profileImageUrl}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
-          ) : (
-            <Profile size="md" />
-          )}
+          <Profile size="md" imgSrc={profileImageUrl} />
           <div
             className={clsx(
               'absolute',
@@ -124,7 +108,7 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
         <div className={clsx(LABEL, 'mt-0')}>닉네임 검색 허용</div>
         <Switch
           onChange={handlePublicNickNameChange}
-          defaultValue={defaultValue?.lock}
+          defaultChecked={defaultValue?.lock}
         />
       </div>
     </>

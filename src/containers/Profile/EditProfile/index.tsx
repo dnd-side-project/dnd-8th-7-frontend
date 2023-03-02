@@ -21,7 +21,7 @@ export default function EditProfileContainer() {
   const [isEdited, setIsEdited] = useState(false)
   const [value, setValue] = useState<UserProfile>()
 
-  const [myProfile, fetchMyProfile, isLoading] = useHttpRequest(() =>
+  const [myProfile, getMyProfile, , , isFetch] = useHttpRequest(() =>
     dayBlockAPI.getMyProfile().then(({ data }) => data),
   )
   const [, updateProfile, isUpdateLoading] = useHttpRequest(
@@ -47,27 +47,39 @@ export default function EditProfileContainer() {
     })
   }
 
-  const handleSubmit = () => {
-    if (!isValid) return
-
-    updateProfile(value)
-  }
-
-  useEffect(() => {
-    fetchMyProfile(undefined, {
+  const fetchMyProfile = () => {
+    getMyProfile(undefined, {
       onSuccess: (res) => {
         setValue(res)
       },
     })
+  }
+
+  const handleSubmit = () => {
+    if (!isValid) return
+
+    updateProfile(value, {
+      onSuccess: () => {
+        fetchMyProfile()
+        setIsEdited(false)
+      },
+      onError: () => {
+        // TODO 에러 처리
+      },
+    })
+  }
+
+  useEffect(() => {
+    fetchMyProfile()
   }, [])
 
   return (
-    <>
-      {(isLoading || isUpdateLoading) && <LoadingContainer />}
+    <LoadingContainer loading={!isFetch}>
+      <LoadingContainer loading={isUpdateLoading} />
       <BottomButtonLayout
         buttonText="수정하기"
         buttonProps={{
-          disabled: !isEdited || !isValid || isUpdateLoading,
+          disabled: isUpdateLoading || !isValid || !isEdited,
           onClick: handleSubmit,
         }}
       >
@@ -78,13 +90,15 @@ export default function EditProfileContainer() {
           rightButton="more"
           onRightButtonClick={handleMore}
         />
-        <div className={clsx('pt-[56px]', 'px-[20px]')}>
-          <ProfileForm
-            onFormChange={handleValueChange}
-            defaultValue={myProfile}
-          />
+        <div className={clsx('min-h-[calc(100vh-90px)]')}>
+          <div className={clsx('pt-[56px]', 'px-[20px]')}>
+            <ProfileForm
+              onFormChange={handleValueChange}
+              defaultValue={myProfile}
+            />
+          </div>
         </div>
       </BottomButtonLayout>
-    </>
+    </LoadingContainer>
   )
 }
