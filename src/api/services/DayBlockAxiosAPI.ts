@@ -23,6 +23,7 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   deleteBlock(params: Type.DeleteBlockParams) {
     return API.delete<Type.DeleteBlockResponse>(`/api/block/${params.blockId}`)
   }
+
   updateBlock(params: Type.UpdateBlockParams) {
     return API.patch<Type.UpdateBlockResponse>(`/api/block/${params.blockId}`, {
       title: params.title,
@@ -75,11 +76,12 @@ export default class DayBlockAxiosAPI implements DayBlockService {
     )
   }
   updateTaskInBlock(params: Type.UpdateTaskInBlockParams) {
-    return API.put<Type.UpdateTaskInBlockResponse>(
+    return API.patch<Type.UpdateTaskInBlockResponse>(
       `/api/task/${params.taskId}`,
-      params,
+      { content: params.content },
     )
   }
+
   deleteTaskInBlock(params: Type.DeleteTaskInBlockParams) {
     return API.delete<Type.DeleteTaskInBlockResponse>(
       `/api/task/${params.taskId}`,
