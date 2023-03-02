@@ -1,7 +1,5 @@
 import { BlockList } from '@/types/block'
 
-export const DAYS = ['일', '월', '화', '수', '목', '금', '토']
-
 export const MOCK_BLOCK_LIST: BlockList = {
   date: '2022-01-25',
   totalBlock: 2,
