@@ -6,14 +6,16 @@ import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnW
 import useHttpRequest from '@/hooks/useHttpRequest'
 import { dayBlockAPI } from '@/api'
 
+import { UpdateMyProfileParams } from '@/api/types/base.types'
+import { UserProfile } from '@/types/common.type'
+
 import { BASE_URL } from '@/constants/urls'
 import { PATH } from '@/constants/path'
 
+import ProfileForm from '@/containers/Profile/ProfileForm'
 import Header from '@/components/Header'
 import { BottomButtonLayout } from '@/components/Layout'
-import ProfileForm from '@/containers/Profile/ProfileForm'
-import { UserProfile } from '@/types/common.type'
-import { UpdateMyProfileParams } from '@/api/types/base.types'
+import LoadingContainer from '@/components/Loading/Container'
 
 export default function EditProfileContainer() {
   const [isEdited, setIsEdited] = useState(false)
@@ -59,30 +61,30 @@ export default function EditProfileContainer() {
     })
   }, [])
 
-  if (isLoading) return null
-  if (!myProfile) return null
-
   return (
-    <BottomButtonLayout
-      buttonText="수정하기"
-      buttonProps={{
-        disabled: !isEdited || !isValid || isUpdateLoading,
-        onClick: handleSubmit,
-      }}
-    >
-      <Header
-        title="프로필 편집"
-        leftButton="back"
-        onLeftButtonClick={handleBack}
-        rightButton="more"
-        onRightButtonClick={handleMore}
-      />
-      <div className={clsx('pt-[56px]', 'px-[20px]')}>
-        <ProfileForm
-          onFormChange={handleValueChange}
-          defaultValue={myProfile}
+    <>
+      {(isLoading || isUpdateLoading) && <LoadingContainer />}
+      <BottomButtonLayout
+        buttonText="수정하기"
+        buttonProps={{
+          disabled: !isEdited || !isValid || isUpdateLoading,
+          onClick: handleSubmit,
+        }}
+      >
+        <Header
+          title="프로필 편집"
+          leftButton="back"
+          onLeftButtonClick={handleBack}
+          rightButton="more"
+          onRightButtonClick={handleMore}
         />
-      </div>
-    </BottomButtonLayout>
+        <div className={clsx('pt-[56px]', 'px-[20px]')}>
+          <ProfileForm
+            onFormChange={handleValueChange}
+            defaultValue={myProfile}
+          />
+        </div>
+      </BottomButtonLayout>
+    </>
   )
 }

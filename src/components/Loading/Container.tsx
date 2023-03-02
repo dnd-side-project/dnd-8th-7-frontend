@@ -9,13 +9,13 @@ interface Props {
 }
 
 export default function LoadingContainer({
-  loading = false,
+  loading = true,
   children,
 }: PropsWithChildren<Props>) {
   return (
     <>
       {loading ? (
-        <div className={clsx(FULL_SCREEN, 'z-10')}>
+        <div className={clsx(FULL_SCREEN, 'z-20')}>
           <div className={clsx(FULL_SCREEN, 'bg-black', 'opacity-40')}></div>
           <Loading
             className={clsx(
@@ -25,7 +25,7 @@ export default function LoadingContainer({
               'translate-y-[-50%]',
               'top-[50%]',
               'left-[50%]',
-              'z-11',
+              'z-21',
             )}
           />
         </div>

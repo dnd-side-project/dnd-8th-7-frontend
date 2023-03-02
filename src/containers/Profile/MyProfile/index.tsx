@@ -9,7 +9,9 @@ import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnW
 
 import List from '@/components/List'
 import { PATH } from '@/constants/path'
+
 import ProfileHeader from './ProfileHeader'
+import LoadingContainer from '@/components/Loading/Container'
 
 const SETTING_LIST = [
   {
@@ -43,27 +45,29 @@ export default function MyProfileContainer() {
   }, [])
 
   return (
-    <div className={clsx('py-[30px]')}>
-      <div className={clsx('px-[20px]', 'mb-[14px]')}>
-        <ProfileHeader
-          percentage={0}
-          user={myProfile?.user || ''}
-          imgSrc={myProfile?.imgPath}
-        />
-        <div
-          className={clsx(
-            'py-4',
-            'px-4',
-            'rounded-lg',
-            'bg-gray-50',
-            'text-base',
-            'text-textGray-200',
-          )}
-        >
-          {myProfile?.introduction}
+    <LoadingContainer loading={isLoading}>
+      <div className={clsx('py-[30px]')}>
+        <div className={clsx('px-[20px]', 'mb-[14px]')}>
+          <ProfileHeader
+            percentage={0}
+            user={myProfile?.user || ''}
+            imgSrc={myProfile?.imgPath}
+          />
+          <div
+            className={clsx(
+              'py-4',
+              'px-4',
+              'rounded-lg',
+              'bg-gray-50',
+              'text-base',
+              'text-textGray-200',
+            )}
+          >
+            {myProfile?.introduction}
+          </div>
         </div>
+        <List items={SETTING_LIST} onItemClick={handleItemClick} />
       </div>
-      <List items={SETTING_LIST} onItemClick={handleItemClick} />
-    </div>
+    </LoadingContainer>
   )
 }
