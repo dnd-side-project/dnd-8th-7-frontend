@@ -1,16 +1,25 @@
 import { dayBlockAPI } from '@/api'
+import { CreateTaskInBlockParams } from '@/api/types/base.types'
 import Button from '@/components/Button'
 import { AddIcon } from '@/components/Icons'
+import useHttpRequest from '@/hooks/useHttpRequest'
 import useBlockListStore from '@/store/blocks'
 
 const AddTaskButton = ({ blockId }: { blockId: number }) => {
   const addNewTaskStore = useBlockListStore((state) => state.addNewTask)
+  const [, createTask] = useHttpRequest((params: CreateTaskInBlockParams) =>
+    dayBlockAPI.createTaskInBlock(params).then(({ data }) => data),
+  )
+
   const handleClick = () => {
-    addNewTaskStore(blockId)
-    dayBlockAPI.createTaskInBlock({
-      blockId,
-      content: '',
-    })
+    createTask(
+      { blockId, content: '' },
+      {
+        onSuccess: ({ taskId: newTaskId }) => {
+          addNewTaskStore(blockId, newTaskId)
+        },
+      },
+    )
   }
 
   return (
