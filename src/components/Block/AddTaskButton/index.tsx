@@ -1,9 +1,12 @@
 import { dayBlockAPI } from '@/api'
 import Button from '@/components/Button'
 import { AddIcon } from '@/components/Icons'
+import useBlockListStore from '@/store/blocks'
 
 const AddTaskButton = ({ blockId }: { blockId: number }) => {
+  const addNewTaskStore = useBlockListStore((state) => state.addNewTask)
   const handleClick = () => {
+    addNewTaskStore(blockId)
     dayBlockAPI.createTaskInBlock({
       blockId,
       content: '',
