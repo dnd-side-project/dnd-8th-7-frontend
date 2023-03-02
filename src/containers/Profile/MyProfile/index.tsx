@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import clsx from 'clsx'
 
-import useHttpRequest from '@/hooks/useHttpRequest'
 import { dayBlockAPI } from '@/api'
+import useHttpRequest from '@/hooks/useHttpRequest'
+import useVisibilityChange from '@/hooks/useVisibilityChange'
+
 import { BASE_URL } from '@/constants/urls'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
@@ -29,7 +31,7 @@ const SETTING_LIST = [
 ]
 
 export default function MyProfileContainer() {
-  const [myProfile, fetchMyProfile, isLoading] = useHttpRequest(() =>
+  const [myProfile, fetchMyProfile, isLoading, , isFetch] = useHttpRequest(() =>
     dayBlockAPI.getMyProfile().then(({ data }) => data),
   )
 
@@ -44,8 +46,13 @@ export default function MyProfileContainer() {
     fetchMyProfile()
   }, [])
 
+  useVisibilityChange(() => {
+    fetchMyProfile()
+  })
+
   return (
-    <LoadingContainer loading={isLoading}>
+    <LoadingContainer loading={!isFetch}>
+      <LoadingContainer loading={isLoading} />
       <div className={clsx('py-[30px]')}>
         <div className={clsx('px-[20px]', 'mb-[14px]')}>
           <ProfileHeader
