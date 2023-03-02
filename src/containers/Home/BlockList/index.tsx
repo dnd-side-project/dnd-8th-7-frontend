@@ -54,7 +54,9 @@ const BlockList = () => {
   }
 
   useEffect(() => {
-    fetchDayBlocks()
+    if (selectedDate) {
+      fetchDayBlocks()
+    }
   }, [selectedDate])
 
   const onVisibility = () => {
