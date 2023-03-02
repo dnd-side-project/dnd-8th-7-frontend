@@ -1,19 +1,21 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
 import { colors } from '@/styles/theme'
 
-import BlockTitleInput from './BlockTitleInput'
-import ColorPicker from '@/components/ColorPicker'
-import Switch from '@/components/Switch'
-import Header from '@/components/Header'
-import { BottomButtonLayout } from '@/components/Layout'
-
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
-import { useRouter } from 'next/router'
+
 import { dayBlockAPI } from '@/api'
 import useHttpRequest from '@/hooks/useHttpRequest'
 import { CreateBlockParams } from '@/api/types/base.types'
+
+import { BottomButtonLayout } from '@/components/Layout'
+import ColorPicker from '@/components/ColorPicker'
+import Switch from '@/components/Switch'
+import Header from '@/components/Header'
+import LoadingContainer from '@/components/Loading/Container'
+import BlockTitleInput from './BlockTitleInput'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -38,7 +40,7 @@ export default function NewBlockContainer() {
   const [emoticon, setEmoticon] = useState<string>()
   const [blockColor, setBlockColor] = useState<string>(colors?.red)
   const [isSecret, setIsSecret] = useState(false)
-  const [, postNewBlock, isLoading] = useHttpRequest(
+  const [, createBlock, isCreateLoading] = useHttpRequest(
     (params: CreateBlockParams) =>
       dayBlockAPI.createBlock(params).then(({ data }) => data),
   )
@@ -68,7 +70,7 @@ export default function NewBlockContainer() {
       console.log('입력 에러') // TODO: 에러 처리
       return
     }
-    postNewBlock(
+    createBlock(
       {
         date: dateValue,
         title: blockTitle,
@@ -84,40 +86,47 @@ export default function NewBlockContainer() {
   }
 
   return (
-    <BottomButtonLayout
-      buttonText="완료"
-      buttonProps={{ type: 'submit', onClick: handleSubmit }}
-    >
-      <Header
-        title={'새 블럭 만들기'}
-        rightButton={'exit'}
-        onRightButtonClick={handleClose}
-      />
-      <div className={clsx('pt-[56px]', 'px-[20px]')}>
-        <div className={clsx(TITLE, 'mt-[24px]')}>블럭 제목</div>
-        <BlockTitleInput
-          value={blockTitle}
-          onChange={handleInputChange}
-          showLimitCount
-          maxLength={15}
-          placeholder="블럭 제목을 입력해주세요"
-          onEmojiChange={handleEmojiChange}
+    <>
+      <LoadingContainer loading={isCreateLoading} />
+      <BottomButtonLayout
+        buttonText="완료"
+        buttonProps={{
+          type: 'submit',
+          onClick: handleSubmit,
+          disabled: !(blockTitle && emoticon && blockColor),
+        }}
+      >
+        <Header
+          title={'새 블럭 만들기'}
+          rightButton={'exit'}
+          onRightButtonClick={handleClose}
         />
-        <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
-        <ColorPicker
-          defaultColors={DEFAULT_COLORS}
-          onChange={handleColorChange}
-          defaultPicked={colors?.red}
-        />
-        <div className={clsx(TITLE, 'mb-[16px]')}>추가 설정</div>
-        <div className={clsx('flex', 'justify-between')}>
-          <div>
-            <div className={clsx(SUB_TITLE)}>쉿! 비밀로 하기</div>
-            <div className={clsx(DESCRIPTION)}>친구들에게 보이지 않아요</div>
+        <div className={clsx('pt-[56px]', 'px-[20px]')}>
+          <div className={clsx(TITLE, 'mt-[24px]')}>블럭 제목</div>
+          <BlockTitleInput
+            value={blockTitle}
+            onChange={handleInputChange}
+            showLimitCount
+            maxLength={15}
+            placeholder="블럭 제목을 입력해주세요"
+            onEmojiChange={handleEmojiChange}
+          />
+          <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
+          <ColorPicker
+            defaultColors={DEFAULT_COLORS}
+            onChange={handleColorChange}
+            defaultPicked={colors?.red}
+          />
+          <div className={clsx(TITLE, 'mb-[16px]')}>추가 설정</div>
+          <div className={clsx('flex', 'justify-between')}>
+            <div>
+              <div className={clsx(SUB_TITLE)}>쉿! 비밀로 하기</div>
+              <div className={clsx(DESCRIPTION)}>친구들에게 보이지 않아요</div>
+            </div>
+            <Switch onChange={handleSecretChange} />
           </div>
-          <Switch onChange={handleSecretChange} />
         </div>
-      </div>
-    </BottomButtonLayout>
+      </BottomButtonLayout>
+    </>
   )
 }
