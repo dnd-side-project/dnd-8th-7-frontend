@@ -1,14 +1,33 @@
-import Button from '@/components/Button'
-import { EditIcon } from '@/components/Icons'
+import { PATH } from '@/constants/path'
 import { BASE_URL } from '@/constants/urls'
 
 import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnWebViewBridge'
 
-const DiaryButton = () => {
+import Button from '@/components/Button'
+import { EditIcon } from '@/components/Icons'
+import qs from 'query-string'
+
+interface Props {
+  date: string
+  reviewId?: number
+}
+
+const DiaryButton = ({ date, reviewId }: Props) => {
   const handleDiaryCreate = () => {
     rnWebViewBridge.open({
       key: 'dailyDiary',
-      url: `${BASE_URL}/dailyDiary`,
+      url:
+        BASE_URL +
+        PATH.dailyDiary +
+        `?${qs.stringify(
+          {
+            date,
+            reviewId,
+          },
+          {
+            skipNull: true,
+          },
+        )}`,
     })
   }
 

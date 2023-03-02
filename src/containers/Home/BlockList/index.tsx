@@ -84,7 +84,7 @@ const BlockList = () => {
           totalBlock={totalBlock}
           totalTask={totalTask}
         />
-        <DiaryButton />
+        <DiaryButton date={selectedDate} reviewId={dayBlocks?.reviewId} />
       </div>
 
       <div className="mt-[18px] mb-5">

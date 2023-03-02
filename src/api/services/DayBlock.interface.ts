@@ -25,11 +25,23 @@ export default interface DayBlockService {
     Type.DeleteSavedBlockParams,
     Type.DeleteSavedBlockResponse
   >
+  loadSavedBlock: ServiceFunc<
+    Type.LoadSavedBlockParams,
+    Type.LoadSavedBlockResponse
+  >
 
   /** 하루 일기 */
   createDailyReview: ServiceFunc<
     Type.CreateDailyReviewParams,
     Type.CreateDailyReviewResponse
+  >
+  getDailyReview: ServiceFunc<
+    Type.GetDailyReviewParams,
+    Type.GetDailyReviewResponse
+  >
+  updateDailyReview: ServiceFunc<
+    Type.UpdateDailyReviewParams,
+    Type.UpdateDailyReviewResponse
   >
 
   /** 태스크 */
