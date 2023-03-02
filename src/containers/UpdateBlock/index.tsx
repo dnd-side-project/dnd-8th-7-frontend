@@ -119,7 +119,7 @@ export default function UpdateBlockContainer() {
           </div>
           <Switch
             onChange={handleSecretChange}
-            defaultValue={blockDetail.isSecret}
+            defaultChecked={blockDetail.isSecret}
           />
         </div>
       </div>
