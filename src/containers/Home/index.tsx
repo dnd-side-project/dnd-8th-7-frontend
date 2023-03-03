@@ -1,22 +1,27 @@
 import { useEffect } from 'react'
 import { dayBlockAPI } from '@/api'
-import dayjs from 'dayjs'
 import Tabs from '@/components/Tabs'
 import ProfileHeader from './ProfileHeader'
 import CalendarPanel from './CalendarPanel'
 import DailyBlockPanel from './DailyBlockPanel'
 import BlockList from './BlockList'
 import useHttpRequest from '@/hooks/useHttpRequest'
+import useSelectedDateState from '@/store/selectedDate'
+import LoadingContainer from '@/components/Loading/Container'
 
 const Home = () => {
-  const today = String(dayjs().format('YYYY-MM-DD'))
-  const [weeklyBlocks, fetchWeeklyBlocks, isLoading] = useHttpRequest(() =>
-    dayBlockAPI.getDailyBlocksOnWeek({ date: today }).then(({ data }) => data),
-  )
+  const selectedDate = useSelectedDateState((state) => state.date)
+
+  const [weeklyBlocks, fetchWeeklyBlocks, isLoading, , isFetch] =
+    useHttpRequest(() =>
+      dayBlockAPI
+        .getDailyBlocksOnWeek({ date: selectedDate })
+        .then(({ data }) => data),
+    )
 
   useEffect(() => {
     fetchWeeklyBlocks()
-  }, [])
+  }, [selectedDate])
 
   const onVisibility = () => {
     if (!document.hidden) {
@@ -32,12 +37,11 @@ const Home = () => {
     }
   })
 
-  if (!weeklyBlocks || isLoading) return null
-  const { user, dailyBlocks } = weeklyBlocks
+  if (!weeklyBlocks) return null
 
   return (
     <div className="inner px-5 pb-14">
-      <ProfileHeader user={user} />
+      <ProfileHeader />
 
       <Tabs>
         <Tabs.TabList>
@@ -45,14 +49,17 @@ const Home = () => {
           <Tabs.Tab id={1} text="달력" />
         </Tabs.TabList>
         <Tabs.TabPanel id={0}>
-          <DailyBlockPanel dailyBlocks={dailyBlocks} />
+          <LoadingContainer loading={!isFetch}>
+            <LoadingContainer loading={isLoading} />
+            <DailyBlockPanel dailyBlocks={weeklyBlocks} />
+          </LoadingContainer>
         </Tabs.TabPanel>
         <Tabs.TabPanel id={1}>
           <CalendarPanel />
         </Tabs.TabPanel>
       </Tabs>
 
-      <BlockList />
+      <BlockList fetchWeeklyBlocks={fetchWeeklyBlocks} />
     </div>
   )
 }

@@ -73,7 +73,7 @@ export default function SavedBlockContainer() {
 
   const handleSavedBlocksLoad = () => {
     loadSavedBlock(
-      { blockId: checkedBlock, date },
+      { blockIds: checkedBlock, date },
       { onSuccess: () => handleBack() },
     )
   }

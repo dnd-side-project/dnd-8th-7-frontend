@@ -1,19 +1,22 @@
 export type DailyBlock = {
   date: string
-  color: Array<string>
+  backgroundColors: Array<{
+    blockId: string
+    backgroundColor: string
+  }>
 }
 
 export type BlockDetail = {
   blockId: number
-  color: string
-  icon: string
+  backgroundColor: string
+  emoji: string
   title: string
-  sumOfTask: number
-  sumOfDoneTask: number
+  numOfTasks: number
+  numOfDoneTask: number
   tasks: Array<Task>
 }
 
-export type SavedBlock = Omit<BlockDetail, 'sumOfDoneTask'>
+export type SavedBlock = Omit<BlockDetail, 'numOfDoneTask'>
 
 export type Task = {
   taskId: number
@@ -23,7 +26,8 @@ export type Task = {
 
 export type BlockList = {
   date: string
-  totalBlock: number
-  totalTask: number
+  numOfTotalBlocks: number
+  numOfTotalTasks: number
+  reviewId: number | null
   blocks: BlockDetail[]
 }

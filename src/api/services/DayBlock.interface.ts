@@ -43,6 +43,10 @@ export default interface DayBlockService {
     Type.UpdateDailyReviewParams,
     Type.UpdateDailyReviewResponse
   >
+  deleteDailyReview: ServiceFunc<
+    Type.GetDailyReviewParams,
+    Record<string, never>
+  >
 
   /** 태스크 */
   createTaskInBlock: ServiceFunc<
@@ -64,4 +68,10 @@ export default interface DayBlockService {
     Type.UpdateMyProfileResponse
   >
   getMyProfile: ServiceFunc<Type.GetMyProfileParams, Type.GetMyProfileResponse>
+
+  /** 유저 */
+  checkUniqueNickname: ServiceFunc<
+    Type.CheckUniqueNicknameParams,
+    Type.CheckUniqueNicknameResponse
+  >
 }

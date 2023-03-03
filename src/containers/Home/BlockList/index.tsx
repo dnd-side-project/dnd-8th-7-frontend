@@ -7,6 +7,7 @@ import NoData from '@/components/NoData'
 import useSelectedDateState from '@/store/selectedDate'
 import { dayBlockAPI } from '@/api'
 import useHttpRequest from '@/hooks/useHttpRequest'
+import useBlockListStore from '@/store/blocks'
 import { BASE_URL } from '@/constants/urls'
 import DiaryButton from './DiaryButton'
 
@@ -21,7 +22,7 @@ const AddButton = ({
 }) => {
   return (
     <Button
-      color="gray"
+      backgroundColor="gray"
       fontWeight="bold"
       className="py-[11px]"
       onClick={onClick}
@@ -32,8 +33,10 @@ const AddButton = ({
   )
 }
 
-const BlockList = () => {
+const BlockList = ({ fetchWeeklyBlocks }: { fetchWeeklyBlocks: any }) => {
   const selectedDate = useSelectedDateState((state) => state.date)
+  const storedBlocks = useBlockListStore((state) => state.blockList) // store에 저장된 블럭
+  const setStoredBlocks = useBlockListStore((state) => state.setBlockList)
 
   const [dayBlocks, fetchDayBlocks, isLoading] = useHttpRequest(() =>
     dayBlockAPI.getDayBlocks({ date: selectedDate }).then(({ data }) => data),
@@ -53,36 +56,34 @@ const BlockList = () => {
     })
   }
 
-  useEffect(() => {
-    if (selectedDate) {
-      fetchDayBlocks()
-    }
-  }, [selectedDate])
-
-  const onVisibility = () => {
-    if (!document.hidden) {
-      fetchDayBlocks()
-    }
+  const handleDayBlocksFetch = () => {
+    fetchDayBlocks(undefined, {
+      onSuccess: (data) => {
+        setStoredBlocks(data)
+      },
+    })
   }
 
   useEffect(() => {
-    document.addEventListener('visibilitychange', onVisibility)
+    if (!selectedDate) return
+    handleDayBlocksFetch()
+  }, [selectedDate])
 
-    return () => {
-      document.removeEventListener('visibilitychange', onVisibility)
-    }
-  })
+  const refetch = () => {
+    handleDayBlocksFetch()
+    fetchWeeklyBlocks()
+  }
 
-  if (!dayBlocks || isLoading) return null
-  const { totalBlock, totalTask, blocks = [] } = dayBlocks
+  if (!dayBlocks) return null
+  const { numOfTotalBlocks, numOfTotalTasks, blocks = [] } = storedBlocks
 
   return (
     <>
       <div className="flex items-end justify-between">
         <Date
           date={selectedDate}
-          totalBlock={totalBlock}
-          totalTask={totalTask}
+          numOfTotalBlocks={numOfTotalBlocks}
+          numOfTotalTasks={numOfTotalTasks}
         />
         <DiaryButton date={selectedDate} reviewId={dayBlocks?.reviewId} />
       </div>
@@ -103,21 +104,32 @@ const BlockList = () => {
         ) : (
           blocks.map(
             (
-              { blockId, color, icon, title, sumOfTask, sumOfDoneTask, tasks },
+              {
+                blockId,
+                backgroundColor,
+                emoji,
+                title,
+                numOfTasks,
+                numOfDoneTask,
+                tasks,
+              },
               idx,
-            ) => (
-              <div key={idx} className="mb-2">
-                <Block
-                  blockId={blockId}
-                  color={color}
-                  icon={icon}
-                  title={title}
-                  sumOfTask={sumOfTask}
-                  sumOfDoneTask={sumOfDoneTask}
-                  tasks={tasks}
-                />
-              </div>
-            ),
+            ) => {
+              return (
+                <div key={idx} className="mb-2">
+                  <Block
+                    refetch={refetch}
+                    blockId={blockId}
+                    backgroundColor={backgroundColor}
+                    emoji={emoji}
+                    title={title}
+                    numOfTasks={numOfTasks}
+                    numOfDoneTask={numOfDoneTask}
+                    tasks={tasks}
+                  />
+                </div>
+              )
+            },
           )
         )}
       </div>

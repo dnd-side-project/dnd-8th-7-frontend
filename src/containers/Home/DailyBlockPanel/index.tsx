@@ -1,20 +1,11 @@
-import { useEffect } from 'react'
-import dayjs from 'dayjs'
 import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
-import useSelectedDateState from '@/store/selectedDate'
 import WeeklyBlocks from './WeeklyBlocks'
 
 const DailyBlockPanel = ({
   dailyBlocks,
 }: {
-  dailyBlocks: GetDailyBlocksOnWeekResponse['dailyBlocks']
+  dailyBlocks: GetDailyBlocksOnWeekResponse
 }) => {
-  const setSelectedDate = useSelectedDateState((state) => state.setSelectedDate)
-  useEffect(() => {
-    const today = String(dayjs().format('YYYY-MM-DD'))
-    setSelectedDate(today)
-  }, [setSelectedDate])
-
   return <WeeklyBlocks weeklyBlocks={dailyBlocks} />
 }
 export default DailyBlockPanel

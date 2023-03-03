@@ -13,35 +13,40 @@ export const getDailyBlocksOnWeek = rest.get(
     const date = req.params.date as string
     return res(
       ctx.json({
-        user: '알잘딱깔센',
+        nickname: '알잘딱깔센',
         dailyBlocks: [
           {
             date: dayjs(date).subtract(3, 'days').format('YYYY-MM-DD'),
-            color: [colors.red, colors.orange],
+            backgroundColor: [colors.red, colors.orange],
           },
           {
             date: dayjs(date).subtract(2, 'days').format('YYYY-MM-DD'),
-            color: [],
+            backgroundColor: [],
           },
           {
             date: dayjs(date).subtract(1, 'days').format('YYYY-MM-DD'),
-            color: [colors.blue],
+            backgroundColor: [colors.blue],
           },
           {
             date,
-            color: [colors.purple, colors.blue, colors.pink, colors.red],
+            backgroundColor: [
+              colors.purple,
+              colors.blue,
+              colors.pink,
+              colors.red,
+            ],
           },
           {
             date: dayjs(date).add(1, 'days').format('YYYY-MM-DD'),
-            color: [colors.blue, colors.pink],
+            backgroundColor: [colors.blue, colors.pink],
           },
           {
             date: dayjs(date).add(2, 'days').format('YYYY-MM-DD'),
-            color: [colors.pink, colors.red],
+            backgroundColor: [colors.pink, colors.red],
           },
           {
             date: dayjs(date).add(3, 'days').format('YYYY-MM-DD'),
-            color: [colors.red],
+            backgroundColor: [colors.red],
           },
         ],
       }),
@@ -56,17 +61,17 @@ export const getDayBlocks = rest.get(
     return res(
       ctx.json({
         date,
-        totalBlock: 1,
-        totalTask: 1,
+        numOfTotalBlocks: 1,
+        numOfTotalTasks: 1,
         reviewId: 2,
         blocks: [
           {
             blockId: 1,
-            color: colors.red,
-            icon: '😄',
+            backgroundColor: colors.red,
+            emoji: '😄',
             title: '출근 준비',
-            sumOfTask: 2,
-            sumOfDoneTask: 1,
+            numOfTasks: 2,
+            numOfDoneTask: 1,
             tasks: [
               {
                 taskId: 1,
@@ -82,11 +87,11 @@ export const getDayBlocks = rest.get(
           },
           {
             blockId: 2,
-            color: colors.red,
-            icon: '😄',
+            backgroundColor: colors.red,
+            emoji: '😄',
             title: '출근 준비',
-            sumOfTask: 2,
-            sumOfDoneTask: 1,
+            numOfTasks: 2,
+            numOfDoneTask: 1,
             tasks: [
               {
                 taskId: 1,

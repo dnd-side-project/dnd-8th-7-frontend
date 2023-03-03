@@ -5,7 +5,7 @@ import { SavedBlock as SavedBlockType } from '@/types/block'
 import { MoreVerticalIcon } from '@/components/Icons'
 import CheckBox from '@/components/CheckBox'
 
-const BlockIcon = ({ icon }: { icon: string }) => {
+const BlockIcon = ({ emoji }: { emoji: string }) => {
   return (
     <div
       className={clsx(
@@ -18,7 +18,7 @@ const BlockIcon = ({ icon }: { icon: string }) => {
         'bg-white',
       )}
     >
-      {icon}
+      {emoji}
     </div>
   )
 }
@@ -58,14 +58,14 @@ const SavedBlock = ({
           'text-white',
           'w-full',
         )}
-        style={{ backgroundColor: blockData.color }}
+        style={{ backgroundColor: blockData.backgroundColor }}
       >
         <div className="flex items-center">
-          <BlockIcon icon={blockData.icon} />
+          <BlockIcon emoji={blockData.emoji} />
 
           <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
             <p>{blockData.title}</p>
-            <p className="font-medium">{blockData.sumOfTask}</p>
+            <p className="font-medium">{blockData.numOfTasks}</p>
           </div>
 
           <button type="button" className="w-6 h-6" onClick={handleMoreClick}>

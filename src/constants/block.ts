@@ -1,19 +1,18 @@
 import { BlockList } from '@/types/block'
 
-export const DAYS = ['일', '월', '화', '수', '목', '금', '토']
-
 export const MOCK_BLOCK_LIST: BlockList = {
   date: '2022-01-25',
-  totalBlock: 2,
-  totalTask: 3,
+  numOfTotalBlocks: 2,
+  numOfTotalTasks: 3,
+  reviewId: 1,
   blocks: [
     {
       blockId: 1,
-      color: '#FF7154',
-      icon: '😀',
+      backgroundColor: '#FF7154',
+      emoji: '😀',
       title: '제목1',
-      sumOfTask: 2,
-      sumOfDoneTask: 1,
+      numOfTasks: 2,
+      numOfDoneTask: 1,
       tasks: [
         {
           taskId: 1,
@@ -29,11 +28,11 @@ export const MOCK_BLOCK_LIST: BlockList = {
     },
     {
       blockId: 2,
-      color: '#7E85FF',
-      icon: '🥲',
+      backgroundColor: '#7E85FF',
+      emoji: '🥲',
       title: '제목2',
-      sumOfTask: 1,
-      sumOfDoneTask: 1,
+      numOfTasks: 1,
+      numOfDoneTask: 1,
       tasks: [
         {
           taskId: 3,
@@ -56,30 +55,30 @@ export const MOCK_COLORS: string[] = [
 export const MOCK_WEEKLY_BLOCKS = [
   {
     date: '2022-01-23',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-24',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-25',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-26',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-27',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-28',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
   {
     date: '2022-01-29',
-    color: MOCK_COLORS,
+    backgroundColor: MOCK_COLORS,
   },
 ]

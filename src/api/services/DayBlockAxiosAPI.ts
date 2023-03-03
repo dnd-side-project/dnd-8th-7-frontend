@@ -26,8 +26,8 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   updateBlock(params: Type.UpdateBlockParams) {
     return API.patch<Type.UpdateBlockResponse>(`/api/block/${params.blockId}`, {
       title: params.title,
-      emoticon: params.emoticon,
-      blockColor: params.blockColor,
+      emoji: params.emoji,
+      backgroundColor: params.backgroundColor,
       isSecret: params.isSecret,
     })
   }
@@ -66,6 +66,9 @@ export default class DayBlockAxiosAPI implements DayBlockService {
       params,
     )
   }
+  deleteDailyReview({ reviewId }: Type.GetDailyReviewParams) {
+    return API.delete(`/api/review/${reviewId}`)
+  }
 
   /** 태스크 */
   createTaskInBlock(params: Type.CreateTaskInBlockParams) {
@@ -75,10 +78,13 @@ export default class DayBlockAxiosAPI implements DayBlockService {
     )
   }
   updateTaskInBlock(params: Type.UpdateTaskInBlockParams) {
-    return API.put<Type.UpdateTaskInBlockResponse>(
+    return API.patch<Type.UpdateTaskInBlockResponse>(
       `/api/task/${params.taskId}`,
-      params,
+      { content: params.content },
     )
+  }
+  updateTaskStatus(params: Type.UpdateTaskStatusParams) {
+    return API.patch(`/api/task/status/${params.taskId}`)
   }
   deleteTaskInBlock(params: Type.DeleteTaskInBlockParams) {
     return API.delete<Type.DeleteTaskInBlockResponse>(
@@ -92,5 +98,37 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   }
   getMyProfile() {
     return API.get<Type.GetMyProfileResponse>(`/api/user`)
+  }
+
+  /** 유저 */
+  checkUniqueNickname({ nickname }: Type.CheckUniqueNicknameParams) {
+    return API.get<Type.CheckUniqueNicknameResponse>(
+      `/api/user/nickname/${nickname}`,
+    )
+  }
+
+  /** 기타 */
+  async getMyDailyBlockMetric({
+    date,
+  }: Type.GetMyDailyBlockMetricParams): Promise<Type.GetMyDailyBlockMetricResponse> {
+    const myProfile = await this.getMyProfile().then(({ data }) => data)
+    const blocks = await this.getDayBlocks({ date }).then(({ data }) => data)
+
+    const numOfTasks = blocks.numOfTotalTasks
+    const numOfdoneTasks =
+      blocks.blocks.reduce(
+        (res, { numOfDoneTask }) => res + (numOfDoneTask || 0),
+        0,
+      ) || 0
+
+    return {
+      date,
+      user: myProfile,
+      numOfBlocks: blocks.numOfTotalBlocks,
+      numOfTasks,
+      numOfdoneTasks,
+      percentageOfDoneTasks:
+        numOfTasks === 0 ? 0 : Math.round((numOfdoneTasks / numOfTasks) * 100),
+    }
   }
 }

@@ -13,7 +13,7 @@ import type {
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   size?: Size
-  color?: Color
+  backgroundColor?: Color
   fontWeight?: FontWeight
   rounded?: Rounded
   disabled?: boolean
@@ -45,7 +45,7 @@ const FONT_WEIGHT_CONFIG: FontWeightConfig = {
 
 const Button = ({
   type = 'button',
-  color = 'black',
+  backgroundColor = 'black',
   disabled = false,
   children,
   size = 'md',
@@ -69,11 +69,12 @@ const Button = ({
         'text-base',
         ROUNDED_CONFIG[rounded],
         FONT_WEIGHT_CONFIG[fontWeight],
-        COLOR_CONFIG[color],
+        COLOR_CONFIG[backgroundColor],
         SIZE_CONFIG[size],
         className,
         {
-          'disabled:text-textGray-50 disabled:bg-gray-100': color === 'black',
+          'disabled:text-textGray-50 disabled:bg-gray-100':
+            backgroundColor === 'black',
         },
         {
           'border border-gray-400': outlined,
