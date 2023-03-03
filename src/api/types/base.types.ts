@@ -114,3 +114,14 @@ export type DeleteSavedBlockResponse = Record<string, never>
 
 export type LoadSavedBlockParams = { date: string; blockIds: number[] }
 export type LoadSavedBlockResponse = Record<string, never>
+
+/** 기타 */
+export type GetMyDailyBlockMetricParams = { date: string }
+export type GetMyDailyBlockMetricResponse = {
+  date: string
+  user: UserProfile
+  numOfBlocks: number
+  numOfTasks: number
+  numOfdoneTasks: number
+  percentageOfDoneTasks: number
+}

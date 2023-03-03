@@ -2,6 +2,7 @@ import API from '@/api/axios'
 
 import DayBlockService from './DayBlock.interface'
 import * as Type from '@/api/types/base.types'
+import { AxiosResponse } from 'axios'
 
 export default class DayBlockAxiosAPI implements DayBlockService {
   /** 메인 */
@@ -95,5 +96,30 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   }
   getMyProfile() {
     return API.get<Type.GetMyProfileResponse>(`/api/user`)
+  }
+
+  /** 기타 */
+  async getMyDailyBlockMetric({
+    date,
+  }: Type.GetMyDailyBlockMetricParams): Promise<Type.GetMyDailyBlockMetricResponse> {
+    const myProfile = await this.getMyProfile().then(({ data }) => data)
+    const blocks = await this.getDayBlocks({ date }).then(({ data }) => data)
+
+    const numOfTasks = blocks.totalTask
+    const numOfdoneTasks =
+      blocks.blocks.reduce(
+        (res, { sumOfDoneTask }) => res + (sumOfDoneTask || 0),
+        0,
+      ) || 0
+
+    return {
+      date,
+      user: myProfile,
+      numOfBlocks: blocks?.totalBlock,
+      numOfTasks,
+      numOfdoneTasks,
+      percentageOfDoneTasks:
+        numOfTasks === 0 ? 0 : Math.round((numOfdoneTasks / numOfTasks) * 100),
+    }
   }
 }

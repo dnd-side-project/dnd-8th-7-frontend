@@ -10,7 +10,7 @@ const DAYS = [
   '토요일',
 ]
 
-const formatDate = (date: string) => {
+const formatDate = (date?: string) => {
   const dateTime = dayjs(date)
   const formattedDate = `${dateTime.month() + 1}월 ${dateTime.date()}일 ${
     DAYS[dateTime.day()]

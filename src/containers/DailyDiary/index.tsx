@@ -30,6 +30,10 @@ export default function DailyDiaryContainer() {
 
   const [open, close] = useRNEmojiBottomSheet('newBlock')
 
+  const [metrics, getMetrics, isMetricLoading] = useHttpRequest(() =>
+    dayBlockAPI.getMyDailyBlockMetric({ date }),
+  )
+
   const [diary, getDiary, isGetLoading] = useHttpRequest(
     (params: GetDailyReviewParams) =>
       dayBlockAPI.getDailyReview(params).then(({ data }) => data),
@@ -109,8 +113,14 @@ export default function DailyDiaryContainer() {
     }
   }, [reviewId])
 
+  useEffect(() => {
+    if (date) {
+      getMetrics()
+    }
+  }, [date])
+
   return (
-    <LoadingContainer loading={isGetLoading}>
+    <LoadingContainer loading={isGetLoading || isMetricLoading}>
       <LoadingContainer
         loading={isCreateLoading || isUpdateLoading}
         backgroundMask
@@ -128,7 +138,7 @@ export default function DailyDiaryContainer() {
           onLeftButtonClick={handleGoBack}
         />
         <div className={clsx('pt-[56px]', 'px-[20px]')}>
-          <ProfileHeader date={date} />
+          <ProfileHeader metrics={metrics} />
           <div className={clsx(LABEL_STYLE, 'mt-[36px]')}>오늘의 감정</div>
           <button
             onClick={handleEmojiClick}
