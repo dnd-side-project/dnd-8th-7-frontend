@@ -1,9 +1,8 @@
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MoreVerticalIcon } from '@/components/Icons'
 import type { BlockDetail } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
-import webBridge from '@/utils/react-native-webview-bridge'
 import AddTaskButton from './AddTaskButton'
 import Task from './Task'
 import { dayBlockAPI } from '@/api'
@@ -113,13 +112,6 @@ const Block = ({
       },
     )
   }
-
-  useEffect(() => {
-    webBridge.init()
-    return () => {
-      webBridge.unmount()
-    }
-  }, [])
 
   return (
     <>

@@ -1,8 +1,7 @@
 import clsx from 'clsx'
-import { ChangeEvent, forwardRef, useState, useEffect } from 'react'
+import { ChangeEvent, forwardRef, useState } from 'react'
 
 import useRNEmojiBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNEmojiBottomSheet'
-import webBridge from '@/utils/react-native-webview-bridge'
 
 import { FaceIcon } from '@/components/Icons'
 import Input, { InputProps } from '@/components/Input'
@@ -38,13 +37,6 @@ export default forwardRef<HTMLInputElement | null, Props>(
       setValue(newValue)
       props?.onChange?.(e)
     }
-
-    useEffect(() => {
-      webBridge.init()
-      return () => {
-        webBridge.unmount()
-      }
-    }, [])
 
     return (
       <Input
