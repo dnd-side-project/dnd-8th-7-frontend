@@ -50,7 +50,7 @@ export type CreateDailyReviewParams = {
   date: string
   emoji: string
   review: string
-  secret: boolean
+  isSecret: boolean
 }
 export type CreateDailyReviewResponse = {
   reviewId: number

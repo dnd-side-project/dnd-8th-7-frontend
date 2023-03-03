@@ -45,9 +45,9 @@ export default function CreateOrUpdatePage({ date, reviewId }: Props) {
     dayBlockAPI.createDailyReview,
   )
 
-  const [emoji, setEmoji] = useState<string>(diary?.emoticon || '')
+  const [emoji, setEmoji] = useState<string>(diary?.emoji || '')
   const [review, setReviewText] = useState(diary?.review || '')
-  const [secret, setIsSecret] = useState(diary?.secret || false)
+  const [isSecret, setIsSecret] = useState(diary?.isSecret || false)
   const isVaild = !!emoji && !!review.length
 
   const handleSubmit = () => {
@@ -58,14 +58,14 @@ export default function CreateOrUpdatePage({ date, reviewId }: Props) {
 
     if (!Number.isNaN(reviewId)) {
       updateDiary(
-        { reviewId, date, emoticon: emoji, review, secret },
+        { reviewId, date, emoji, review, isSecret },
         {
           onSuccess: () => handleGoBack(),
         },
       )
     } else {
       createDiary(
-        { date, emoticon: emoji, review, secret },
+        { date, emoji, review, isSecret },
         {
           onSuccess: () => handleGoBack(),
         },
@@ -99,10 +99,10 @@ export default function CreateOrUpdatePage({ date, reviewId }: Props) {
       getDiary(
         { reviewId },
         {
-          onSuccess: ({ emoticon, review, secret }) => {
-            setEmoji(emoticon)
+          onSuccess: ({ emoji, review, isSecret }) => {
+            setEmoji(emoji)
             setReviewText(review)
-            setIsSecret(secret)
+            setIsSecret(isSecret)
           },
         },
       )
@@ -178,7 +178,7 @@ export default function CreateOrUpdatePage({ date, reviewId }: Props) {
             </div>
             <Switch
               onChange={handleSecretChange}
-              defaultChecked={diary?.secret}
+              defaultChecked={diary?.isSecret}
             />
           </div>
         </div>

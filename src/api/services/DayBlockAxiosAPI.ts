@@ -2,7 +2,6 @@ import API from '@/api/axios'
 
 import DayBlockService from './DayBlock.interface'
 import * as Type from '@/api/types/base.types'
-import { ServiceFunc } from './types'
 
 export default class DayBlockAxiosAPI implements DayBlockService {
   /** 메인 */
@@ -115,17 +114,17 @@ export default class DayBlockAxiosAPI implements DayBlockService {
     const myProfile = await this.getMyProfile().then(({ data }) => data)
     const blocks = await this.getDayBlocks({ date }).then(({ data }) => data)
 
-    const numOfTasks = blocks.totalTask
+    const numOfTasks = blocks.numOfTotalTasks
     const numOfdoneTasks =
       blocks.blocks.reduce(
-        (res, { sumOfDoneTask }) => res + (sumOfDoneTask || 0),
+        (res, { numOfDoneTask }) => res + (numOfDoneTask || 0),
         0,
       ) || 0
 
     return {
       date,
       user: myProfile,
-      numOfBlocks: blocks?.totalBlock,
+      numOfBlocks: blocks.numOfTotalBlocks,
       numOfTasks,
       numOfdoneTasks,
       percentageOfDoneTasks:

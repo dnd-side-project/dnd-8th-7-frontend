@@ -105,7 +105,7 @@ export default function NewProfileCongratulationContainer() {
           </div>
         </div>
         <div className="mb-[15px]">
-          <Button color="red" onClick={handleGoMain}>
+          <Button backgroundColor="red" onClick={handleGoMain}>
             <div className={clsx('text-lg')}>하루블럭 시작하기</div>
           </Button>
         </div>

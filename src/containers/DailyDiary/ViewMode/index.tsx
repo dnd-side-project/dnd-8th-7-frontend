@@ -34,6 +34,8 @@ export default function ViewModePage({ reviewId, date, onEditClick }: Props) {
     dayBlockAPI.deleteDailyReview({ reviewId }),
   )
 
+  console.log(metrics)
+
   const handleDeleteClick = () => {
     deleteReview(undefined, {
       onSuccess: () => {
@@ -70,10 +72,12 @@ export default function ViewModePage({ reviewId, date, onEditClick }: Props) {
           />
           <ProfileHeader metrics={metrics} />
           <div className={clsx('mt-[30px]', 'flex', 'gap-[30px]', 'flex-col')}>
-            <Secret>이 글은 친구들에게 보이지 않아요</Secret>
+            {diary?.isSecret && (
+              <Secret>이 글은 친구들에게 보이지 않아요</Secret>
+            )}
             <div>
               <div className={clsx(LABEL_STYLE, 'mt-[36px]')}>오늘의 감정</div>
-              <div className={clsx('text-[30px]')}>{diary?.emoticon}</div>
+              <div className={clsx('text-[30px]')}>{diary?.emoji}</div>
             </div>
             <div>
               <div className={clsx(LABEL_STYLE, 'mt-[36px]')}>하루 일기</div>
