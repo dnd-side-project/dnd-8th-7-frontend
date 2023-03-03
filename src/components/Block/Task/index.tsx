@@ -40,8 +40,10 @@ const Task = ({
 
   const handleCheckTask: OnChange = ({ selected }) => {
     setIsChecked(selected)
-    updateTaskStatus({ taskId })
-    updateTaskStatusStore(blockId, taskId, selected)
+    updateTaskStatus(
+      { taskId },
+      { onSuccess: () => updateTaskStatusStore(blockId, taskId, selected) },
+    )
   }
 
   const handleTaskChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -50,18 +52,24 @@ const Task = ({
 
   const handleDelete = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (taskValue.length === 0 && e.key.toLowerCase() === 'backspace') {
-      deleteTask({ taskId })
-      deleteTaskStore(blockId, taskId)
+      deleteTask(
+        { taskId },
+        {
+          onSuccess: () => deleteTaskStore(blockId, taskId),
+        },
+      )
     }
   }
 
   useEffect(() => {
     if (!debouncedValue) return
-    updateTask({
-      taskId,
-      content: debouncedValue,
-    })
-    updateTaskStore(blockId, taskId, debouncedValue)
+    updateTask(
+      {
+        taskId,
+        content: debouncedValue,
+      },
+      { onSuccess: () => updateTaskStore(blockId, taskId, debouncedValue) },
+    )
   }, [debouncedValue])
 
   return (
