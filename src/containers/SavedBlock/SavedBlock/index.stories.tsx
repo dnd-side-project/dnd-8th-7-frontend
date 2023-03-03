@@ -9,18 +9,18 @@ export default {
 const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />
 
 const MOCK_DATA = {
-  color: '#FF7154',
-  icon: '😂',
+  backgroundColor: '#FF7154',
+  emoji: '😂',
   title: '출근 준비',
-  sumOfTask: 4,
+  numOfTasks: 4,
 }
 
-const { color, icon, title, sumOfTask } = MOCK_DATA
+const { backgroundColor, emoji, title, numOfTasks } = MOCK_DATA
 
 export const SavedBlock = Template.bind({})
 SavedBlock.args = {
-  color,
-  icon,
+  backgroundColor,
+  emoji,
   title,
-  sumOfTask,
+  numOfTasks,
 }

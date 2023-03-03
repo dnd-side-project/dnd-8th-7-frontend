@@ -9,8 +9,8 @@ type State = {
 
 const INITIAL_STATE: State['blockList'] = {
   date: '',
-  totalBlock: 0,
-  totalTask: 0,
+  numOfTotalBlocks: 0,
+  numOfTotalTasks: 0,
   reviewId: null,
   blocks: [],
 }
@@ -21,7 +21,7 @@ type Actions = {
   updateTask: (blockId: number, taskId: number, content: string) => void
   updateTaskStatus: (blockId: number, taskId: number, isDone: boolean) => void
   deleteTask: (blockId: number, taskId: number) => void
-  deleteBlock: (blockId: number, sumOfTask: number) => void
+  deleteBlock: (blockId: number, numOfTasks: number) => void
 }
 
 const useBlockListStore = create(
@@ -42,8 +42,8 @@ const useBlockListStore = create(
           isDone: false,
         }
         block.tasks.push(newTask)
-        block.sumOfTask += 1
-        blockList.totalTask += 1
+        block.numOfTasks += 1
+        blockList.numOfTotalTasks += 1
       }),
 
     updateTask: (blockId, taskId, content) =>
@@ -56,25 +56,25 @@ const useBlockListStore = create(
       set(({ blockList: { blocks } }) => {
         const { block, task } = getItem(blocks, blockId, taskId)
         task.isDone = isDone
-        if (isDone) block.sumOfDoneTask += 1
-        else block.sumOfDoneTask -= 1
+        if (isDone) block.numOfDoneTask += 1
+        else block.numOfDoneTask -= 1
       }),
 
     deleteTask: (blockId, taskId) => {
       set(({ blockList }) => {
         const { block, taskIndex } = getItem(blockList.blocks, blockId, taskId)
         block.tasks.splice(taskIndex, 1)
-        block.sumOfTask -= 1
-        blockList.totalTask -= 1
+        block.numOfTasks -= 1
+        blockList.numOfTotalTasks -= 1
       })
     },
 
-    deleteBlock: (blockId, sumOfTask) => {
+    deleteBlock: (blockId, numOfTasks) => {
       set(({ blockList }) => {
         const { blockIndex } = getItem(blockList.blocks, blockId)
         blockList.blocks.splice(blockIndex, 1)
-        blockList.totalBlock -= 1
-        blockList.totalTask -= sumOfTask
+        blockList.numOfTotalBlocks -= 1
+        blockList.numOfTotalTasks -= numOfTasks
       })
     },
   })),

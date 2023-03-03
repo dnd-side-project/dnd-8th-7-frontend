@@ -44,7 +44,6 @@ const Home = () => {
   })
 
   if (!weeklyBlocks || isLoading) return null
-  const { dailyBlocks } = weeklyBlocks
 
   return (
     <div className="inner px-5 pb-14">
@@ -56,7 +55,7 @@ const Home = () => {
           <Tabs.Tab id={1} text="달력" />
         </Tabs.TabList>
         <Tabs.TabPanel id={0}>
-          <DailyBlockPanel dailyBlocks={dailyBlocks} />
+          <DailyBlockPanel dailyBlocks={weeklyBlocks} />
         </Tabs.TabPanel>
         <Tabs.TabPanel id={1}>
           <CalendarPanel />

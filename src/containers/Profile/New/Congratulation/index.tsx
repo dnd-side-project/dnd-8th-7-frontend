@@ -84,11 +84,11 @@ export default function NewProfileCongratulationContainer() {
               'mb-[74px]',
             )}
           >
-            {myProfile?.user}님, 하루 블럭에
+            {myProfile?.nickname}님, 하루 블럭에
             <br />
             오신 것을 환영해요
           </div>
-          {myProfile?.imgPath?.includes(
+          {myProfile?.imgUrl?.includes(
             '/onboarding/default_profile_image.png',
           ) ? (
             <DarkProfileIcon />
@@ -96,14 +96,14 @@ export default function NewProfileCongratulationContainer() {
             <PercentageProfile
               dark
               percentage={65}
-              imgSrc={myProfile?.imgPath}
+              imgSrc={myProfile?.imgUrl}
               size="md"
             />
           )}
         </div>
       </div>
       <div className="mb-[15px]">
-        <Button color="red" onClick={handleGoMain}>
+        <Button backgroundColor="red" onClick={handleGoMain}>
           <div className={clsx('text-lg')}>하루블럭 시작하기</div>
         </Button>
       </div>

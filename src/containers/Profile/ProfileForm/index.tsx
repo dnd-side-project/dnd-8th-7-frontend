@@ -23,26 +23,26 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
   const openImagePicker = useRNImagePicker('profile')
 
   const [profileImageUrl, setImageUrl] = useState(
-    defaultValue?.imgPath || DEFAULT_PROFILE_IMAGE_URL,
+    defaultValue?.imgUrl || DEFAULT_PROFILE_IMAGE_URL,
   )
-  const [nickname, setNickname] = useState(defaultValue?.user || '')
+  const [nickname, setNickname] = useState(defaultValue?.nickname || '')
   const [introduction, setIntroduction] = useState(
     defaultValue?.introduction || '',
   )
-  const [isSecret, setIsSecret] = useState(defaultValue?.lock || false)
+  const [isSecret, setIsSecret] = useState(defaultValue?.isSecret || false)
 
   const handleProfileImageChangeClick = () => {
     openImagePicker({
       onImagePick: (data) => {
         setImageUrl(data)
-        handleValueChange({ imgPath: data })
+        handleValueChange({ imgUrl: data })
       },
     })
   }
 
   const handleNickNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setNickname(target.value)
-    handleValueChange({ user: target.value })
+    handleValueChange({ nickname: target.value })
   }
   const handleDescritionChange = ({
     target,
@@ -52,15 +52,15 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
   }
   const handlePublicNickNameChange = (value: boolean) => {
     setIsSecret(value)
-    handleValueChange({ lock: value })
+    handleValueChange({ isSecret: value })
   }
 
   const handleValueChange = (value: Partial<UserProfile>) => {
     onFormChange?.({
-      imgPath: profileImageUrl,
-      user: nickname,
+      imgUrl: profileImageUrl,
+      nickname: nickname,
       introduction: introduction,
-      lock: isSecret,
+      isSecret: isSecret,
       ...value,
     })
   }
@@ -92,7 +92,7 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
         showLimitCount
         maxLength={6}
         placeholder="한글 6자 이내/특수문자 입력 불가"
-        defaultValue={defaultValue?.user}
+        defaultValue={defaultValue?.nickname}
       />
       <div className={LABEL}>한 줄 소개</div>
       <Input
@@ -108,7 +108,7 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
         <div className={clsx(LABEL, 'mt-0')}>닉네임 검색 허용</div>
         <Switch
           onChange={handlePublicNickNameChange}
-          defaultChecked={defaultValue?.lock}
+          defaultChecked={defaultValue?.isSecret}
         />
       </div>
     </>

@@ -15,7 +15,7 @@ export default {
       options: sizeOptions,
       control: { type: 'radio' },
     },
-    color: {
+    backgroundColor: {
       options: colorOptions,
       control: { type: 'radio' },
     },
@@ -37,7 +37,7 @@ Basic.args = {
   children: '기본 버튼',
   disabled: false,
   size: 'sm',
-  color: 'black',
+  backgroundColor: 'black',
   fontWeight: 'medium',
   rounded: 'md',
   outlined: false,

@@ -29,7 +29,7 @@ export default function EditProfileContainer() {
       dayBlockAPI.updateMyProfile(params).then(({ data }) => data),
   )
 
-  const isValid = !!value?.imgPath && !!value?.user && !!value?.introduction
+  const isValid = !!value?.imgUrl && !!value?.nickname && !!value?.introduction
 
   const handleValueChange = (forms: UserProfile) => {
     setValue(forms)
@@ -62,6 +62,7 @@ export default function EditProfileContainer() {
       onSuccess: () => {
         fetchMyProfile()
         setIsEdited(false)
+        rnWebViewBridge.close()
       },
       onError: () => {
         // TODO 에러 처리

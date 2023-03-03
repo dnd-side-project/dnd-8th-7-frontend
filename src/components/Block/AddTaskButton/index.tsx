@@ -24,7 +24,7 @@ const AddTaskButton = ({ blockId }: { blockId: number }) => {
 
   return (
     <Button
-      color="white"
+      backgroundColor="white"
       rounded="sm"
       className="!px-3 !py-1 !w-fit"
       onClick={handleClick}

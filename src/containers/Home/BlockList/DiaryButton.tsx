@@ -35,7 +35,7 @@ const DiaryButton = ({ date, reviewId }: Props) => {
     <Button
       outlined
       rounded="sm"
-      color="white"
+      backgroundColor="white"
       className="text-textGray-200 py-1.5 !px-3 !w-fit"
       onClick={handleDiaryCreate}
     >

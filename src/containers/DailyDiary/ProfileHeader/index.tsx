@@ -21,7 +21,7 @@ const ProfileHeader = ({ date }: Props) => {
   )
   const numOfdoneTasks =
     blocks?.blocks?.reduce(
-      (res, { sumOfDoneTask }) => res + sumOfDoneTask,
+      (res, { numOfDoneTask }) => res + numOfDoneTask,
       0,
     ) || 0
 
@@ -36,11 +36,11 @@ const ProfileHeader = ({ date }: Props) => {
     <div className="flex justify-between items-start mt-[30px]">
       <div className="flex gap-x-[12px] items-center">
         <PercentageProfile
-          imgSrc={myProfile?.imgPath || DEFAULT_PROFILE_IMAGE_URL}
+          imgSrc={myProfile?.imgUrl || DEFAULT_PROFILE_IMAGE_URL}
           showNumber
           percentage={
-            blocks?.totalTask
-              ? Math.round(numOfdoneTasks / blocks.totalTask) * 100
+            blocks?.numOfTotalTasks
+              ? Math.round(numOfdoneTasks / blocks.numOfTotalTasks) * 100
               : 0
           }
         />
@@ -49,8 +49,8 @@ const ProfileHeader = ({ date }: Props) => {
             {formatDate(date)}
           </div>
           <div className="leading-[140%] text-[14px] font-[500] text-textGray-100 self-center">
-            블럭 {blocks?.totalBlock ?? '-'}개, 할 일 {blocks?.totalTask ?? '-'}
-            개
+            블럭 {blocks?.numOfTotalBlocks ?? '-'}개, 할 일{' '}
+            {blocks?.numOfTotalTasks ?? '-'}개
           </div>
         </div>
       </div>

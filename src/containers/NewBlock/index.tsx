@@ -16,6 +16,8 @@ import Switch from '@/components/Switch'
 import Header from '@/components/Header'
 import LoadingContainer from '@/components/Loading/Container'
 import BlockTitleInput from './BlockTitleInput'
+// import useDayBlockStore from '@/store/dayblock'
+// import useSelectedDateState from '@/store/selectedDate'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -37,9 +39,12 @@ export default function NewBlockContainer() {
   } = useRouter()
   const dateValue = date?.toString()
   const [blockTitle, setBlockTitle] = useState<string>('')
-  const [emoticon, setEmoticon] = useState<string>()
-  const [blockColor, setBlockColor] = useState<string>(colors?.red)
+  const [emoji, setEmoticon] = useState<string>()
+  const [backgroundColor, setBlockColor] = useState<string>(colors?.red)
   const [isSecret, setIsSecret] = useState(false)
+  // const addBlock = useDayBlockStore((state) => state.addBlock)
+  // const selectedDate = useSelectedDateState((state) => state.date)
+
   const [, createBlock, isCreateLoading] = useHttpRequest(
     (params: CreateBlockParams) =>
       dayBlockAPI.createBlock(params).then(({ data }) => data),
@@ -53,8 +58,8 @@ export default function NewBlockContainer() {
     setEmoticon(emoji)
   }
 
-  const handleColorChange = (color: string) => {
-    setBlockColor(color)
+  const handleColorChange = (backgroundColor: string) => {
+    setBlockColor(backgroundColor)
   }
 
   const handleSecretChange = (value: boolean) => {
@@ -66,7 +71,7 @@ export default function NewBlockContainer() {
   }
 
   const handleSubmit = () => {
-    if (!dateValue || !emoticon || !blockColor) {
+    if (!dateValue || !emoji || !backgroundColor) {
       console.log('입력 에러') // TODO: 에러 처리
       return
     }
@@ -74,12 +79,14 @@ export default function NewBlockContainer() {
       {
         date: dateValue,
         title: blockTitle,
-        emoticon,
-        blockColor,
+        emoji,
+        backgroundColor,
         isSecret,
       },
       {
-        onSuccess: () => rnWebViewBridge.close(),
+        onSuccess: () => {
+          rnWebViewBridge.close()
+        },
         onError: () => console.log('error'), // TODO: 에러 처리
       },
     )
@@ -93,7 +100,7 @@ export default function NewBlockContainer() {
         buttonProps={{
           type: 'submit',
           onClick: handleSubmit,
-          disabled: !(blockTitle && emoticon && blockColor),
+          disabled: !(blockTitle && emoji && backgroundColor),
         }}
       >
         <Header

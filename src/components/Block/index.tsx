@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { LockIcon, MoreVerticalIcon } from '@/components/Icons'
+import { MoreVerticalIcon } from '@/components/Icons'
 import type { BlockDetail } from '@/types/block'
 import useRNListBottomSheet from '@/utils/react-native-webview-bridge/bottom-sheet/useRNListBottomSheet'
 import webBridge from '@/utils/react-native-webview-bridge'
@@ -13,10 +13,12 @@ import useHttpRequest from '@/hooks/useHttpRequest'
 import LoadingContainer from '../Loading/Container'
 import { DeleteBlockParams } from '@/api/types/base.types'
 import useBlockListStore from '@/store/blocks'
+// import useDayBlockStore from '@/store/dayblock'
+// import useSelectedDateState from '@/store/selectedDate'
 
-const LOCKED_TEXT = '쉿! 비밀이에요'
+// const LOCKED_TEXT = '쉿! 비밀이에요'
 
-const BlockIcon = ({ icon }: { icon: string }) => {
+const BlockIcon = ({ emoji }: { emoji: string }) => {
   return (
     <div
       className={clsx(
@@ -29,24 +31,30 @@ const BlockIcon = ({ icon }: { icon: string }) => {
         'bg-white',
       )}
     >
-      {icon}
+      {emoji}
     </div>
   )
 }
 
 const Block = ({
+  index,
   blockId,
-  color,
-  icon,
+  backgroundColor,
+  emoji,
   title,
-  sumOfTask,
-  sumOfDoneTask,
+  numOfTasks,
+  numOfDoneTask,
   tasks,
-  locked = false,
-}: BlockDetail & { locked?: boolean; handleDelete?: () => void }) => {
+}: BlockDetail & {
+  index: number
+  handleDelete?: () => void
+}) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open, close] = useRNListBottomSheet('blockMenu')
+
+  // const selectedDate = useSelectedDateState((state) => state.date)
   const deleteBlockStore = useBlockListStore((state) => state.deleteBlock)
+  // const deleteDayBlockStore = useDayBlockStore((state) => state.deleteBlock)
 
   const [, postSaveBlock, isSaveLoading] = useHttpRequest(() =>
     dayBlockAPI.saveBlock({ blockId }).then(({ data }) => data),
@@ -72,7 +80,8 @@ const Block = ({
       { blockId },
       {
         onSuccess: () => {
-          deleteBlockStore(blockId, sumOfTask)
+          // deleteBlockStore(blockId, numOfTasks)
+          // deleteDayBlockStore(selectedDate, index)
           close()
         },
       },
@@ -93,7 +102,6 @@ const Block = ({
 
   const handleMoreClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
-    if (locked) return
     open(
       {
         title,
@@ -136,23 +144,16 @@ const Block = ({
           'py-[7px]',
           'text-white',
         )}
-        style={{ backgroundColor: color as string }}
+        style={{ backgroundColor: backgroundColor as string }}
       >
         <div className="flex items-center" onClick={handleBlockClick}>
-          <BlockIcon icon={icon} />
+          <BlockIcon emoji={emoji} />
 
           <div className="flex justify-between text-base font-bold ml-2.5 mr-2 w-[calc(100%_-_34px_-_24px)]">
-            {locked ? (
-              <div className="flex items-center">
-                <LockIcon className="fill-white" width={18} height={18} />
-                <p className="ml-2.5">{LOCKED_TEXT}</p>
-              </div>
-            ) : (
-              <p>{title}</p>
-            )}
+            <p>{title}</p>
 
             <p className="font-medium">
-              {sumOfDoneTask}/{sumOfTask}
+              {numOfDoneTask}/{numOfTasks}
             </p>
           </div>
 
