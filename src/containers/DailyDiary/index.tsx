@@ -16,6 +16,8 @@ import Switch from '@/components/Switch'
 import { FaceIcon } from '@/components/Icons'
 import DiaryTextArea from './DiaryTextArea'
 import ProfileHeader from './ProfileHeader'
+import CreateOrUpdatePage from './CreateOrUpdate'
+import ViewModePage from './ViewMode'
 
 const LABEL_STYLE = 'text-lg font-bold text-black mt-[40px] mb-[10px]'
 const SUB_TITLE_STYLE = 'text-lg tracking-[-0.006em] text-black mb-[6px]'
@@ -78,24 +80,8 @@ export default function DailyDiaryContainer() {
     rnWebViewBridge.close()
   }
 
-  const handleSecretChange = (value: boolean) => {
+  const handleEditClick = () => {
     setIsEdited(true)
-    setIsSecret(value)
-  }
-
-  const handleDiaryChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
-    setIsEdited(true)
-    setReviewText((target?.value || '').slice(0, DIARY_MAX_LENGTH))
-  }
-
-  const handleEmojiClick = () => {
-    open({
-      onItemClick: (key) => {
-        setIsEdited(true)
-        setEmoji(key)
-        close()
-      },
-    })
   }
 
   useEffect(() => {
@@ -119,74 +105,22 @@ export default function DailyDiaryContainer() {
     }
   }, [date])
 
+  if (!date) {
+    rnWebViewBridge.close()
+    return
+  }
+
   return (
-    <LoadingContainer loading={isGetLoading || isMetricLoading}>
-      <LoadingContainer
-        loading={isCreateLoading || isUpdateLoading}
-        backgroundMask
-      />
-      <BottomButtonLayout
-        buttonText="완료"
-        buttonProps={{
-          onClick: handleSubmit,
-          disabled: !isVaild || !isEdited,
-        }}
-      >
-        <Header
-          title={'하루 일기'}
-          leftButton={'back'}
-          onLeftButtonClick={handleGoBack}
+    <>
+      {Number.isNaN(reviewId) || isEdited ? (
+        <CreateOrUpdatePage date={date} reviewId={reviewId} />
+      ) : (
+        <ViewModePage
+          date={date}
+          reviewId={reviewId}
+          onEditClick={handleEditClick}
         />
-        <div className={clsx('pt-[56px]', 'px-[20px]')}>
-          <ProfileHeader metrics={metrics} />
-          <div className={clsx(LABEL_STYLE, 'mt-[36px]')}>오늘의 감정</div>
-          <button
-            onClick={handleEmojiClick}
-            className={clsx(
-              'bg-gray-50',
-              'w-[70px]',
-              'h-[70px]',
-              'flex',
-              'items-center',
-              'justify-center',
-              'rounded-lg',
-            )}
-          >
-            {emoji || <FaceIcon className="fill-gray-400" />}
-          </button>
-          <div className={clsx('flex', 'justify-between', LABEL_STYLE)}>
-            <div>하루 일기</div>
-            <div
-              className={clsx(
-                'text-[14px]',
-                'leading-[140%]',
-                'text-textGray-50',
-                'font-[500]',
-              )}
-            >
-              {review.length}/{DIARY_MAX_LENGTH}
-            </div>
-          </div>
-          <DiaryTextArea
-            onChange={handleDiaryChange}
-            maxLength={DIARY_MAX_LENGTH}
-            defaultValue={diary?.review}
-          />
-          <div className={LABEL_STYLE}>추가 설정</div>
-          <div className={clsx('flex', 'justify-between')}>
-            <div>
-              <div className={clsx(SUB_TITLE_STYLE)}>쉿! 비밀로 하기</div>
-              <div className={clsx(DESCRIPTION_STYLE)}>
-                친구들에게 보이지 않아요
-              </div>
-            </div>
-            <Switch
-              onChange={handleSecretChange}
-              defaultChecked={diary?.secret}
-            />
-          </div>
-        </div>
-      </BottomButtonLayout>
-    </LoadingContainer>
+      )}
+    </>
   )
 }

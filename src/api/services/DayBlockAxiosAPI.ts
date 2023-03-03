@@ -2,7 +2,6 @@ import API from '@/api/axios'
 
 import DayBlockService from './DayBlock.interface'
 import * as Type from '@/api/types/base.types'
-import { AxiosResponse } from 'axios'
 
 export default class DayBlockAxiosAPI implements DayBlockService {
   /** 메인 */
@@ -66,6 +65,9 @@ export default class DayBlockAxiosAPI implements DayBlockService {
       `/api/review/${reviewId}`,
       params,
     )
+  }
+  deleteDailyReview({ reviewId }: Type.GetDailyReviewParams) {
+    return API.delete(`/api/review/${reviewId}`)
   }
 
   /** 태스크 */

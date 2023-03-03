@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 import { ArrowLeftIcon, ExitIcon, MoreVerticalIcon } from '@/components/Icons'
 import { noop } from '@/utils'
 
-export const buttonOptions = ['none', 'exit', 'more', 'back'] as const
+export const buttonOptions = ['none', 'exit', 'more', 'back', 'delete'] as const
 type ButtonType = (typeof buttonOptions)[number]
 
 interface Props {
@@ -24,6 +24,7 @@ const Header = ({
   return (
     <header
       className={clsx(
+        'inner',
         'fixed',
         'flex',
         'top-0',
@@ -39,7 +40,7 @@ const Header = ({
       )}
     >
       <HeaderButton type={leftButton} onClick={onLeftButtonClick} />
-      <p className="text-black text-xl font-bold min-w-[calc(100%_-_40px)] text-center">
+      <p className="text-black text-xl font-bold flex-1  text-center">
         {title}
       </p>
       <HeaderButton type={rightButton} onClick={onRightButtonClick} />
@@ -51,6 +52,7 @@ const ButtonIcon = ({ type }: { type: ButtonType }) => {
   if (type === 'exit') return <ExitIcon />
   if (type === 'more') return <MoreVerticalIcon />
   if (type === 'back') return <ArrowLeftIcon />
+  if (type === 'delete') return <div>삭제</div>
   else return null
 }
 
@@ -61,8 +63,17 @@ const HeaderButton = ({
   return (
     <button type="button" className="min-w-[24px]" onClick={onClick}>
       <ButtonIcon type={type} />
+      {/* {typeof type === 'string' && isButtonType(type) ? (
+        <ButtonIcon type={type} />
+      ) : (
+        <>{type}</>
+      )} */}
     </button>
   )
+}
+
+const isButtonType = (type: string): type is ButtonType => {
+  return !!buttonOptions.find((option) => option === type)
 }
 
 export default Header
