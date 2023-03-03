@@ -16,11 +16,7 @@ const ERROR_BOX_CONFIG: StatusConfig = {
   success: '',
 }
 
-const STATUS_CONFIG: StatusConfig = {
-  error: 'text-sm h-6 pt-1',
-  default: '',
-  success: '',
-}
+const STATUS_CONFIG = 'text-sm h-6 pt-1'
 
 export interface InputProps extends ComponentProps<'input'> {
   showLimitCount?: boolean
@@ -105,9 +101,7 @@ export default forwardRef<HTMLInputElement | null, InputProps>(
           )}
         </div>
         {!noStatusMessage && (
-          <div className={clsx(STATUS_CONFIG[status])}>
-            {renderStatusMessage()}
-          </div>
+          <div className={clsx(STATUS_CONFIG)}>{renderStatusMessage()}</div>
         )}
       </div>
     )

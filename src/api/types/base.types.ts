@@ -125,3 +125,6 @@ export type GetMyDailyBlockMetricResponse = {
   numOfdoneTasks: number
   percentageOfDoneTasks: number
 }
+
+export type CheckUniqueNicknameParams = { nickname: string }
+export type CheckUniqueNicknameResponse = { isDuplicated: boolean }

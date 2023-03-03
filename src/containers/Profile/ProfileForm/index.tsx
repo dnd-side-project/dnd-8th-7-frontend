@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FocusEvent, useState } from 'react'
 import clsx from 'clsx'
 
 import ProfilePlusSvg from 'public/assets/svgs/profile_plus.svg'
@@ -11,15 +11,24 @@ import { UserProfile } from '@/types/common.type'
 import Profile from '@/components/Profile'
 import Switch from '@/components/Switch'
 import Input from '@/components/Input'
+import { Status } from '@/components/Input/types'
+import useHttpRequest from '@/hooks/useHttpRequest'
+import { dayBlockAPI } from '@/api'
+import { CheckUniqueNicknameParams } from '@/api/types/base.types'
 
 const LABEL = 'text-lg font-bold text-black mt-[40px] mb-[10px]'
 
 interface Props {
   defaultValue?: UserProfile
+  onValidationChange?: (isValid: boolean) => void
   onFormChange?: (values: UserProfile) => void
 }
 
-export default function ProfileForm({ onFormChange, defaultValue }: Props) {
+export default function ProfileForm({
+  onFormChange,
+  onValidationChange,
+  defaultValue,
+}: Props) {
   const openImagePicker = useRNImagePicker('profile')
 
   const [profileImageUrl, setImageUrl] = useState(
@@ -30,6 +39,16 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
     defaultValue?.introduction || '',
   )
   const [isSecret, setIsSecret] = useState(defaultValue?.isSecret || false)
+
+  const [nicknameValidation, setNicknameValidation] = useState<{
+    statusMessage: string
+    status: Status
+  }>({ statusMessage: '', status: 'default' })
+
+  const [, checkUniqueNickname] = useHttpRequest(
+    (params: CheckUniqueNicknameParams) =>
+      dayBlockAPI.checkUniqueNickname(params).then(({ data }) => data),
+  )
 
   const handleProfileImageChangeClick = () => {
     openImagePicker({
@@ -65,6 +84,29 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
     })
   }
 
+  const handleBlur = ({ target }: FocusEvent<HTMLInputElement>) => {
+    checkUniqueNickname(
+      { nickname: target.value },
+      {
+        onSuccess: ({ isDuplicated }) => {
+          onValidationChange?.(!isDuplicated)
+
+          if (isDuplicated) {
+            setNicknameValidation({
+              statusMessage: '이미 사용 중인 닉네임입니다',
+              status: 'error',
+            })
+          } else {
+            setNicknameValidation({
+              statusMessage: '사용하실 수 있는 닉네임입니다',
+              status: 'success',
+            })
+          }
+        },
+      },
+    )
+  }
+
   return (
     <>
       <div className={clsx('flex', 'flex-col', 'items-center', 'mt-[20px]')}>
@@ -93,6 +135,8 @@ export default function ProfileForm({ onFormChange, defaultValue }: Props) {
         maxLength={6}
         placeholder="한글 6자 이내/특수문자 입력 불가"
         defaultValue={defaultValue?.nickname}
+        onBlur={handleBlur}
+        {...nicknameValidation}
       />
       <div className={LABEL}>한 줄 소개</div>
       <Input

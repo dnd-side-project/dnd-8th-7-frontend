@@ -24,14 +24,15 @@ export default function NewProfileContainer() {
   )
 
   const [value, setValue] = useState<UserProfile>()
-  const isValid = !!value?.imgUrl && !!value?.nickname && !!value?.introduction
+  const [isValid, setValid] = useState(false)
+  const isFilled = !!value?.imgUrl && !!value?.nickname && !!value?.introduction
 
   const handleValueChange = (forms: UserProfile) => {
     setValue(forms)
   }
 
   const handleSubmit = () => {
-    if (!isValid) return
+    if (!isValid || !isFilled) return
 
     updateProfile(value, {
       onSuccess: () => {
@@ -47,6 +48,10 @@ export default function NewProfileContainer() {
     })
   }
 
+  const handleValidationChange = (validation: boolean) => {
+    setValid(validation)
+  }
+
   const handleGoBack = () => {
     rnWebViewBridge.close()
   }
@@ -58,7 +63,7 @@ export default function NewProfileContainer() {
         buttonText="완료"
         buttonProps={{
           onClick: handleSubmit,
-          disabled: isUpdateLoading || !isValid,
+          disabled: isUpdateLoading || !isValid || !isFilled,
         }}
       >
         <Header
@@ -80,7 +85,10 @@ export default function NewProfileContainer() {
             <br />
             프로필을 등록해보세요
           </div>
-          <ProfileForm onFormChange={handleValueChange} />
+          <ProfileForm
+            onFormChange={handleValueChange}
+            onValidationChange={handleValidationChange}
+          />
         </div>
       </BottomButtonLayout>
     </>

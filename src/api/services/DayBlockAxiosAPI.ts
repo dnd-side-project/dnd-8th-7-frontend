@@ -2,6 +2,7 @@ import API from '@/api/axios'
 
 import DayBlockService from './DayBlock.interface'
 import * as Type from '@/api/types/base.types'
+import { ServiceFunc } from './types'
 
 export default class DayBlockAxiosAPI implements DayBlockService {
   /** 메인 */
@@ -98,6 +99,13 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   }
   getMyProfile() {
     return API.get<Type.GetMyProfileResponse>(`/api/user`)
+  }
+
+  /** 유저 */
+  checkUniqueNickname({ nickname }: Type.CheckUniqueNicknameParams) {
+    return API.get<Type.CheckUniqueNicknameResponse>(
+      `/api/user/nickname/${nickname}`,
+    )
   }
 
   /** 기타 */
