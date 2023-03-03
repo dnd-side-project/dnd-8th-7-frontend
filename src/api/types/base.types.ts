@@ -53,7 +53,7 @@ export type CreateDailyReviewParams = {
   date: string
   emoticon: string
   review: string
-  isSecret: boolean
+  secret: boolean
 }
 export type CreateDailyReviewResponse = {
   reviewId: number
@@ -115,5 +115,5 @@ export type GetMyProfileResponse = UserProfile
 export type DeleteSavedBlockParams = { blockId: number }
 export type DeleteSavedBlockResponse = Record<string, never>
 
-export type LoadSavedBlockParams = { date: string; blockId: number[] }
+export type LoadSavedBlockParams = { date: string; blockIds: number[] }
 export type LoadSavedBlockResponse = Record<string, never>
