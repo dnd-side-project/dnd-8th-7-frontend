@@ -1,14 +1,24 @@
 import clsx from 'clsx'
+import type { DailyBlock as DailyBlockType } from '@/types/block'
 
 const MAX_COLORS = 5 // 보여질 최대 색상 개수
 const HEIGHT = ['', 'h-full', 'h-1/2', 'h-1/3', 'h-1/4', 'h-1/5']
 
 interface Props {
-  colors: string[]
+  colors: DailyBlockType['backgroundColors']
 }
 
 const DailyBlock = ({ colors }: Props) => {
-  const totalBlocks = colors.length
+  const getColors = () => {
+    const arr = []
+    for (let i = 0; i < colors.length; i++) {
+      arr.push(colors[i].backgroundColor)
+    }
+    return arr
+  }
+
+  const colorList = getColors()
+  const totalBlocks = colorList.length
 
   const showColors = () => {
     const coloredBlocks = []
@@ -18,7 +28,7 @@ const DailyBlock = ({ colors }: Props) => {
         <div
           key={i}
           className={clsx(HEIGHT[Math.min(totalBlocks, MAX_COLORS)])}
-          style={{ backgroundColor: colors[i] }}
+          style={{ backgroundColor: colorList[i] }}
         />,
       )
     }

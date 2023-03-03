@@ -16,8 +16,6 @@ import Switch from '@/components/Switch'
 import Header from '@/components/Header'
 import LoadingContainer from '@/components/Loading/Container'
 import BlockTitleInput from './BlockTitleInput'
-// import useDayBlockStore from '@/store/dayblock'
-// import useSelectedDateState from '@/store/selectedDate'
 
 const TITLE =
   'text-lg font-bold tracking-[-0.004em] text-black mt-[30px] mb-[12px]'
@@ -42,8 +40,6 @@ export default function NewBlockContainer() {
   const [emoji, setEmoticon] = useState<string>()
   const [backgroundColor, setBlockColor] = useState<string>(colors?.red)
   const [isSecret, setIsSecret] = useState(false)
-  // const addBlock = useDayBlockStore((state) => state.addBlock)
-  // const selectedDate = useSelectedDateState((state) => state.date)
 
   const [, createBlock, isCreateLoading] = useHttpRequest(
     (params: CreateBlockParams) =>
