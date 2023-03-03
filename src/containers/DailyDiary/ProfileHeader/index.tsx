@@ -21,7 +21,7 @@ const ProfileHeader = ({ date }: Props) => {
   )
   const numOfdoneTasks =
     blocks?.blocks?.reduce(
-      (res, { numOfDoneTask }) => res + numOfDoneTask,
+      (res, { sumOfDoneTask }) => res + (sumOfDoneTask || 0),
       0,
     ) || 0
 
@@ -39,8 +39,8 @@ const ProfileHeader = ({ date }: Props) => {
           imgSrc={myProfile?.imgUrl || DEFAULT_PROFILE_IMAGE_URL}
           showNumber
           percentage={
-            blocks?.numOfTotalTasks
-              ? Math.round(numOfdoneTasks / blocks.numOfTotalTasks) * 100
+            blocks?.totalTask
+              ? Math.round(numOfdoneTasks / blocks.totalTask) * 100
               : 0
           }
         />
