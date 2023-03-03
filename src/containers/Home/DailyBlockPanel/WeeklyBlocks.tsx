@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import DailyBlock from '@/components/DailyBlock'
+import type { DailyBlock as DailyBlockType } from '@/types/block'
 import { noop } from '@/utils'
 import useSelectedDateState from '@/store/selectedDate'
 import { GetDailyBlocksOnWeekResponse } from '@/api/types/base.types'
@@ -14,7 +15,7 @@ const DayBlock = ({
   isActive,
   onClick = noop,
 }: {
-  colors: string[]
+  colors: DailyBlockType['backgroundColors']
   date: number
   isActive: boolean
   onClick?: () => void

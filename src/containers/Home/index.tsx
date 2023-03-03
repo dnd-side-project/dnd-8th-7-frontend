@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { dayBlockAPI } from '@/api'
-import dayjs from 'dayjs'
 import Tabs from '@/components/Tabs'
 import ProfileHeader from './ProfileHeader'
 import CalendarPanel from './CalendarPanel'
@@ -8,30 +7,25 @@ import DailyBlockPanel from './DailyBlockPanel'
 import BlockList from './BlockList'
 import useHttpRequest from '@/hooks/useHttpRequest'
 import useSelectedDateState from '@/store/selectedDate'
-import { GetDailyBlocksOnWeekParams } from '@/api/types/base.types'
+import LoadingContainer from '@/components/Loading/Container'
 
 const Home = () => {
-  const today = String(dayjs().format('YYYY-MM-DD'))
   const selectedDate = useSelectedDateState((state) => state.date)
-  const setSelectedDate = useSelectedDateState((state) => state.setSelectedDate)
 
-  const [weeklyBlocks, fetchWeeklyBlocks, isLoading] = useHttpRequest(
-    (params: GetDailyBlocksOnWeekParams) =>
-      dayBlockAPI.getDailyBlocksOnWeek(params).then(({ data }) => data),
-  )
-
-  useEffect(() => {
-    setSelectedDate(today)
-    fetchWeeklyBlocks({ date: today })
-  }, [])
+  const [weeklyBlocks, fetchWeeklyBlocks, isLoading, , isFetch] =
+    useHttpRequest(() =>
+      dayBlockAPI
+        .getDailyBlocksOnWeek({ date: selectedDate })
+        .then(({ data }) => data),
+    )
 
   useEffect(() => {
-    fetchWeeklyBlocks({ date: selectedDate })
+    fetchWeeklyBlocks()
   }, [selectedDate])
 
   const onVisibility = () => {
     if (!document.hidden) {
-      fetchWeeklyBlocks({ date: selectedDate })
+      fetchWeeklyBlocks()
     }
   }
 
@@ -43,7 +37,7 @@ const Home = () => {
     }
   })
 
-  if (!weeklyBlocks || isLoading) return null
+  if (!weeklyBlocks) return null
 
   return (
     <div className="inner px-5 pb-14">
@@ -55,14 +49,17 @@ const Home = () => {
           <Tabs.Tab id={1} text="달력" />
         </Tabs.TabList>
         <Tabs.TabPanel id={0}>
-          <DailyBlockPanel dailyBlocks={weeklyBlocks} />
+          <LoadingContainer loading={!isFetch}>
+            <LoadingContainer loading={isLoading} />
+            <DailyBlockPanel dailyBlocks={weeklyBlocks} />
+          </LoadingContainer>
         </Tabs.TabPanel>
         <Tabs.TabPanel id={1}>
           <CalendarPanel />
         </Tabs.TabPanel>
       </Tabs>
 
-      <BlockList />
+      <BlockList fetchWeeklyBlocks={fetchWeeklyBlocks} />
     </div>
   )
 }

@@ -12,11 +12,6 @@ import { BASE_URL } from '@/constants/urls'
 import useHttpRequest from '@/hooks/useHttpRequest'
 import LoadingContainer from '../Loading/Container'
 import { DeleteBlockParams } from '@/api/types/base.types'
-import useBlockListStore from '@/store/blocks'
-// import useDayBlockStore from '@/store/dayblock'
-// import useSelectedDateState from '@/store/selectedDate'
-
-// const LOCKED_TEXT = '쉿! 비밀이에요'
 
 const BlockIcon = ({ emoji }: { emoji: string }) => {
   return (
@@ -37,7 +32,7 @@ const BlockIcon = ({ emoji }: { emoji: string }) => {
 }
 
 const Block = ({
-  index,
+  refetch,
   blockId,
   backgroundColor,
   emoji,
@@ -46,15 +41,11 @@ const Block = ({
   numOfDoneTask,
   tasks,
 }: BlockDetail & {
-  index: number
+  refetch: () => void
   handleDelete?: () => void
 }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open, close] = useRNListBottomSheet('blockMenu')
-
-  // const selectedDate = useSelectedDateState((state) => state.date)
-  const deleteBlockStore = useBlockListStore((state) => state.deleteBlock)
-  // const deleteDayBlockStore = useDayBlockStore((state) => state.deleteBlock)
 
   const [, postSaveBlock, isSaveLoading] = useHttpRequest(() =>
     dayBlockAPI.saveBlock({ blockId }).then(({ data }) => data),
@@ -80,8 +71,7 @@ const Block = ({
       { blockId },
       {
         onSuccess: () => {
-          // deleteBlockStore(blockId, numOfTasks)
-          // deleteDayBlockStore(selectedDate, index)
+          refetch()
           close()
         },
       },

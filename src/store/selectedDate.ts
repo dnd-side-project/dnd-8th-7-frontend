@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { create } from 'zustand'
 
 type State = {
@@ -9,7 +10,7 @@ type Actions = {
 }
 
 const useSelectedDateState = create<State & Actions>((set) => ({
-  date: '',
+  date: String(dayjs().format('YYYY-MM-DD')),
   setSelectedDate: (selectedDate) => {
     set(() => ({
       date: selectedDate,

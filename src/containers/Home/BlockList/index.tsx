@@ -33,7 +33,7 @@ const AddButton = ({
   )
 }
 
-const BlockList = () => {
+const BlockList = ({ fetchWeeklyBlocks }: { fetchWeeklyBlocks: any }) => {
   const selectedDate = useSelectedDateState((state) => state.date)
   const storedBlocks = useBlockListStore((state) => state.blockList) // store에 저장된 블럭
   const setStoredBlocks = useBlockListStore((state) => state.setBlockList)
@@ -56,30 +56,25 @@ const BlockList = () => {
     })
   }
 
-  useEffect(() => {
-    if (!selectedDate) return
+  const handleDayBlocksFetch = () => {
     fetchDayBlocks(undefined, {
       onSuccess: (data) => {
         setStoredBlocks(data)
       },
     })
-  }, [selectedDate])
-
-  const onVisibility = () => {
-    if (!document.hidden) {
-      fetchDayBlocks()
-    }
   }
 
   useEffect(() => {
-    document.addEventListener('visibilitychange', onVisibility)
+    if (!selectedDate) return
+    handleDayBlocksFetch()
+  }, [selectedDate])
 
-    return () => {
-      document.removeEventListener('visibilitychange', onVisibility)
-    }
-  })
+  const refetch = () => {
+    handleDayBlocksFetch()
+    fetchWeeklyBlocks()
+  }
 
-  if (!dayBlocks || isLoading) return null
+  if (!dayBlocks) return null
   const { numOfTotalBlocks, numOfTotalTasks, blocks = [] } = storedBlocks
 
   return (
@@ -120,13 +115,10 @@ const BlockList = () => {
               },
               idx,
             ) => {
-              const index = blocks.findIndex(
-                (block) => block.blockId === blockId,
-              )
               return (
                 <div key={idx} className="mb-2">
                   <Block
-                    index={index}
+                    refetch={refetch}
                     blockId={blockId}
                     backgroundColor={backgroundColor}
                     emoji={emoji}
