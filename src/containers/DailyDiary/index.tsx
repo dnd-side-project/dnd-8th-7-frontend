@@ -41,9 +41,10 @@ export default function DailyDiaryContainer() {
     dayBlockAPI.createDailyReview,
   )
 
+  const [isEdited, setIsEdited] = useState(false)
   const [emoji, setEmoji] = useState<string>(diary?.emoticon || '')
   const [review, setReviewText] = useState(diary?.review || '')
-  const [isSecret, setIsSecret] = useState(diary?.isSecret || false)
+  const [secret, setIsSecret] = useState(diary?.secret || false)
   const isVaild = !!emoji && !!review.length
 
   const handleSubmit = () => {
@@ -54,14 +55,14 @@ export default function DailyDiaryContainer() {
 
     if (!Number.isNaN(reviewId)) {
       updateDiary(
-        { reviewId, date, emoticon: emoji, review, isSecret },
+        { reviewId, date, emoticon: emoji, review, secret },
         {
           onSuccess: () => handleGoBack(),
         },
       )
     } else {
       createDiary(
-        { date, emoticon: emoji, review, isSecret },
+        { date, emoticon: emoji, review, secret },
         {
           onSuccess: () => handleGoBack(),
         },
@@ -74,16 +75,19 @@ export default function DailyDiaryContainer() {
   }
 
   const handleSecretChange = (value: boolean) => {
+    setIsEdited(true)
     setIsSecret(value)
   }
 
   const handleDiaryChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+    setIsEdited(true)
     setReviewText((target?.value || '').slice(0, DIARY_MAX_LENGTH))
   }
 
   const handleEmojiClick = () => {
     open({
       onItemClick: (key) => {
+        setIsEdited(true)
         setEmoji(key)
         close()
       },
@@ -95,7 +99,11 @@ export default function DailyDiaryContainer() {
       getDiary(
         { reviewId },
         {
-          onSuccess: ({ emoticon }) => setEmoji(emoticon),
+          onSuccess: ({ emoticon, review, secret }) => {
+            setEmoji(emoticon)
+            setReviewText(review)
+            setIsSecret(secret)
+          },
         },
       )
     }
@@ -111,7 +119,7 @@ export default function DailyDiaryContainer() {
         buttonText="완료"
         buttonProps={{
           onClick: handleSubmit,
-          disabled: !isVaild,
+          disabled: !isVaild || !isEdited,
         }}
       >
         <Header
@@ -164,7 +172,7 @@ export default function DailyDiaryContainer() {
             </div>
             <Switch
               onChange={handleSecretChange}
-              defaultChecked={diary?.isSecret}
+              defaultChecked={diary?.secret}
             />
           </div>
         </div>
