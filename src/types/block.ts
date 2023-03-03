@@ -1,7 +1,7 @@
 export type DailyBlock = {
   date: string
   backgroundColors: Array<{
-    blockId: string
+    blockId: number
     backgroundColor: string
   }>
 }
