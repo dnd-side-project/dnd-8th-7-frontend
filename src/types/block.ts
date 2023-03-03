@@ -25,5 +25,6 @@ export type BlockList = {
   date: string
   totalBlock: number
   totalTask: number
+  reviewId: number | null
   blocks: BlockDetail[]
 }

@@ -16,7 +16,7 @@ export type GetDayBlocksResponse = {
   date: string
   totalBlock: number
   totalTask: number
-  reviewId?: number
+  reviewId?: number | null
   blocks: Array<BlockDetail>
 }
 
@@ -103,6 +103,8 @@ export type UpdateBlockResponse = {
   blockColor: string
   isSecret: boolean
 }
+
+export type UpdateTaskStatusParams = { taskId: number }
 
 export type UpdateMyProfileParams = UserProfile
 export type UpdateMyProfileResponse = UserProfile

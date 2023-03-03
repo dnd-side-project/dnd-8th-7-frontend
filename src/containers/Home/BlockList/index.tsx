@@ -7,6 +7,7 @@ import NoData from '@/components/NoData'
 import useSelectedDateState from '@/store/selectedDate'
 import { dayBlockAPI } from '@/api'
 import useHttpRequest from '@/hooks/useHttpRequest'
+import useBlockListStore from '@/store/blocks'
 import { BASE_URL } from '@/constants/urls'
 import DiaryButton from './DiaryButton'
 
@@ -34,6 +35,8 @@ const AddButton = ({
 
 const BlockList = () => {
   const selectedDate = useSelectedDateState((state) => state.date)
+  const storedBlocks = useBlockListStore((state) => state.blockList) // store에 저장된 블럭
+  const setStoredBlocks = useBlockListStore((state) => state.setBlockList)
 
   const [dayBlocks, fetchDayBlocks, isLoading] = useHttpRequest(() =>
     dayBlockAPI.getDayBlocks({ date: selectedDate }).then(({ data }) => data),
@@ -54,9 +57,12 @@ const BlockList = () => {
   }
 
   useEffect(() => {
-    if (selectedDate) {
-      fetchDayBlocks()
-    }
+    if (!selectedDate) return
+    fetchDayBlocks(undefined, {
+      onSuccess: (data) => {
+        setStoredBlocks(data)
+      },
+    })
   }, [selectedDate])
 
   const onVisibility = () => {
@@ -74,7 +80,7 @@ const BlockList = () => {
   })
 
   if (!dayBlocks || isLoading) return null
-  const { totalBlock, totalTask, blocks = [] } = dayBlocks
+  const { totalBlock, totalTask, blocks = [] } = storedBlocks
 
   return (
     <>

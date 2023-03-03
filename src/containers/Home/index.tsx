@@ -7,15 +7,19 @@ import CalendarPanel from './CalendarPanel'
 import DailyBlockPanel from './DailyBlockPanel'
 import BlockList from './BlockList'
 import useHttpRequest from '@/hooks/useHttpRequest'
+import useSelectedDateState from '@/store/selectedDate'
 
 const Home = () => {
   const today = String(dayjs().format('YYYY-MM-DD'))
+  const setSelectedDate = useSelectedDateState((state) => state.setSelectedDate)
+
   const [weeklyBlocks, fetchWeeklyBlocks, isLoading] = useHttpRequest(() =>
     dayBlockAPI.getDailyBlocksOnWeek({ date: today }).then(({ data }) => data),
   )
 
   useEffect(() => {
     fetchWeeklyBlocks()
+    setSelectedDate(today)
   }, [])
 
   const onVisibility = () => {

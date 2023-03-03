@@ -75,10 +75,13 @@ export default class DayBlockAxiosAPI implements DayBlockService {
     )
   }
   updateTaskInBlock(params: Type.UpdateTaskInBlockParams) {
-    return API.put<Type.UpdateTaskInBlockResponse>(
+    return API.patch<Type.UpdateTaskInBlockResponse>(
       `/api/task/${params.taskId}`,
-      params,
+      { content: params.content },
     )
+  }
+  updateTaskStatus(params: Type.UpdateTaskStatusParams) {
+    return API.patch(`/api/task/status/${params.taskId}`)
   }
   deleteTaskInBlock(params: Type.DeleteTaskInBlockParams) {
     return API.delete<Type.DeleteTaskInBlockResponse>(

@@ -11,6 +11,8 @@ import rnWebViewBridge from '@/utils/react-native-webview-bridge/new-webview/rnW
 import { BASE_URL } from '@/constants/urls'
 import useHttpRequest from '@/hooks/useHttpRequest'
 import LoadingContainer from '../Loading/Container'
+import { DeleteBlockParams } from '@/api/types/base.types'
+import useBlockListStore from '@/store/blocks'
 
 const LOCKED_TEXT = '쉿! 비밀이에요'
 
@@ -44,8 +46,13 @@ const Block = ({
 }: BlockDetail & { locked?: boolean; handleDelete?: () => void }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [open, close] = useRNListBottomSheet('blockMenu')
+  const deleteBlockStore = useBlockListStore((state) => state.deleteBlock)
+
   const [, postSaveBlock, isSaveLoading] = useHttpRequest(() =>
     dayBlockAPI.saveBlock({ blockId }).then(({ data }) => data),
+  )
+  const [, deleteBlock] = useHttpRequest((params: DeleteBlockParams) =>
+    dayBlockAPI.deleteBlock(params).then(({ data }) => data),
   )
 
   const handleBlockClick = () => {
@@ -61,9 +68,15 @@ const Block = ({
   }
 
   const handleDeleteBlock = () => {
-    dayBlockAPI.deleteBlock({ blockId }).then(() => {
-      close()
-    })
+    deleteBlock(
+      { blockId },
+      {
+        onSuccess: () => {
+          deleteBlockStore(blockId, sumOfTask)
+          close()
+        },
+      },
+    )
   }
 
   const handleSaveBlock = () => {
@@ -153,7 +166,7 @@ const Block = ({
             <AddTaskButton blockId={blockId} />
             <div className="mt-6">
               {tasks?.map((task) => (
-                <Task {...task} key={task.taskId} />
+                <Task key={task.taskId} {...task} blockId={blockId} />
               ))}
             </div>
           </div>
