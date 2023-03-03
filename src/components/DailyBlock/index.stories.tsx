@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof DailyBlock> = (args) => (
 
 export const Basic = Template.bind({})
 Basic.args = {
-  colors: ['#FF7154', '#FFB673'],
+  colors: [{ blockId: 1, backgroundColor: '#FF7154' }],
 }
