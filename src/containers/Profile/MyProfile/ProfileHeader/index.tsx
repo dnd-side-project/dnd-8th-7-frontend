@@ -3,10 +3,10 @@ import PercentageProfile, {
 } from '@/components/PercentageProfile'
 
 interface Props extends PercentageProfileProps {
-  user: string
+  nickname: string
 }
 
-const ProfileHeader = ({ user, ...props }: Props) => {
+const ProfileHeader = ({ nickname, ...props }: Props) => {
   return (
     <div className="flex justify-between items-start pb-[20px]">
       <div className="flex">
@@ -14,7 +14,7 @@ const ProfileHeader = ({ user, ...props }: Props) => {
           <PercentageProfile {...props} />
         </div>
         <div className="ml-2.5 text-2xl font-bold text-black self-center">
-          {user}님, <br />
+          {nickname}님, <br />
           안녕하세요 반가워요
         </div>
       </div>

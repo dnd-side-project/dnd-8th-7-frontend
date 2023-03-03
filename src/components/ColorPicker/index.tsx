@@ -5,7 +5,7 @@ type Value = string
 interface Props {
   defaultColors?: string[]
   defaultPicked?: Value
-  onChange?: (color: string) => void
+  onChange?: (backgroundColor: string) => void
 }
 
 export default function ColorPicker({
@@ -17,19 +17,19 @@ export default function ColorPicker({
     defaultPicked,
   )
 
-  const handleColorClick = (color: string) => {
-    onChange?.(color)
-    setPickedColor(color)
+  const handleColorClick = (backgroundColor: string) => {
+    onChange?.(backgroundColor)
+    setPickedColor(backgroundColor)
   }
 
   return (
     <div className={clsx('flex', 'gap-[10px]')}>
-      {defaultColors?.map((color) => (
+      {defaultColors?.map((backgroundColor) => (
         <Color
-          key={color}
-          color={color}
-          onClick={() => handleColorClick(color)}
-          picked={pickedColor === color}
+          key={backgroundColor}
+          backgroundColor={backgroundColor}
+          onClick={() => handleColorClick(backgroundColor)}
+          picked={pickedColor === backgroundColor}
         />
       ))}
     </div>
@@ -37,10 +37,10 @@ export default function ColorPicker({
 }
 
 interface ColorProps extends ComponentProps<'div'> {
-  color: string
+  backgroundColor: string
   picked?: boolean
 }
-function Color({ color, picked, ...props }: ColorProps) {
+function Color({ backgroundColor, picked, ...props }: ColorProps) {
   return (
     <div
       {...props}
@@ -57,7 +57,7 @@ function Color({ color, picked, ...props }: ColorProps) {
     >
       <div
         className={clsx('w-[24px]', 'h-[24px]', 'rounded-[99px]')}
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: backgroundColor }}
       />
     </div>
   )

@@ -22,7 +22,7 @@ const AddButton = ({
 }) => {
   return (
     <Button
-      color="gray"
+      backgroundColor="gray"
       fontWeight="bold"
       className="py-[11px]"
       onClick={onClick}
@@ -80,15 +80,15 @@ const BlockList = () => {
   })
 
   if (!dayBlocks || isLoading) return null
-  const { totalBlock, totalTask, blocks = [] } = storedBlocks
+  const { numOfTotalBlocks, numOfTotalTasks, blocks = [] } = storedBlocks
 
   return (
     <>
       <div className="flex items-end justify-between">
         <Date
           date={selectedDate}
-          totalBlock={totalBlock}
-          totalTask={totalTask}
+          numOfTotalBlocks={numOfTotalBlocks}
+          numOfTotalTasks={numOfTotalTasks}
         />
         <DiaryButton date={selectedDate} reviewId={dayBlocks?.reviewId} />
       </div>
@@ -109,21 +109,35 @@ const BlockList = () => {
         ) : (
           blocks.map(
             (
-              { blockId, color, icon, title, sumOfTask, sumOfDoneTask, tasks },
+              {
+                blockId,
+                backgroundColor,
+                emoji,
+                title,
+                numOfTasks,
+                numOfDoneTask,
+                tasks,
+              },
               idx,
-            ) => (
-              <div key={idx} className="mb-2">
-                <Block
-                  blockId={blockId}
-                  color={color}
-                  icon={icon}
-                  title={title}
-                  sumOfTask={sumOfTask}
-                  sumOfDoneTask={sumOfDoneTask}
-                  tasks={tasks}
-                />
-              </div>
-            ),
+            ) => {
+              const index = blocks.findIndex(
+                (block) => block.blockId === blockId,
+              )
+              return (
+                <div key={idx} className="mb-2">
+                  <Block
+                    index={index}
+                    blockId={blockId}
+                    backgroundColor={backgroundColor}
+                    emoji={emoji}
+                    title={title}
+                    numOfTasks={numOfTasks}
+                    numOfDoneTask={numOfDoneTask}
+                    tasks={tasks}
+                  />
+                </div>
+              )
+            },
           )
         )}
       </div>

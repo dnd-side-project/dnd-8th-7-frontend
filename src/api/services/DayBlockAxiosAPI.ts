@@ -26,8 +26,8 @@ export default class DayBlockAxiosAPI implements DayBlockService {
   updateBlock(params: Type.UpdateBlockParams) {
     return API.patch<Type.UpdateBlockResponse>(`/api/block/${params.blockId}`, {
       title: params.title,
-      emoticon: params.emoticon,
-      blockColor: params.blockColor,
+      emoji: params.emoji,
+      backgroundColor: params.backgroundColor,
       isSecret: params.isSecret,
     })
   }

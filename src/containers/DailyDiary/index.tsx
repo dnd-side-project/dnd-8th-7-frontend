@@ -42,9 +42,9 @@ export default function DailyDiaryContainer() {
   )
 
   const [isEdited, setIsEdited] = useState(false)
-  const [emoji, setEmoji] = useState<string>(diary?.emoticon || '')
+  const [emoji, setEmoji] = useState<string>(diary?.emoji || '')
   const [review, setReviewText] = useState(diary?.review || '')
-  const [secret, setIsSecret] = useState(diary?.secret || false)
+  const [isSecret, setIsSecret] = useState(diary?.secret || false)
   const isVaild = !!emoji && !!review.length
 
   const handleSubmit = () => {
@@ -55,14 +55,14 @@ export default function DailyDiaryContainer() {
 
     if (!Number.isNaN(reviewId)) {
       updateDiary(
-        { reviewId, date, emoticon: emoji, review, secret },
+        { reviewId, date, emoji, review, secret: isSecret },
         {
           onSuccess: () => handleGoBack(),
         },
       )
     } else {
       createDiary(
-        { date, emoticon: emoji, review, secret },
+        { date, emoji, review, secret: isSecret },
         {
           onSuccess: () => handleGoBack(),
         },
@@ -99,8 +99,8 @@ export default function DailyDiaryContainer() {
       getDiary(
         { reviewId },
         {
-          onSuccess: ({ emoticon, review, secret }) => {
-            setEmoji(emoticon)
+          onSuccess: ({ emoji, review, secret }) => {
+            setEmoji(emoji)
             setReviewText(review)
             setIsSecret(secret)
           },

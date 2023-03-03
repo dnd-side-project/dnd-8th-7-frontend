@@ -34,8 +34,8 @@ export default function UpdateBlockContainer() {
   } = useRouter()
   const blockIdNumber = Number(blockId?.toString())
   const [blockTitle, setBlockTitle] = useState<string>()
-  const [emoticon, setEmoticon] = useState<string>()
-  const [blockColor, setBlockColor] = useState<string>()
+  const [emoji, setEmoticon] = useState<string>()
+  const [backgroundColor, setBlockColor] = useState<string>()
   const [isSecret, setIsSecret] = useState<boolean>()
   const [blockDetail, fetchBlockDetail, isLoading] = useHttpRequest(() =>
     dayBlockAPI
@@ -51,8 +51,8 @@ export default function UpdateBlockContainer() {
     setEmoticon(emoji)
   }
 
-  const handleColorChange = (color: string) => {
-    setBlockColor(color)
+  const handleColorChange = (backgroundColor: string) => {
+    setBlockColor(backgroundColor)
   }
 
   const handleSecretChange = (value: boolean) => {
@@ -69,8 +69,8 @@ export default function UpdateBlockContainer() {
       .updateBlock({
         blockId: blockIdNumber,
         title: blockTitle ?? blockDetail?.title,
-        emoticon: emoticon ?? blockDetail?.emoticon,
-        blockColor: blockColor ?? blockDetail?.blockColor,
+        emoji: emoji ?? blockDetail?.emoji,
+        backgroundColor: backgroundColor ?? blockDetail?.backgroundColor,
         isSecret: isSecret ?? blockDetail?.isSecret,
       })
       .then(() => rnWebViewBridge.close())
@@ -102,14 +102,14 @@ export default function UpdateBlockContainer() {
           maxLength={15}
           placeholder="블럭 제목을 입력해주세요"
           onEmojiChange={handleEmojiChange}
-          defaultEmoji={blockDetail.emoticon}
+          defaultEmoji={blockDetail.emoji}
           defaultValue={blockDetail.title}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>블럭 색상</div>
         <ColorPicker
           defaultColors={DEFAULT_COLORS}
           onChange={handleColorChange}
-          defaultPicked={blockDetail.blockColor}
+          defaultPicked={blockDetail.backgroundColor}
         />
         <div className={clsx(TITLE, 'mb-[16px]')}>추가 설정</div>
         <div className={clsx('flex', 'justify-between')}>

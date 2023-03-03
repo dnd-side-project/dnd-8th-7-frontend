@@ -4,7 +4,7 @@ import WeeklyBlocks from './WeeklyBlocks'
 const DailyBlockPanel = ({
   dailyBlocks,
 }: {
-  dailyBlocks: GetDailyBlocksOnWeekResponse['dailyBlocks']
+  dailyBlocks: GetDailyBlocksOnWeekResponse
 }) => {
   return <WeeklyBlocks weeklyBlocks={dailyBlocks} />
 }

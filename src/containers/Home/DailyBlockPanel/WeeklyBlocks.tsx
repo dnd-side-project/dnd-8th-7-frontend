@@ -54,7 +54,7 @@ const DayBlock = ({
 const DailyBlockPanel = ({
   weeklyBlocks,
 }: {
-  weeklyBlocks: GetDailyBlocksOnWeekResponse['dailyBlocks']
+  weeklyBlocks: GetDailyBlocksOnWeekResponse
 }) => {
   const setSelectedDate = useSelectedDateState((state) => state.setSelectedDate)
   const selectedDate = useSelectedDateState((state) => state.date)
@@ -66,7 +66,7 @@ const DailyBlockPanel = ({
 
   return (
     <div className="flex justify-between mx-auto my-7 min-w-80 max-w-[400px]">
-      {weeklyBlocks.map(({ date: dateTime, color }, idx) => {
+      {weeklyBlocks.map(({ date: dateTime, backgroundColors }, idx) => {
         const formattedDate = dayjs(dateTime).format('YYYY-MM-DD')
         const day = dayjs(dateTime).format('dd')
         const date = dayjs(dateTime).date()
@@ -75,7 +75,7 @@ const DailyBlockPanel = ({
           <div key={idx} className="flex flex-col items-center text-base">
             <p className="text-textGray-50 mb-[5px]">{day}</p>
             <DayBlock
-              colors={color}
+              colors={backgroundColors}
               date={date}
               isActive={selectedDay === day}
               onClick={() => handleBlockClick(formattedDate)}

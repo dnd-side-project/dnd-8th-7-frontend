@@ -4,18 +4,15 @@ import { UserProfile } from '@/types/common.type'
 export type GetDailyBlocksOnWeekParams = {
   date: string
 }
-export type GetDailyBlocksOnWeekResponse = {
-  user: string
-  dailyBlocks: Array<DailyBlock>
-}
+export type GetDailyBlocksOnWeekResponse = Array<DailyBlock>
 
 export type GetDayBlocksParams = {
   date: string
 }
 export type GetDayBlocksResponse = {
   date: string
-  totalBlock: number
-  totalTask: number
+  numOfTotalBlocks: number
+  numOfTotalTasks: number
   reviewId?: number | null
   blocks: Array<BlockDetail>
 }
@@ -27,12 +24,12 @@ export type GetSingleBlockParams = {
 export type GetSingleBlockResponse = {
   date: string
   title: string
-  emoticon: string
-  blockColor: string
+  emoji: string
+  backgroundColor: string
   isSecret: boolean
 }
 
-export type GetSavedBlocksResponse = Omit<BlockDetail, 'sumOfDoneTask'>[]
+export type GetSavedBlocksResponse = Omit<BlockDetail, 'numOfDoneTask'>[]
 
 export type SaveBlockParams = {
   blockId: number
@@ -41,8 +38,8 @@ export type SaveBlockParams = {
 export type CreateBlockParams = {
   date: string
   title: string
-  emoticon: string
-  blockColor: string
+  emoji: string
+  backgroundColor: string
   isSecret: boolean
 }
 export type CreateBlockResponse = {
@@ -51,7 +48,7 @@ export type CreateBlockResponse = {
 
 export type CreateDailyReviewParams = {
   date: string
-  emoticon: string
+  emoji: string
   review: string
   secret: boolean
 }
@@ -92,15 +89,15 @@ export type DeleteTaskInBlockResponse = unknown
 export type UpdateBlockParams = {
   blockId: number
   title: string
-  emoticon: string
-  blockColor: string
+  emoji: string
+  backgroundColor: string
   isSecret: boolean
 }
 
 export type UpdateBlockResponse = {
   title: string
-  emoticon: string
-  blockColor: string
+  emoji: string
+  backgroundColor: string
   isSecret: boolean
 }
 

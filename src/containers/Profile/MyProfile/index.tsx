@@ -57,8 +57,8 @@ export default function MyProfileContainer() {
         <div className={clsx('px-[20px]', 'mb-[14px]')}>
           <ProfileHeader
             percentage={0}
-            user={myProfile?.user || ''}
-            imgSrc={myProfile?.imgPath}
+            nickname={myProfile?.nickname || ''}
+            imgSrc={myProfile?.imgUrl}
           />
           <div
             className={clsx(
