@@ -64,6 +64,20 @@ const BlockList = ({ fetchWeeklyBlocks }: { fetchWeeklyBlocks: any }) => {
     })
   }
 
+  const onVisibility = () => {
+    if (!document.hidden) {
+      handleDayBlocksFetch()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  })
+
   useEffect(() => {
     if (!selectedDate) return
     handleDayBlocksFetch()
