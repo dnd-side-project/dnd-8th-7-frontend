@@ -44,11 +44,11 @@ const Home = () => {
   })
 
   if (!weeklyBlocks || isLoading) return null
-  const { user, dailyBlocks } = weeklyBlocks
+  const { dailyBlocks } = weeklyBlocks
 
   return (
     <div className="inner px-5 pb-14">
-      <ProfileHeader user={user} />
+      <ProfileHeader />
 
       <Tabs>
         <Tabs.TabList>
